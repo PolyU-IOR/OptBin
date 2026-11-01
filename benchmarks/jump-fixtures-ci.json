@@ -1,0 +1,608 @@
+{
+  "scope": "Full canonical numerical function-in-set comparison with JuMP.read_from_file / MOI; no optimization",
+  "environment": {
+    "julia": "1.12.6",
+    "packages": {
+      "JSON3": {
+        "git_tree_sha1": "411eccfe8aba0814ffa0fdf4860913ed09c34975",
+        "version": "1.14.3"
+      },
+      "MathOptInterface": {
+        "git_tree_sha1": "d10ba577e0b5a0481fab01dfd31fb20af3326954",
+        "version": "1.53.0"
+      },
+      "JuMP": {
+        "git_tree_sha1": "4f27b21df3b47e8c08a83ead049afb621b2f5b3c",
+        "version": "1.31.2"
+      }
+    },
+    "exporter_sha256": "140380b81e9b1627b2b42899b9fec8604223b94b2d8627e20cfd859c8530d58e",
+    "reference_source_sha256": {
+      "src/FileFormats/MPS/MPS.jl": "bc1bd8df295d2908996fd1408c26a05c61a19126d2528a93ed88c173873fdd47",
+      "src/FileFormats/MPS/read.jl": "d89f3fed26d03fd618aafb4de96df36b47a855fc71a8f269d54ec2bd2f8811d0",
+      "src/FileFormats/CBF/read.jl": "95d29696892fceb8dfa5d47ac8ffeafcf64c3dcf47fffebbec516c8326e48b1c"
+    }
+  },
+  "build": "/benchmark/workstation/optbin/build-release",
+  "binary_sha256": {
+    "mps2optb": "01f14ec238000d1f6b7ca75c3505a654bf77e2ed737883302588c3e529fe9c39",
+    "cbf2optb": "68c93246eefa286cf2a5f8f08b72d3f33463a747b2fda617de1547d1c93c2006",
+    "liboptbin.so": "fbcb027ecf14a6827b7f46d7a0cdb6468fd249001bf2c430f0760beb51939731"
+  },
+  "harness_sha256": "87fdda2310d945f038da908a2ddea454368cb6ceb0509efe0ce854225d4dc736",
+  "julia_project_manifest_sha256": "d8f135783e609c2b5316f88b4722f2e286b5bf991c69be48e3881278d9708433",
+  "known_reference_issues_sha256": "2b5a6baeb12b438f94c166d1764d32b34dc71d9353de417741103982a8887092",
+  "normalizations": [
+    "Aggregate duplicate terms and discard numerical zero terms, treating both signs of zero as equal",
+    "Expand scalar intervals/equalities into lower/upper constraints; move affine constants to bounds",
+    "Ignore ordering/names and unconstrained Reals domains; preserve duplicate nontrivial constraints",
+    "Map MOI quadratic coefficients to polynomial monomials, including the half factor on diagonals",
+    "Lift PSD variables to unscaled triangular coordinates, counting trace off-diagonals twice",
+    "Apply CBF-to-MOI exponential coordinate permutations and two-weight power normalization"
+  ],
+  "limits": [
+    "Canonical model comparison, not bytewise equality of unlike physical representations",
+    "Reference-reader unsupported cases are recorded separately from passes",
+    "No original scalar-row names or ordering are compared"
+  ],
+  "summary": {
+    "pass": 15,
+    "known_reference_discrepancy": 5,
+    "reference_unsupported": 1
+  },
+  "results": [
+    {
+      "id": "fixture_lp",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "549ac2959715d08c765572767cf0674b34f620bb766429c2734d85ca55511cb8",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "03ecbc9f0fc64c7c8aa071b4f0292f5835eb371b9703719018f2b73cc9478b3f",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "3c9ea7ddbf684c54e2654d8ba3cdd4685efed11b4690059b9aace034821b67be",
+      "reference_canonical_sha256": "3c9ea7ddbf684c54e2654d8ba3cdd4685efed11b4690059b9aace034821b67be",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_qp",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "1c801d19a370cc7eb2592b9c518c71c7edfdd6296ea00cd6897553be54843fce",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "7f1401d40788cd118f75dead4b8a0741f79cdead5fcae428244b0d1a6138d662",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "9d4e81ebcf090efe16400d5c1eb37e96eaa1bb8fe9f5c988788d59f7d30f01d1",
+      "reference_canonical_sha256": "9d4e81ebcf090efe16400d5c1eb37e96eaa1bb8fe9f5c988788d59f7d30f01d1",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_qcqp_gurobi",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "3e41ed69f46218507e19ab847afedcfa7f52765eeea204697eae301477e6fa96",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "4366470ce83c0a6b85bc2e08880cb66d5b2c29a0cab693f0531e81fecf660f04",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "reference_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_qcqp_mosek",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "3e41ed69f46218507e19ab847afedcfa7f52765eeea204697eae301477e6fa96",
+      "dialect": "mosek",
+      "converter_exit_code": 0,
+      "optbin_sha256": "ce1884301ce67ce2f4eb502fdb16735d131333952125f06da2d8e0d958ba6ec8",
+      "reference_dialect": "mosek",
+      "native_full_validation": true,
+      "pass": false,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": false
+      },
+      "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "reference_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "native_only": [
+        {
+          "count": 1,
+          "sha256": "3037777d42c41c3d280f973d5502dec3cac3aef0738f459230dc8447fe3efdcf",
+          "prefix": "[\"scalar\",\"upper\",[[0,\"c008000000000000\"],[1,\"4010000000000000\"]],[[0,0,\"4000000000000000\"],[0,1,\"4018000000000000\"],[1,1,\"4010000000000000\"]],\"4014000000000000\"]"
+        }
+      ],
+      "reference_only": [
+        {
+          "count": 1,
+          "sha256": "d2554f5f662a604038807e46b16e9dc87148902e95c0beeb1f09f82a9fdba07d",
+          "prefix": "[\"scalar\",\"upper\",[[0,\"c008000000000000\"],[1,\"4010000000000000\"]],[[0,0,\"3ff0000000000000\"],[0,1,\"4008000000000000\"],[1,1,\"4000000000000000\"]],\"4014000000000000\"]"
+        }
+      ],
+      "status": "known_reference_discrepancy",
+      "mosek_sdk": {
+        "status": "not_installed"
+      },
+      "reference_issue": "MOI Mosek quadratic_format applies a half factor to QCMATRIX constraints; the actual MOSEK 11.2.7 reader uses xQx for QCMATRIX"
+    },
+    {
+      "id": "fixture_psd_operators",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "c172e76b80b7cf39bdcfb0aded5b898ba2e4ea7d9673b8588f7fa3be030d7b81",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "7d894e5fc77585d16c0eca99bc0ef6e42dda233b5afc9c9b385282ad1d7eb6ff",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "8cc498e17665d42777f71b5ad186a8bb638d28e026f118e4cd3987318325a007",
+      "reference_canonical_sha256": "8cc498e17665d42777f71b5ad186a8bb638d28e026f118e4cd3987318325a007",
+      "variables": 5,
+      "normalized_constraints": 3,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_soc",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "20ad4049b6cb21b5616dd4e87aa0fd74a77f0f7478affd804397bf31c29cff90",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "edfd9f8d8add35d4178b320d7ab1a099859e86f0a8c5e0f1e704e0d46f06f9d2",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "ce86b3329a13cff6e529fff9758068b91c90c5fe5531dfdb15fdfddc7e9dda7f",
+      "reference_canonical_sha256": "ce86b3329a13cff6e529fff9758068b91c90c5fe5531dfdb15fdfddc7e9dda7f",
+      "variables": 2,
+      "normalized_constraints": 2,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_qmatrix",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "47f7b82d7bd3fccc7f6e36debc9f3c1e2065e33e223c45a4dd02a35f60287c64",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "7f1401d40788cd118f75dead4b8a0741f79cdead5fcae428244b0d1a6138d662",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "9d4e81ebcf090efe16400d5c1eb37e96eaa1bb8fe9f5c988788d59f7d30f01d1",
+      "reference_canonical_sha256": "9d4e81ebcf090efe16400d5c1eb37e96eaa1bb8fe9f5c988788d59f7d30f01d1",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_ranges_bounds_max",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "bd427eab0d9301c4a2959524d5f15d78b90a6e61e1b8e68f08993cab5050e116",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "0543392d950d0a890fc443acea1fb0648f8bf4a433ab8268168328ff47f75716",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "0264633c7294e32105e6383c58f0e679146f70a2779722da9030de867ab25ae9",
+      "reference_canonical_sha256": "0264633c7294e32105e6383c58f0e679146f70a2779722da9030de867ab25ae9",
+      "variables": 3,
+      "normalized_constraints": 11,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_negative_upper_default",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "433a2d79899d7b9eff3b3b0a97b28a637eace0c4845f458ff1198a2f47f27a12",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "107f6130ef82c94fc1b780d2f90ecc4063319f506a2844dde128489c2aee3ed2",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": false,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": false
+      },
+      "native_canonical_sha256": "f0e02bc8ebb1e17e2045c7d46d2ae7a502099a4de06a2eff7e3fa87ac36e401c",
+      "reference_canonical_sha256": "001e9625af2f9d346cc521b1ad4217c4ba4ddb0f7dd4e5e7bcd140d8d1e57964",
+      "variables": 2,
+      "normalized_constraints": 4,
+      "native_only": [
+        {
+          "count": 1,
+          "sha256": "c6474b7d338770d40d9abef541763688420ae902f7b7de91b52d0cdebfb48400",
+          "prefix": "[\"scalar\",\"upper\",[[1,\"3ff0000000000000\"]],[],\"c000000000000000\"]"
+        }
+      ],
+      "reference_only": [],
+      "status": "known_reference_discrepancy",
+      "gurobi_sdk": {
+        "status": "not_installed"
+      },
+      "reference_issue": "With a negative UP and no explicit lower bound, OptBin follows Gurobi (-Inf, upper). MOI retains an internal lower bound of zero, then bounds_to_set drops both bounds when lower > upper. An explicit MI lower-bound record avoids the ambiguity."
+    },
+    {
+      "id": "fixture_duplicate_entries",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "b7dd1ec73657a58f243a2345c549f6f20574b94353895926c63d4c3d9fe23a8f",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "07598c7521591d738d2c0d248168aa6aa9ee3b7a8411233c021b74b49e3a8397",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "18bfddfbd2ffa3ffdb01f5b9caecce4da14154d20b3283beba8684462a64fa63",
+      "reference_canonical_sha256": "18bfddfbd2ffa3ffdb01f5b9caecce4da14154d20b3283beba8684462a64fa63",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_mosek_QCMATRIX",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "55f1e31aebfd5f9c268c4101c0444f5cfe20cdffdca1c6fc71266740320285cb",
+      "dialect": "mosek",
+      "converter_exit_code": 0,
+      "optbin_sha256": "ce1884301ce67ce2f4eb502fdb16735d131333952125f06da2d8e0d958ba6ec8",
+      "reference_dialect": "mosek",
+      "native_full_validation": true,
+      "pass": false,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": false,
+        "constraints": false
+      },
+      "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "reference_canonical_sha256": "96ed6d328b0aa6927e6ad3acf742ef160c98d47403194960036129bc3d0d4548",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "native_objective_prefix": "(((0, '3ff0000000000000'), (1, 'c000000000000000')), ((0, 0, '3ff0000000000000'), (0, 1, '3fe0000000000000'), (1, 1, '4000000000000000')), '401c000000000000')",
+      "reference_objective_prefix": "(((0, '3ff0000000000000'), (1, 'c000000000000000')), (), '401c000000000000')",
+      "native_only": [
+        {
+          "count": 1,
+          "sha256": "3037777d42c41c3d280f973d5502dec3cac3aef0738f459230dc8447fe3efdcf",
+          "prefix": "[\"scalar\",\"upper\",[[0,\"c008000000000000\"],[1,\"4010000000000000\"]],[[0,0,\"4000000000000000\"],[0,1,\"4018000000000000\"],[1,1,\"4010000000000000\"]],\"4014000000000000\"]"
+        }
+      ],
+      "reference_only": [
+        {
+          "count": 1,
+          "sha256": "d2554f5f662a604038807e46b16e9dc87148902e95c0beeb1f09f82a9fdba07d",
+          "prefix": "[\"scalar\",\"upper\",[[0,\"c008000000000000\"],[1,\"4010000000000000\"]],[[0,0,\"3ff0000000000000\"],[0,1,\"4008000000000000\"],[1,1,\"4000000000000000\"]],\"4014000000000000\"]"
+        }
+      ],
+      "status": "known_reference_discrepancy",
+      "mosek_sdk": {
+        "status": "not_installed"
+      },
+      "reference_issue": "MOI reads quadratic objectives from QSECTION only when the matrix name is literal OBJ; the valid source objective is named obj; MOI Mosek quadratic_format applies a half factor to QCMATRIX constraints; the actual MOSEK 11.2.7 reader uses xQx for QCMATRIX"
+    },
+    {
+      "id": "fixture_mosek_QCMATRIX_OBJ",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "a086aa2a83e432c143104bed98f0de9dee5aa1f305e14049458b7624243a6e36",
+      "dialect": "mosek",
+      "converter_exit_code": 0,
+      "optbin_sha256": "ce1884301ce67ce2f4eb502fdb16735d131333952125f06da2d8e0d958ba6ec8",
+      "reference_dialect": "mosek",
+      "native_full_validation": true,
+      "pass": false,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": false
+      },
+      "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "reference_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "native_only": [
+        {
+          "count": 1,
+          "sha256": "3037777d42c41c3d280f973d5502dec3cac3aef0738f459230dc8447fe3efdcf",
+          "prefix": "[\"scalar\",\"upper\",[[0,\"c008000000000000\"],[1,\"4010000000000000\"]],[[0,0,\"4000000000000000\"],[0,1,\"4018000000000000\"],[1,1,\"4010000000000000\"]],\"4014000000000000\"]"
+        }
+      ],
+      "reference_only": [
+        {
+          "count": 1,
+          "sha256": "d2554f5f662a604038807e46b16e9dc87148902e95c0beeb1f09f82a9fdba07d",
+          "prefix": "[\"scalar\",\"upper\",[[0,\"c008000000000000\"],[1,\"4010000000000000\"]],[[0,0,\"3ff0000000000000\"],[0,1,\"4008000000000000\"],[1,1,\"4000000000000000\"]],\"4014000000000000\"]"
+        }
+      ],
+      "status": "known_reference_discrepancy",
+      "mosek_sdk": {
+        "status": "not_installed"
+      },
+      "reference_issue": "MOI Mosek quadratic_format applies a half factor to QCMATRIX constraints; the actual MOSEK 11.2.7 reader uses xQx for QCMATRIX"
+    },
+    {
+      "id": "fixture_mosek_QSECTION",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "2375f125ebf93257e9964eb7f1555baa324d145190117ab7aac21966cec81cc7",
+      "dialect": "mosek",
+      "converter_exit_code": 0,
+      "optbin_sha256": "8a35c4dba074586329644f791d2deb8cefee5a5e164484c2a1bc9a6a0dccf132",
+      "reference_dialect": "mosek",
+      "native_full_validation": true,
+      "pass": false,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": false,
+        "constraints": true
+      },
+      "native_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+      "reference_canonical_sha256": "96ed6d328b0aa6927e6ad3acf742ef160c98d47403194960036129bc3d0d4548",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "native_objective_prefix": "(((0, '3ff0000000000000'), (1, 'c000000000000000')), ((0, 0, '3ff0000000000000'), (0, 1, '3fe0000000000000'), (1, 1, '4000000000000000')), '401c000000000000')",
+      "reference_objective_prefix": "(((0, '3ff0000000000000'), (1, 'c000000000000000')), (), '401c000000000000')",
+      "status": "known_reference_discrepancy",
+      "mosek_sdk": {
+        "status": "not_installed"
+      },
+      "reference_issue": "MOI reads quadratic objectives from QSECTION only when the matrix name is literal OBJ; the valid source objective is named obj"
+    },
+    {
+      "id": "fixture_mosek_QSECTION_OBJ",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "0e31364313894bec00d428616dc852114c52495d4e461f4913134ea1997504ce",
+      "dialect": "mosek",
+      "converter_exit_code": 0,
+      "optbin_sha256": "8a35c4dba074586329644f791d2deb8cefee5a5e164484c2a1bc9a6a0dccf132",
+      "reference_dialect": "mosek",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+      "reference_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "status": "pass",
+      "mosek_sdk": {
+        "status": "not_installed"
+      }
+    },
+    {
+      "id": "fixture_cone_EXP",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "26abce073d928c6869f3bd8b442ea03b47998e86675b680998cd7fbc5850b2ca",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "a890dfb4229456642e8cb66bba4d63bcb6a136e74615350b183bae7193a0ec43",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "41ec5a138b57c77ada418ee3c8a6cfcfbf797d6728d9bc9a830ba8e5ee4e91ac",
+      "reference_canonical_sha256": "41ec5a138b57c77ada418ee3c8a6cfcfbf797d6728d9bc9a830ba8e5ee4e91ac",
+      "variables": 3,
+      "normalized_constraints": 2,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_cone_EXP_dual",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "c9a932afcafdadc5d66b4a7840e50af4d5225ee17d39511fd76e4fbf0650deec",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "8cb34878a9491be0189ee7df3f02d664fc8e9415f89447046310504e7260c36c",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "86654b7f37a15318c3fd6e11ac5d9c45e61f5c5d67637a52b81a2bf2583cea8e",
+      "reference_canonical_sha256": "86654b7f37a15318c3fd6e11ac5d9c45e61f5c5d67637a52b81a2bf2583cea8e",
+      "variables": 3,
+      "normalized_constraints": 2,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_cone_QR",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "21a9db2602bf3e24a104de7f7021bed9d0ea0ade8a233f6ca5d4599d0115d4da",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "b302424ed8592d4cb43058af0c089d8210630f8d702bd27966ba560f4b3918cb",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "08e7cf3357bf161637251ed2dbc7302ec97135d559c0146b87302da74871657c",
+      "reference_canonical_sha256": "08e7cf3357bf161637251ed2dbc7302ec97135d559c0146b87302da74871657c",
+      "variables": 3,
+      "normalized_constraints": 2,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_cone_POW",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "e15fb4b4fee9f24117b28d5229ea6baea084ebb63f2a851d199f1b35d0af23bc",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "0c399df67332b882adbfaf91542e7558fabfbeaf2e3d81012382b5f084b82d9a",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "31fb8f27c91a04fdd7e95a4d0b11343a4bc4f2dde781b30f6d0a4019d8902bbe",
+      "reference_canonical_sha256": "31fb8f27c91a04fdd7e95a4d0b11343a4bc4f2dde781b30f6d0a4019d8902bbe",
+      "variables": 3,
+      "normalized_constraints": 2,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_cone_POW_dual",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "5c1ca5ced81440597216944a1f5b6d092e9e2e0e6ae2e7c61927c7705a058654",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "501b7f6f158c71434e2e2c09afd7ae771d0f91269f0384c5db6604addd04fbdd",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "9eb26c15618b7c0e764861aca400a14deda789761e2600b55908016ffd11b8fe",
+      "reference_canonical_sha256": "9eb26c15618b7c0e764861aca400a14deda789761e2600b55908016ffd11b8fe",
+      "variables": 3,
+      "normalized_constraints": 2,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_generalized_power",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "8ff0587ece4f226592ddc0c8ea9ee05396b83c908923374d25033d46c6acfd7c",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "669984fce6fb71f5d2352a368c2923fb2f3c58427936baaa07d5e53979752dc0",
+      "native_full_validation": true,
+      "status": "reference_unsupported",
+      "error": "Only 3-dimensional power cones are supported.",
+      "error_type": "ErrorException"
+    },
+    {
+      "id": "fixture_qcqp_mosek_gurobi_option",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "3e41ed69f46218507e19ab847afedcfa7f52765eeea204697eae301477e6fa96",
+      "dialect": "mosek",
+      "converter_exit_code": 0,
+      "optbin_sha256": "ce1884301ce67ce2f4eb502fdb16735d131333952125f06da2d8e0d958ba6ec8",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "reference_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "status": "pass",
+      "mosek_sdk": {
+        "status": "not_installed"
+      }
+    }
+  ]
+}

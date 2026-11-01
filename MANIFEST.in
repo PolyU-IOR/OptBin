@@ -1,0 +1,17 @@
+include CMakeLists.txt Makefile LICENSE README.md CHANGELOG.md CONTRIBUTING.md setup.py pyproject.toml
+recursive-include cmake *.cmake.in
+recursive-include include *.h
+recursive-include src *.c *.cpp *.h *.hpp
+recursive-include examples *.c *.mps *.cbf CMakeLists.txt
+recursive-include tests *.py *.jl *.toml *.json *.md
+recursive-include scripts *.py *.jl
+recursive-include docs *.md *.tex *.json *.pdf
+recursive-include benchmarks *.md *.json
+recursive-include .github *.yml
+prune manuscript
+prune benchmarks/runs
+prune data
+prune build
+prune output
+prune tmp
+global-exclude __pycache__ *.pyc *.so *.o *.a *.optb *.bqp

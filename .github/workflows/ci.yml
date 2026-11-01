@@ -1,0 +1,196 @@
+name: Build and install
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  distributions:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.10', '3.12', '3.14']
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Native dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential cmake zlib1g-dev libzstd1
+      - name: Build dependencies
+        run: python -m pip install build twine
+      - name: Core and legacy tests
+        run: make -j4 test BUILD=build-ci PYTHON=python
+      - name: Build distributions from source
+        run: python -m build
+      - name: Check package metadata
+        run: python -m twine check dist/*
+      - name: Verify fresh source and wheel installations
+        run: >-
+          python scripts/check_install.py --sdist dist/optbin-*.tar.gz
+          --wheel dist/optbin-*.whl --output output/install-check.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: packages-and-install-checks-${{ matrix.python }}
+          path: |
+            dist/
+            output/install-check*
+
+  optional-frontends:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake zlib1g-dev libzstd1 libhdf5-dev
+          python -m pip install '.[solvers,benchmark,quadratic]'
+      - name: Native tools and HDF5 frontend
+        run: |
+          make -j4
+          cmake -S . -B build-native -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DOPTBIN_WITH_HDF5=ON
+          cmake --build build-native -j4
+      - name: Optional solver and HDF5 checks
+        env:
+          OPTBIN_LIBRARY: ${{ github.workspace }}/build/liboptbin.so
+          OPTBIN_BUILD: ${{ github.workspace }}/build
+          OPTBIN_NATIVE_BUILD: ${{ github.workspace }}/build-native
+          OPENBLAS_NUM_THREADS: '1'
+          OMP_NUM_THREADS: '1'
+        run: |
+          python -m unittest discover -s tests -p 'test_*solvers.py' -v
+          python -m unittest discover -s tests -p 'test_hdf5.py' -v
+          python -m unittest discover -s tests -p 'test_native_hdf5.py' -v
+          ctest --test-dir build-native --output-on-failure
+
+  gurobi-reader:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Reader dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake zlib1g-dev libzstd1
+          python -m pip install '.[gurobi]' 'gurobipy==13.0.3'
+      - name: Native tools and independent reference contracts
+        run: |
+          cmake -S . -B build-gurobi -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DOPTBIN_WITH_GUROBI_BENCH=ON -DPython3_EXECUTABLE="$(command -v python)"
+          cmake --build build-gurobi -j4
+          ctest --test-dir build-gurobi --output-on-failure
+
+  mosek-reader:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Reader dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential zlib1g-dev libzstd1
+          python -m pip install '.[mosek]' 'Mosek==11.2.7'
+      - name: Native tools and independent conic reference contracts
+        run: |
+          make -j4
+          python -m unittest discover -s tests -p 'test_mosek_bench.py' -v
+
+  jump-reader:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      JULIA_NUM_THREADS: '2'
+      JULIA_NUM_PRECOMPILE_TASKS: '2'
+      JULIA_PKG_PRECOMPILE_AUTO: '0'
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - uses: julia-actions/setup-julia@4c0cb0fce8556fdb04a90347310e5db8b1f98fb9 # v2
+        with:
+          version: '1.12.6'
+      - name: Dependencies and native tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential zlib1g-dev libzstd1
+          python -m pip install numpy
+          make -j4
+          julia --startup-file=no --project=tests/jump -e 'using Pkg; Pkg.instantiate()'
+      - name: Independent source-reader fixtures
+        run: >-
+          python scripts/validate_jump.py --julia julia --build build
+          --fixtures-only --output output/jump-fixtures.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: jump-reader-checks
+          path: |
+            output/jump-fixtures.json
+            benchmarks/runs/jump/julia.log
+
+  undefined-behavior:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential zlib1g-dev libzstd1
+      - name: Core and legacy checks under UBSan
+        run: >-
+          make -j4 test BUILD=build-ubsan PYTHON=python
+          CFLAGS='-O1 -g -std=c11 -fsanitize=undefined -fno-sanitize-recover=all'
+          CXXFLAGS='-O1 -g -std=c++17 -fsanitize=undefined -fno-sanitize-recover=all'
+          LDFLAGS=-fsanitize=undefined
+
+  technical-note:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      # microtype needs scalable outlines for the report's T1 Computer Modern fonts.
+      - name: PDF dependencies
+        run: >-
+          sudo apt-get update && sudo apt-get install -y
+          texlive-latex-extra texlive-fonts-recommended cm-super poppler-utils
+      - name: Rebuild the note and verify recorded evidence
+        run: |
+          python scripts/build_technical_report.py --render
+          git diff --exit-code -- docs/technical-report.tex docs/report-evidence.json docs/gzip-comparison.md
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: technical-note
+          path: |
+            output/pdf/
+            tmp/pdfs/

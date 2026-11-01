@@ -1,0 +1,18 @@
+{
+  "captured_utc": "2026-10-19T15:02:56Z",
+  "platform": "Linux-5.15.0-138-generic-x86_64-with-glibc2.35",
+  "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+  "logical_cpus": 128,
+  "ram_bytes": 1622831075328,
+  "cuda_runtime_version": 12080,
+  "gpus": [
+    "0, NVIDIA H100 PCIe, 81559 MiB, 570.124.06",
+    "1, NVIDIA H100 PCIe, 81559 MiB, 570.124.06",
+    "2, NVIDIA H100 PCIe, 81559 MiB, 570.124.06",
+    "3, NVIDIA H100 PCIe, 81559 MiB, 570.124.06"
+  ],
+  "conversion_workers": 8,
+  "gpu_device": 2,
+  "gpu_budget_gib": 65,
+  "cache_policy": "OS cache not cleared; loads follow conversion; shared server and overlapping CPU workers."
+}

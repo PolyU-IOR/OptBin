@@ -1,0 +1,252 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,booktabs}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\hypersetup{pdftitle={OptBin: A Practical Storage and Loading Tool for Sparse Optimization Models},
+pdfauthor={},pdfsubject={Technical report for the experimental OptBin tool},
+pdfkeywords={optimization, sparse models, MPS, CBF, lossless storage, native C reader}}
+\title{OptBin: A Practical Storage and Loading Tool\\for Sparse Optimization Models}
+\author{}
+% BEGIN AUTO: VERSION
+\date{Version 0.2.0rc4 -- 30 October 2026}
+% END AUTO: VERSION
+\begin{document}
+\maketitle
+\begin{abstract}
+OptBin converts supported continuous MPS and CBF models into compact lossless
+blocks and loads them through a validating C reader. This report describes the
+experimental tool, installation, verification and observed storage/loading
+trade-offs. Its practical purpose is repeatable numerical model distribution
+and loading, using established compression methods.
+\end{abstract}
+
+\section{Implemented scope and contracts}
+The package provides MPS-to-OptBin and CBF-to-OptBin converters, a C11 reader,
+block traversal, an inspector, Python bindings, and a legacy BQP-to-v2 migration
+utility. Make and CMake builds are available. The core requires zlib and uses
+the optional Zstandard runtime for compressed blocks; it has no HDF5, CUDA or
+solver dependency. The current validated platform is 64-bit little-endian
+Linux x86-64. The v2 wire schema and C ABI remain experimental.
+
+The bounded profile preserves LP/QP/QCQP objectives, variable/row bounds and
+native quadratic constraints. MPS extensions use producer-specific section
+vocabularies~\cite{gurobi,mosek}. QCQP conversion requires an explicit producer
+dialect. Gurobi 13.0.3 and MOSEK 11.2.7 reader regressions verify the implemented
+\texttt{QCMATRIX}/\texttt{QSECTION} scaling. CPLEX QCQP conventions are not
+validated. The continuous CBF 1--3 subset~\cite{cbf} retains scalar cones, original power
+parameters, PSD variables and sparse PSD operators. Integrality, change
+sequences and unknown features fail explicitly. Storage support is broader than
+the optional SCS/Clarabel and Gurobi/SCIP adapter coverage. Full details and
+parser exclusions are in \path{README.md} and \path{docs/format-v2.md}.
+
+Text conversion produces a canonical binary64 numerical model; it may sort
+coordinates or sum duplicate MPS coefficients. Losslessness refers to exact
+reconstruction of that model, including supported signed zeros, rather than
+the original text, comments or names. Value blocks select raw, constant, exact
+small-integer, exact binary32 or dictionary representations. Integer blocks
+use raw or delta/zigzag encodings, followed by optional Zstandard~\cite{zstd}. These are
+established techniques integrated for this tool, not a new compressor.
+
+Complete loading validates checksums, array coverage, sparse ordering, shapes,
+and cross-array model relationships. Block traversal validates framing, CRCs
+and coverage with bounded scratch, but does not establish all cross-array
+invariants. CRCs detect accidental corruption and are not authentication.
+Conversion uses exclusive publication and never overwrites an existing file.
+
+\clearpage
+\section{Build, installation and use}
+Native tools require a C11/C++17 toolchain, CMake 3.16+ and zlib development
+files. The Zstandard runtime is needed to read Zstd-compressed blocks; write
+uncompressed blocks with \texttt{--zstd 0} when it is unavailable. From unpacked
+source, a typical local installation is:
+\begin{verbatim}
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
+cmake --build build -j4
+ctest --test-dir build --output-on-failure
+cmake --install build --prefix "$HOME/.local/optbin"
+~/.local/optbin/bin/mps2optb examples/qp.mps /tmp/qp.optb
+~/.local/optbin/bin/optb_inspect /tmp/qp.optb --load
+\end{verbatim}
+Installed CMake consumers link \texttt{OptBin::optbin}; an external example is
+provided under \path{examples/consumer/}. The installed prefix can be relocated.
+The public C entry point is \texttt{optb\_load}; release successful models with
+\texttt{optb\_free}. Its limit bounds decoded-array bytes, not process RSS.
+
+The Python distribution requires CPython 3.10+. Source installation needs a C
+compiler, Python headers and zlib development files. Pip builds a bundled C
+reader, so the installed package works outside its source checkout:
+\begin{verbatim}
+python3 -m venv .venv
+.venv/bin/python -m pip install .
+.venv/bin/optbin-info /tmp/qp.optb --limit 8589934592
+\end{verbatim}
+The base binding has no NumPy/SciPy dependency. Optional extras enable solver
+adapters and the Python HDF5 experiment; standalone converters and the C
+development library use the native installation. Python source/wheel and
+relocated native installs are exercised by \path{scripts/check_install.py}.
+The wheel has a local Linux platform tag; no manylinux or cross-distribution
+binary compatibility is claimed. CI tests CPython 3.10/3.12/3.14, optional
+frontends, independent-reader contracts, UBSan and compilation of this note.
+Hosted results are available in
+\href{https://github.com/PolyU-IOR/OptBin/actions}{GitHub Actions}.
+
+\section{Verification and large sparse indices}
+% BEGIN AUTO: VALIDATION
+Complete numerical comparisons with independent source readers pass on 22 continuous models (13 MPS LP/QP/QCQP models read independently by Gurobi and nine CBFs by both MOSEK and the original CBLIB parser). All 6 selected integer CBFs are rejected explicitly. The archived solver study contains 55 source/native runs; all 13 paired Gurobi cases return optimal status. Some conic/SDP runs are inaccurate or inconclusive and two SCIP runs reach their time limits. All eight large source BQP payload SHA-256 hashes match their existing manifest.
+
+An additional JuMP 1.31.2/MOI 1.53.0 source-reader check matches all 22 real models and 15 fixture/configuration cases after explicit function-in-set normalization. Five targeted MPS fixtures retain reader discrepancies, adjudicated against MOSEK or Gurobi; one generalized power cone is unsupported by MOI. These six cases are not agreement passes. Details and pinned reproduction are in \path{docs/jump-validation.md}.
+% END AUTO: VALIDATION
+
+The checks include 22 core/legacy groups, four JuMP-comparison harness groups,
+14 optional groups, five Gurobi-reference groups, four MOSEK-reference groups
+and four gzip-benchmark groups,
+including malformed inputs, budgets, exclusive output, exact codecs and
+independently constructed raw files. Core and HDF5 checks also passed UBSan.
+Release installation checks additionally exercise fresh virtual environments,
+known numerical arrays, CLI error handling, a relocated native prefix and an
+external CMake consumer. Python and inspector limits outside $[0,2^{64}-1]$ are
+rejected; Python paths containing null bytes fail before entering C.
+Model-data comparison is distinct from solver success;
+inaccurate and inconclusive outcomes remain visible in the archived reports.
+
+For CSC with $n$ columns, $N$ stored entries, 64-bit pointers, row-index width
+$w$ and binary64 values, the decoded sparse-array footprint is
+$8(n+1)+(w+8)N$ bytes. Pointer width depends on entry count; row-index width
+depends on row IDs. They must be selected independently.
+% BEGIN AUTO: INDEX_BOUNDARY
+A separate full load of \texttt{prod\_200\_500\_02} reconstructs $4{,}443{,}349{,}500$ entries exactly against its BQP source, retaining 32-bit row indices and 64-bit pointers. This verifies an entry count beyond $2^{32}$; it is a correctness-only check, not a repeated timing result.
+% END AUTO: INDEX_BOUNDARY
+
+\clearpage
+\section{Compressed storage and complete loading}
+The practical comparison uses MPS.gz or CBLIB CBF.gz, externally gzipped raw
+HDF5 arrays~\cite{hdf5} (\texttt{raw.h5.gz}), default OptBin and externally gzipped default
+OptBin (\texttt{OptBin.gz}). Raw HDF5 contains unencoded binary64 values,
+32/64-bit indices, metadata and block checksums, with no dataset compression or
+shuffle filter. External gzip is applied to the entire file. HDF5 is 1.14.6.
+
+MPS.gz timing uses public \texttt{gurobipy.read} from Gurobi 13.0.3~\cite{gurobiread},
+ending with its solver model ready. Environment startup and subsequent
+reference extraction are measured separately. CBF.gz uses public MOSEK 11.2.7
+\texttt{Task.readdata}~\cite{mosekread}, ending with its solver Task ready.
+Full conic functions, domains and PSD trace coefficients agree exactly with
+OptBin after explicit coordinate normalization. All public-API extraction and
+comparison occur outside read timing. The binary paths return numeric arrays
+that pass full \texttt{optb\_validate}; binary checksums are also verified.
+These are practical public loader endpoints with different internal model
+representations. No optimization, presolve, GPU upload or model-file output is
+timed. Numerical comparisons occur after the timer and RSS snapshot.
+Files are warm; trials use fresh processes in shuffled rounds.
+Only large-case RSS is interpreted: small subprocess peaks can retain a
+pre-exec parent watermark, rather than reflect minimum reader memory.
+
+The binary gzip paths decompress to a seekable temporary file on the same
+filesystem before native loading, with both steps included in the timer.
+\texttt{OptBin.gz} is a transport wrapper: the C API itself expects the expanded
+\texttt{.optb} file. Generated gzip files use level 6; existing CBLIB gzip settings are unknown.
+Gzip creation times are recorded separately as preparation;
+they are not charged to repeated loading. The default OptBin writer already
+uses block encodings and Zstandard. This compares practical representations,
+not isolated compressors or all possible HDF5 reader implementations.
+
+% BEGIN AUTO: GZIP_RESULTS
+All 22 real continuous models pass independent source-model comparisons; the three binary representations reconstruct identical numerical arrays. The table shows eight examples spanning LP, QP, QCQP, SOCP, exponential cones and PSD data, measured on 12th Gen Intel(R) Core(TM) i9-12900.
+
+\begin{table}[ht]\centering\small\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrrrrrrr}\toprule
+ & \multicolumn{2}{c}{Text.gz} & \multicolumn{2}{c}{raw.h5.gz} & \multicolumn{2}{c}{OptBin} & \multicolumn{2}{c}{OptBin.gz} \\
+Model & KiB & ms & KiB & ms & KiB & ms & KiB & ms \\ \midrule
+afiro & 0.60 & 2.242 & 1.68 & 1.849 & 1.98 & 0.209 & 0.91 & 0.338 \\
+AUG2D & 401.58 & 15.887 & 130.64 & 5.047 & 2.13 & 2.202 & 0.87 & 2.325 \\
+AUG3DCQP & 62.93 & 5.073 & 29.67 & 2.966 & 2.13 & 0.583 & 0.91 & 0.692 \\
+QPLIB\_2676 & 71.59 & 5.852 & 17.86 & 3.020 & 7.59 & 0.614 & 5.94 & 0.807 \\
+nql30 & 71.11 & 4.888 & 38.32 & 3.060 & 21.54 & 0.837 & 18.83 & 1.051 \\
+nb\_L2 & 2194.08 & 54.388 & 760.63 & 12.660 & 613.99 & 6.888 & 607.30 & 9.358 \\
+LogExpCR-n20-m400 & 109.96 & 4.530 & 72.67 & 2.330 & 66.16 & 0.601 & 63.78 & 1.060 \\
+infeas\_clean\_10\_10\_1 & 1.30 & 0.956 & 2.99 & 1.844 & 4.09 & 0.264 & 1.39 & 0.425 \\
+\bottomrule\end{tabular}
+\caption{Stored KiB ($2^{10}$ bytes), including metadata, and complete loading medians in milliseconds (seven shuffled fresh-process trials per format). Text.gz is MPS.gz read by Gurobi in the first four rows and original CBLIB CBF.gz read by MOSEK in the last four. Decompression and binary temporary-file staging are included.}\end{table}
+
+On the 13 MPS models, default OptBin loads 6.42--10.75 times as fast as public gurobipy.read; OptBin.gz loads 6.13--7.74 times as fast. On the nine CBF cases, default OptBin loads 3.62--8.00 times as fast as MOSEK Task.readdata; OptBin.gz loads 2.25--6.88 times as fast. Across all 22 cases it loads 1.84--8.87 times as fast as the raw.h5.gz temporary-file path. The highly compressible AUG cases are favorable examples. Default OptBin is larger than Text.gz on 5 of 22 models; OptBin.gz is larger on 2, afiro and the tiny clean PSD case. Outer gzip sometimes reduces OptBin metadata substantially, but also adds a decompression/staging step. Small-case results include reader initialization and metadata costs and are not large-model speedup claims.
+% END AUTO: GZIP_RESULTS
+
+\clearpage
+\subsection*{Large LP files}
+% BEGIN AUTO: GZIP_LARGE_RESULTS
+Gurobi reads both original large MPS.gz files; complete public-API LP comparisons match their OptBin numerical models. A separate post-timing metadata audit confirms continuous single-objective LP profiles, unchanged file hashes and Gurobi fingerprints. The binary representations also pass decoded-array byte comparisons. These files retain previously migrated BQP data. The shared host uses INTEL(R) XEON(R) GOLD 6548Y+. prod has 16,361,200 rows, 64,560,800 columns and 2,310,559,600 matrix nonzeros; mcf has 5,525,100 rows, 502,500,100 columns and 1,007,500,100 matrix nonzeros. Two case jobs run concurrently; each loads one format at a time in shuffled rounds. The prod gzip files use GNU gzip with one compression thread; mcf uses pigz 2.8 with 16 compression threads, both at level 6. Native decoding is serial; Gurobi uses Threads=1. Environment startup and reference extraction are excluded from Gurobi read time.
+
+\begin{table}[ht]\centering\small
+\begin{tabular}{lrrrr}\toprule
+Representation & prod GiB & prod seconds & mcf GiB & mcf seconds \\ \midrule
+MPS.gz (Gurobi) & 7.294 & 342.27 & 10.553 & 386.89 \\
+raw.h5 (uncompressed) & 27.992 & -- & 26.319 & -- \\
+raw.h5.gz & 0.533 & 101.39 & 4.301 & 117.72 \\
+OptBin & 0.441 & 53.13 & 4.460 & 53.59 \\
+OptBin.gz & 0.421 & 55.41 & 4.314 & 73.37 \\
+\bottomrule\end{tabular}
+\caption{Large LP storage and complete loading. Times are medians of three shuffled fresh-process trials. Raw .h5 has storage measurements only. prod is \texttt{prod\_200\_400\_02}; mcf is \texttt{mcf\_5000\_100\_1000}. GiB means $2^{30}$ bytes. Gurobi returns its solver model; the binary paths return validated numerical arrays.}\end{table}
+
+Before gzip, raw HDF5 occupies 27.99 and 26.32 GiB (prod/mcf), 63.4 and 5.9 times default OptBin. The tested raw.h5.gz loader needs a temporary file of that expanded size; default OptBin reads its internally compressed file directly. These savings concern stored files and temporary disk space; decoded RAM is essentially unchanged. HDF5 also supports internal dataset compression, which this raw-array baseline does not use.
+
+For \texttt{mcf\_5000\_100\_1000}, raw.h5.gz is smaller than both OptBin representations; stored size and loading time favor different choices. Default OptBin loads 6.44 and 7.22 times as fast as Gurobi on these cases; OptBin.gz loads 6.18 and 5.27 times as fast. Creating raw.h5.gz from the existing raw HDF5 files took 208.6 and 48.5 seconds; creating OptBin.gz from the existing OptBin files took 14.8 and 8.3 seconds. These are gzip-only preparation costs, not source-to-binary conversion times.
+
+OptBin peak process RSS is 28.00 and 26.32 GiB; the other binary paths are within 0.01 GiB. Gurobi read-phase RSS is 57.67 and 70.41 GiB. The latter includes the vendor model and its metadata, so this is not a pure container-memory comparison. Expanded numeric arrays dominate memory. RSS excludes filesystem page cache, expanded gzip temporaries and later solver allocations. Full verification temporarily holds additional model and array copies. Binary gzip staging needs temporary space equal to the uncompressed file size.
+
+The prod matrix contains 2,310,559,600 entries. Gurobi reads it successfully; in 13.0.3, \texttt{getA()} then fails while querying the legacy 32-bit nonzero count. Full verification uses public row-only model copies below the query limit, with complete row/nonzero coverage. This extraction work is outside read timing and its RSS snapshot.
+% END AUTO: GZIP_LARGE_RESULTS
+
+\clearpage
+\section{Limits, provenance and reproducibility}
+Full model loading allocates expanded arrays. The MPS converter uses temporary
+section spools; arbitrary-coordinate CBF conversion currently sorts in memory.
+There is no v2 GPU adapter, direct storage-to-GPU access or compressed solver
+computation. Cold-I/O studies, more large QP/QCQP/PSD workloads, complete
+original-coordinate infeasibility certificates and broader portability remain
+outside this release.
+
+Source collections retain their identifiers, attribution and licenses:
+Oliver Hinder's large LPs\footnote{\url{https://www.oliverhinder.com/large-scale-lp-problems}},
+QPLIB\footnote{\url{https://qplib.zib.de/}} and
+CBLIB\footnote{\url{https://cblib.zib.de/}}.
+The software is MIT licensed; external datasets are not bundled or relicensed.
+Benchmark datasets must be obtained separately; source identifiers and verified
+file hashes are retained in the benchmark reports.
+
+\begin{sloppypar}
+Full tables, per-trial data and reproduction commands are linked from
+\path{docs/gzip-comparison.md}. Installation and feature limits are in
+\path{docs/release.md} and \path{docs/validation.md}.
+The report builder, \path{scripts/build_technical_report.py}, updates marked
+regions from the saved results and records their SHA-256 hashes in
+\path{docs/report-evidence.json}. The independent JuMP/MOI checks use the documented
+file-format API~\cite{moi}; the saved version pins and known discrepancies
+remain part of the reproducibility record. Gurobi source checks and timing
+contracts are documented in \path{docs/gurobi-reference.md}; the corresponding
+CBF check and reference-helper limits are in \path{docs/mosek-reference.md}.
+\end{sloppypar}
+\begin{thebibliography}{9}
+\small
+\bibitem{gurobi} Gurobi Optimization. \emph{Model File Formats}, MPS reference.
+\href{https://docs.gurobi.com/projects/optimizer/en/current/reference/fileformats/modelformats.html}{Official documentation}.
+\bibitem{mosek} MOSEK. \emph{The MPS File Format}.
+\href{https://docs.mosek.com/latest/cxxfusion/mps-format.html}{Official documentation}.
+\bibitem{cbf} MOSEK. \emph{The Conic Benchmark Format}, technical reference.
+\href{https://docs.mosek.com/latest/capi/cbf-format.html}{Official specification}.
+\bibitem{zstd} Y. Collet and M. Kucherawy (ed.). \emph{Zstandard Compression and
+ the `application/zstd' Media Type}. RFC 8878, 2021.
+\href{https://www.rfc-editor.org/rfc/rfc8878.html}{RFC 8878}.
+\bibitem{hdf5} The HDF Group. \emph{HDF5 File Format Specification}, version 3.0.
+\href{https://support.hdfgroup.org/documentation/hdf5/latest/_f_m_t3.html}{Official specification}.
+\bibitem{moi} JuMP developers. \emph{MathOptInterface FileFormats Overview}.
+\href{https://jump.dev/MathOptInterface.jl/stable/submodules/FileFormats/overview/}{Official documentation}.
+\bibitem{gurobiread} Gurobi Optimization. \emph{Python Global Functions: read;
+ Model Queries: getA and getAttr}.
+\href{https://docs.gurobi.com/projects/optimizer/en/current/reference/python/func_global.html#read}{Read reference};
+\href{https://docs.gurobi.com/projects/optimizer/en/current/reference/python/model.html}{model reference}.
+\bibitem{mosekread} MOSEK. \emph{Supported File Formats; Optimizer Task API}.
+\href{https://docs.mosek.com/latest/pythonapi/supported-file-formats.html}{CBF and compressed inputs};
+\href{https://docs.mosek.com/latest/pythonapi/optimizer-task.html}{public Task reference}.
+\end{thebibliography}
+\end{document}

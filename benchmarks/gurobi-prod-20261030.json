@@ -1,0 +1,835 @@
+{
+  "schema": 1,
+  "complete": true,
+  "scope": "Independent Gurobi MPS source reader; practical loader comparison, no solving",
+  "timing_contract": {
+    "gurobi": "gurobipy.read only, including source gzip decompression and vendor model construction",
+    "gurobi_separate": "Environment startup, attribute extraction/comparison and OptBin reference loading excluded from read timer/RSS",
+    "binary": "Native complete validated numerical arrays; no Gurobi model construction",
+    "gzip": "Outer binary gzip expansion to a seekable temporary included",
+    "cache": "Warm files; one verification/warmup per format, then shuffled fresh-process rounds"
+  },
+  "limitations": [
+    "Different public API endpoints: Gurobi solver model versus validated binary numerical arrays",
+    "No optimization, presolve, GPU upload or compressed-file creation in read timings",
+    "Peak RSS is sampled before reference extraction/loading; filesystem cache and temporary disk excluded",
+    "Large comparison is LP-only; small LP/QP/QCQP may use the separate Python polynomial comparator",
+    "Gurobi infinity sentinels, zero signs and explicit sparse zeros are normalized; no numerical tolerance"
+  ],
+  "environment": {
+    "hostname": "benchmark-server",
+    "platform": "Linux-5.15.0-138-generic-x86_64-with-glibc2.35",
+    "started_utc": "2026-10-29T16:48:32.201664+00:00",
+    "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+    "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+    "repeats": 3,
+    "gurobi_threads_parameter": 1,
+    "gurobi_interface": "python",
+    "gurobi_library": "/benchmark/server/optbin-gzip-evaluation-20261029/data/deps/gurobi-venv/lib/python3.10/site-packages/gurobipy/.libs/libgurobi130.so",
+    "gurobi_library_sha256": "8e87fca221fdffc922331c8619426031b3e72dfd419446422f88af0cb0e98f9c",
+    "executable_sha256": {
+      "/benchmark/server/optbin-gzip-evaluation-20261029/build-gzip/optb_format_bench": "4b85ad8849a9e293b025803f3576a646842899974448cac591b6c30ec69cfdef",
+      "/usr/bin/python3.10": "a2f33a6e006989270f4340528eb61f8f97366e00a5d1b602ac8672ea44fc56ae"
+    },
+    "binary_library_sha256": {
+      "liboptbin.so": "4f2c58d18b5cdb5539d2f9269e519636400574ec4e0455506734ce93e6d0fb29",
+      "liboptbin_hdf5.so": "da2c94916d9101446d49f36a2c1f1e9ffc8f32a97127a059ea20860a2b464e3d"
+    },
+    "source_sha256": {
+      "scripts/benchmark_gurobi.py": "2c827d1f1017a2d989a967490ad230dcd9bfddefd8a18613096495a09bf37977",
+      "scripts/gurobi_read.py": "51af3d10aa4c854182d9b42fd75f826687e047419d0f32bb20aed41261f38917",
+      "python/optbin/reader.py": "bb202f5b8bb263ec16ed6c4d1bc652ab166b87da20483a40450b129adda417ca"
+    }
+  },
+  "baseline_report": {
+    "path": "/benchmark/server/optbin-gzip-evaluation-20261029/benchmarks/gurobi-baseline-large-20261030.json",
+    "sha256": "31575ea1b968991357f017fb3418068e36f0d5a03e6166f6b69dcc2ddce243fc"
+  },
+  "results": [
+    {
+      "id": "prod_200_400_02",
+      "source": "/benchmark/datasets/Oliver_Hinder/larger/prod_200_400_02.mps.gz",
+      "formats": [
+        {
+          "format": "gurobi-mps-gzip",
+          "path": "/benchmark/datasets/Oliver_Hinder/larger/prod_200_400_02.mps.gz",
+          "bytes": 7832133628,
+          "sha256": "56b390b90c15fd81a2070819056877d5e20304b6c660f09cb71fd5d8249f3d76",
+          "runs": [
+            {
+              "reader": "gurobipy.read",
+              "gurobi_version": "13.0.3",
+              "seconds": 353.96629083901644,
+              "environment_seconds": 0.04043880105018616,
+              "max_rss_bytes": 61920505856,
+              "user_seconds": 303.62838800000003,
+              "system_seconds": 50.266288,
+              "rows": 16361200,
+              "cols": 64560800,
+              "nnz": 2310559600,
+              "q_nnz": 0,
+              "q_constraints": 0,
+              "gurobi_threads_parameter": 1,
+              "exact_reference_equal": null,
+              "reference_compare_seconds": 0,
+              "gurobi_fingerprint": 352432948,
+              "process_wall_seconds": 367.66644660383463
+            },
+            {
+              "reader": "gurobipy.read",
+              "gurobi_version": "13.0.3",
+              "seconds": 342.15842289477587,
+              "environment_seconds": 0.018508583307266235,
+              "max_rss_bytes": 61920575488,
+              "user_seconds": 300.067002,
+              "system_seconds": 42.029531999999996,
+              "rows": 16361200,
+              "cols": 64560800,
+              "nnz": 2310559600,
+              "q_nnz": 0,
+              "q_constraints": 0,
+              "gurobi_threads_parameter": 1,
+              "exact_reference_equal": null,
+              "reference_compare_seconds": 0,
+              "gurobi_fingerprint": 352432948,
+              "process_wall_seconds": 355.39286568015814
+            },
+            {
+              "reader": "gurobipy.read",
+              "gurobi_version": "13.0.3",
+              "seconds": 342.2674772515893,
+              "environment_seconds": 0.02185460925102234,
+              "max_rss_bytes": 61920354304,
+              "user_seconds": 299.397285,
+              "system_seconds": 42.817899999999995,
+              "rows": 16361200,
+              "cols": 64560800,
+              "nnz": 2310559600,
+              "q_nnz": 0,
+              "q_constraints": 0,
+              "gurobi_threads_parameter": 1,
+              "exact_reference_equal": null,
+              "reference_compare_seconds": 0,
+              "gurobi_fingerprint": 352432948,
+              "process_wall_seconds": 355.623482093215
+            }
+          ],
+          "median_seconds": 342.2674772515893,
+          "median_peak_rss_bytes": 61920505856
+        },
+        {
+          "format": "raw-hdf5-gzip",
+          "path": "/benchmark/server/optbin-gzip-evaluation-20261029/benchmarks/runs/gzip/prod_200_400_02/raw.h5.gz",
+          "bytes": 572512910,
+          "sha256": "f89f02294744b380bb417a3675014604d80f6e20057886d1d41129da6c8d5ace",
+          "runs": [
+            {
+              "seconds": 101.678149,
+              "gzip_to_temporary_seconds": 54.2119651,
+              "max_rss_bytes": 30064734208,
+              "user_seconds": 66.944539,
+              "system_seconds": 34.714057,
+              "input_blocks": 0,
+              "bytes": 572512910,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": true,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 179.17651287466288
+            },
+            {
+              "seconds": 101.387538,
+              "gzip_to_temporary_seconds": 54.0717504,
+              "max_rss_bytes": 30064541696,
+              "user_seconds": 67.187803,
+              "system_seconds": 34.139769,
+              "input_blocks": 0,
+              "bytes": 572512910,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": true,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 178.08975698053837
+            },
+            {
+              "seconds": 99.5234174,
+              "gzip_to_temporary_seconds": 52.8175995,
+              "max_rss_bytes": 30064697344,
+              "user_seconds": 66.614875,
+              "system_seconds": 32.88952,
+              "input_blocks": 0,
+              "bytes": 572512910,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": true,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 175.97121247649193
+            }
+          ],
+          "median_seconds": 101.387538,
+          "median_peak_rss_bytes": 30064697344
+        },
+        {
+          "format": "optbin",
+          "path": "/benchmark/server/optbin-evaluation-20261027/benchmarks/runs/native-cpu/prod_200_400_02/prod_200_400_02.optb",
+          "bytes": 473904256,
+          "sha256": "da5cf55581689670e71711a8637c4ba496c81b7baa3243ba899a0cda9adc25ba",
+          "runs": [
+            {
+              "seconds": 52.9723932,
+              "gzip_to_temporary_seconds": 0,
+              "max_rss_bytes": 30060392448,
+              "user_seconds": 41.573212,
+              "system_seconds": 11.400332,
+              "input_blocks": 0,
+              "bytes": 473904256,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": true,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 130.1823659390211
+            },
+            {
+              "seconds": 53.1349862,
+              "gzip_to_temporary_seconds": 0,
+              "max_rss_bytes": 30060457984,
+              "user_seconds": 41.512126,
+              "system_seconds": 11.624035,
+              "input_blocks": 0,
+              "bytes": 473904256,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": true,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 130.45391159504652
+            },
+            {
+              "seconds": 59.0519598,
+              "gzip_to_temporary_seconds": 0,
+              "max_rss_bytes": 30060482560,
+              "user_seconds": 42.349007,
+              "system_seconds": 16.704397,
+              "input_blocks": 0,
+              "bytes": 473904256,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": true,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 138.00797986984253
+            }
+          ],
+          "median_seconds": 53.1349862,
+          "median_peak_rss_bytes": 30060457984
+        },
+        {
+          "format": "optbin-gzip",
+          "path": "/benchmark/server/optbin-gzip-evaluation-20261029/benchmarks/runs/gzip/prod_200_400_02/prod_200_400_02.optb.gz",
+          "bytes": 452472813,
+          "sha256": "a6dd415ec66783a3bedb00b7901487f46b7c6e257af8cb12fdcdcc3194e97e16",
+          "runs": [
+            {
+              "seconds": 58.0024606,
+              "gzip_to_temporary_seconds": 2.79956749,
+              "max_rss_bytes": 30061711360,
+              "user_seconds": 44.351454,
+              "system_seconds": 13.651832,
+              "input_blocks": 0,
+              "bytes": 452472813,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": true,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 145.3849122747779
+            },
+            {
+              "seconds": 55.4064977,
+              "gzip_to_temporary_seconds": 2.79005963,
+              "max_rss_bytes": 30061670400,
+              "user_seconds": 43.903752,
+              "system_seconds": 11.503935,
+              "input_blocks": 0,
+              "bytes": 452472813,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": true,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 132.1521287560463
+            },
+            {
+              "seconds": 55.216109,
+              "gzip_to_temporary_seconds": 2.78805209,
+              "max_rss_bytes": 30061666304,
+              "user_seconds": 44.137086,
+              "system_seconds": 11.080272,
+              "input_blocks": 0,
+              "bytes": 452472813,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": true,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 131.78789515048265
+            }
+          ],
+          "median_seconds": 55.4064977,
+          "median_peak_rss_bytes": 30061670400
+        }
+      ],
+      "verification": [
+        {
+          "format": "gurobi-mps-gzip",
+          "reader": "gurobipy.read",
+          "gurobi_version": "13.0.3",
+          "seconds": 354.08850517868996,
+          "environment_seconds": 0.018630295991897583,
+          "max_rss_bytes": 61920559104,
+          "user_seconds": 307.391939,
+          "system_seconds": 46.668088,
+          "rows": 16361200,
+          "cols": 64560800,
+          "nnz": 2310559600,
+          "q_nnz": 0,
+          "q_constraints": 0,
+          "gurobi_threads_parameter": 1,
+          "exact_reference_equal": true,
+          "reference_compare_seconds": 490.0827681943774,
+          "checks": [
+            {
+              "field": "profile",
+              "pass": true
+            },
+            {
+              "field": "reference quadratic objective count",
+              "pass": true,
+              "elements": 0
+            },
+            {
+              "field": "reference quadratic constraints count",
+              "pass": true,
+              "elements": 0
+            },
+            {
+              "field": "rows",
+              "pass": true
+            },
+            {
+              "field": "cols",
+              "pass": true
+            },
+            {
+              "field": "sense",
+              "pass": true
+            },
+            {
+              "field": "objective offset",
+              "pass": true
+            },
+            {
+              "field": "row block coverage",
+              "pass": true
+            },
+            {
+              "field": "A rows [0,16161851) column pointers count",
+              "pass": true
+            },
+            {
+              "field": "A rows [0,16161851) column pointers",
+              "elements": 64560801,
+              "pass": true
+            },
+            {
+              "field": "A rows [0,16161851) row indices count",
+              "pass": true
+            },
+            {
+              "field": "A rows [0,16161851) row indices",
+              "elements": 1499994902,
+              "pass": true
+            },
+            {
+              "field": "A rows [0,16161851) coefficients count",
+              "pass": true
+            },
+            {
+              "field": "A rows [0,16161851) coefficients",
+              "elements": 1499994902,
+              "pass": true
+            },
+            {
+              "field": "row block coverage",
+              "pass": true
+            },
+            {
+              "field": "A rows [16161851,16361200) column pointers count",
+              "pass": true
+            },
+            {
+              "field": "A rows [16161851,16361200) column pointers",
+              "elements": 64560801,
+              "pass": true
+            },
+            {
+              "field": "A rows [16161851,16361200) row indices count",
+              "pass": true
+            },
+            {
+              "field": "A rows [16161851,16361200) row indices",
+              "elements": 810564698,
+              "pass": true
+            },
+            {
+              "field": "A rows [16161851,16361200) coefficients count",
+              "pass": true
+            },
+            {
+              "field": "A rows [16161851,16361200) coefficients",
+              "elements": 810564698,
+              "pass": true
+            },
+            {
+              "field": "complete row coverage",
+              "pass": true
+            },
+            {
+              "field": "complete nonzero coverage",
+              "pass": true
+            },
+            {
+              "field": "Obj count",
+              "pass": true
+            },
+            {
+              "field": "Obj",
+              "elements": 64560800,
+              "pass": true
+            },
+            {
+              "field": "LB count",
+              "pass": true
+            },
+            {
+              "field": "LB",
+              "elements": 64560800,
+              "pass": true
+            },
+            {
+              "field": "UB count",
+              "pass": true
+            },
+            {
+              "field": "UB",
+              "elements": 64560800,
+              "pass": true
+            },
+            {
+              "field": "RHS count",
+              "pass": true
+            },
+            {
+              "field": "Sense count",
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 1048576,
+              "pass": true
+            },
+            {
+              "field": "row lower count",
+              "pass": true
+            },
+            {
+              "field": "row lower",
+              "elements": 632560,
+              "pass": true
+            },
+            {
+              "field": "row upper count",
+              "pass": true
+            },
+            {
+              "field": "row upper",
+              "elements": 632560,
+              "pass": true
+            }
+          ],
+          "ignored_explicit_sparse_zeros": 0,
+          "matrix_reference_method": "public row-submodel getA",
+          "matrix_row_partitions": [
+            [
+              0,
+              16161851
+            ],
+            [
+              16161851,
+              16361200
+            ]
+          ],
+          "matrix_nnz_checked": 2310559600,
+          "compared_elements": 4976645602,
+          "normalization": "Gurobi infinity sentinels, zero signs and explicit sparse zeros; no tolerance",
+          "numpy_version": "2.2.6",
+          "scipy_version": "1.15.3",
+          "gurobi_fingerprint": 352432948,
+          "process_wall_seconds": 858.2473412901163
+        },
+        {
+          "format": "raw-hdf5-gzip",
+          "seconds": 103.043303,
+          "gzip_to_temporary_seconds": 54.2350646,
+          "max_rss_bytes": 30064742400,
+          "user_seconds": 67.266249,
+          "system_seconds": 35.754564,
+          "input_blocks": 0,
+          "bytes": 572512910,
+          "decoded_bytes": 30054440008,
+          "rows": 16361200,
+          "cols": 64560800,
+          "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6",
+          "process_wall_seconds": 181.18760158121586
+        },
+        {
+          "format": "optbin",
+          "seconds": 53.4048269,
+          "gzip_to_temporary_seconds": 0,
+          "max_rss_bytes": 30060535808,
+          "user_seconds": 41.861658,
+          "system_seconds": 11.544457,
+          "input_blocks": 0,
+          "bytes": 473904256,
+          "decoded_bytes": 30054440008,
+          "rows": 16361200,
+          "cols": 64560800,
+          "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6",
+          "process_wall_seconds": 131.09755937755108
+        },
+        {
+          "format": "optbin-gzip",
+          "seconds": 56.2195159,
+          "gzip_to_temporary_seconds": 2.84039634,
+          "max_rss_bytes": 30061625344,
+          "user_seconds": 44.276609,
+          "system_seconds": 11.944164,
+          "input_blocks": 0,
+          "bytes": 452472813,
+          "decoded_bytes": 30054440008,
+          "rows": 16361200,
+          "cols": 64560800,
+          "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6",
+          "process_wall_seconds": 133.91420966386795
+        }
+      ],
+      "measurement_order": [
+        [
+          "gurobi-mps-gzip",
+          "optbin-gzip",
+          "optbin",
+          "raw-hdf5-gzip"
+        ],
+        [
+          "optbin",
+          "raw-hdf5-gzip",
+          "gurobi-mps-gzip",
+          "optbin-gzip"
+        ],
+        [
+          "optbin-gzip",
+          "raw-hdf5-gzip",
+          "gurobi-mps-gzip",
+          "optbin"
+        ]
+      ],
+      "status": "complete",
+      "gurobi_version": "13.0.3",
+      "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b"
+    }
+  ]
+}

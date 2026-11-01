@@ -1,0 +1,31 @@
+{
+  "scope": "Correctness-only single full native load and exact comparison; not a repeated performance benchmark",
+  "id": "prod_200_500_02",
+  "rows": 25476450,
+  "cols": 100801000,
+  "nnz_A": 4443349500,
+  "row_index_bytes": 4,
+  "source": "/benchmark/datasets/Oliver_Hinder/larger_bqp/prod_200_500_02.bqp",
+  "optbin": "/benchmark/server/optbin-evaluation-20261027/benchmarks/runs/boundary/prod_200_500_02.optb",
+  "preparation": {
+    "bytes": 776049328,
+    "seconds": 67.2799,
+    "max_rss_bytes": 12189696,
+    "payloads_unchanged": true,
+    "validation": "framing-and-decoded-crc; full-model-at-load"
+  },
+  "comparison": {
+    "seconds": 96.3838286,
+    "max_rss_bytes": 56957812736,
+    "user_seconds": 78.882499,
+    "system_seconds": 17.498779,
+    "input_blocks": 0,
+    "bytes": 776049328,
+    "decoded_bytes": 56953449208,
+    "rows": 25476450,
+    "cols": 100801000,
+    "numerical_sha256": "a88c7f5b30d78d53d8dc69e595b7df704f6e31a17c461c66c9579db073518a46",
+    "bitwise_reference_equal": true,
+    "hdf5_version": "HDF5 library version: 1.14.6"
+  }
+}

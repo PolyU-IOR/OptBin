@@ -1,0 +1,847 @@
+{
+  "scope": "Native C CPU read, allocation, decoding, block CRCs and full model validation; no solver setup or GPU",
+  "cache": "Warm file cache: exports/verification plus one untimed warmup per format; independent-process trials in shuffled rounds; no global cache flush",
+  "measurement": "CLOCK_MONOTONIC and getrusage snapshot before SHA256 and optional memcmp; RSS is Linux process peak resident bytes",
+  "limitations": [
+    "Single host and single-threaded readers; no direct-I/O or controlled cold-cache measurements",
+    "Typed HDF5 uses the original block partitions/checksums with contiguous or shuffle/deflate level 1 arrays",
+    "HDF5 encoded byte reads use a bounded 1 MiB cache; OptBin uses stdio buffering",
+    "BQP migration preserves existing encoded payloads; it does not measure MPS-to-v2 conversion",
+    "Legacy BQP timing through the compatibility API includes v1 validation followed by v2 validation"
+  ],
+  "environment": {
+    "hostname": "benchmark-server",
+    "platform": "Linux-5.15.0-138-generic-x86_64-with-glibc2.35",
+    "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+    "logical_cpus": 128,
+    "started_utc": "2026-10-27T02:26:32.576364+00:00",
+    "compiler": "cc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+    "binary_sha256": "91cf75d5770a6a2e486bd78318845479a4dfa45cbd1de91b488708c7231417bb"
+  },
+  "results": [
+    {
+      "id": "prod_200_400_02",
+      "original": "/benchmark/shared/lp_data/Oliver_Hinder/larger_bqp/prod_200_400_02.bqp",
+      "original_bytes": 473903552,
+      "preparation": {
+        "bqp_repack": {
+          "bytes": 473904256,
+          "seconds": 35.6629,
+          "max_rss_bytes": 17969152,
+          "payloads_unchanged": true,
+          "validation": "framing-and-decoded-crc; full-model-at-load",
+          "process_wall_seconds": 35.66417330503464
+        },
+        "encoded": {
+          "bytes": 473911888,
+          "seconds": 35.5918687,
+          "layout": 0,
+          "process_wall_seconds": 35.5932973921299
+        },
+        "raw": {
+          "bytes": 30056251656,
+          "seconds": 72.3101892,
+          "layout": 1,
+          "process_wall_seconds": 72.31166784465313
+        },
+        "gzip": {
+          "bytes": 840483502,
+          "seconds": 131.480023,
+          "layout": 2,
+          "process_wall_seconds": 131.4827230423689
+        }
+      },
+      "verification": [
+        {
+          "format": "optbin",
+          "seconds": 51.4942988,
+          "max_rss_bytes": 30058811392,
+          "user_seconds": 41.475991,
+          "system_seconds": 10.015032,
+          "input_blocks": 0,
+          "bytes": 473904256,
+          "decoded_bytes": 30054440008,
+          "rows": 16361200,
+          "cols": 64560800,
+          "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6",
+          "process_wall_seconds": 135.6906637698412
+        },
+        {
+          "format": "hdf5-encoded",
+          "seconds": 51.080016,
+          "max_rss_bytes": 30064066560,
+          "user_seconds": 41.426847,
+          "system_seconds": 9.651731,
+          "input_blocks": 0,
+          "bytes": 473911888,
+          "decoded_bytes": 30054440008,
+          "rows": 16361200,
+          "cols": 64560800,
+          "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6",
+          "process_wall_seconds": 134.82298064231873
+        },
+        {
+          "format": "hdf5-raw",
+          "seconds": 42.3145846,
+          "max_rss_bytes": 30061813760,
+          "user_seconds": 29.262237,
+          "system_seconds": 13.051213,
+          "input_blocks": 0,
+          "bytes": 30056251656,
+          "decoded_bytes": 30054440008,
+          "rows": 16361200,
+          "cols": 64560800,
+          "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6",
+          "process_wall_seconds": 126.36256686598063
+        },
+        {
+          "format": "hdf5-gzip",
+          "seconds": 74.4238457,
+          "max_rss_bytes": 30222286848,
+          "user_seconds": 63.684726,
+          "system_seconds": 10.734774,
+          "input_blocks": 0,
+          "bytes": 840483502,
+          "decoded_bytes": 30054440008,
+          "rows": 16361200,
+          "cols": 64560800,
+          "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6",
+          "process_wall_seconds": 158.27357044816017
+        },
+        {
+          "format": "legacy-bqp",
+          "seconds": 60.826457,
+          "max_rss_bytes": 30058594304,
+          "user_seconds": 50.796489,
+          "system_seconds": 10.027307,
+          "input_blocks": 0,
+          "bytes": 473903552,
+          "decoded_bytes": 30054440008,
+          "rows": 16361200,
+          "cols": 64560800,
+          "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6",
+          "process_wall_seconds": 145.04121194034815
+        }
+      ],
+      "migration": "Encoded v1 blocks regrouped into v2 sections, no numerical re-encoding",
+      "measurement_order": [
+        [
+          "legacy-bqp",
+          "hdf5-raw",
+          "hdf5-gzip",
+          "optbin",
+          "hdf5-encoded"
+        ],
+        [
+          "hdf5-raw",
+          "optbin",
+          "hdf5-gzip",
+          "hdf5-encoded",
+          "legacy-bqp"
+        ],
+        [
+          "hdf5-raw",
+          "legacy-bqp",
+          "hdf5-gzip",
+          "optbin",
+          "hdf5-encoded"
+        ]
+      ],
+      "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+      "formats": [
+        {
+          "format": "optbin",
+          "path": "/benchmark/server/optbin-evaluation-20261027/benchmarks/runs/native-cpu/prod_200_400_02/prod_200_400_02.optb",
+          "bytes": 473904256,
+          "runs": [
+            {
+              "seconds": 51.452939,
+              "max_rss_bytes": 30058622976,
+              "user_seconds": 41.610979,
+              "system_seconds": 9.839758,
+              "input_blocks": 0,
+              "bytes": 473904256,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 70.34117636084557
+            },
+            {
+              "seconds": 51.0974653,
+              "max_rss_bytes": 30058627072,
+              "user_seconds": 41.507268,
+              "system_seconds": 9.587831,
+              "input_blocks": 0,
+              "bytes": 473904256,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 69.95901656150818
+            },
+            {
+              "seconds": 51.1858129,
+              "max_rss_bytes": 30058811392,
+              "user_seconds": 41.220908,
+              "system_seconds": 9.963252,
+              "input_blocks": 0,
+              "bytes": 473904256,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 70.07748492062092
+            }
+          ],
+          "median_seconds": 51.1858129,
+          "median_peak_rss_bytes": 30058627072
+        },
+        {
+          "format": "hdf5-encoded",
+          "path": "/benchmark/server/optbin-evaluation-20261027/benchmarks/runs/native-cpu/prod_200_400_02/encoded.h5",
+          "bytes": 473911888,
+          "runs": [
+            {
+              "seconds": 51.1270476,
+              "max_rss_bytes": 30064009216,
+              "user_seconds": 41.256195,
+              "system_seconds": 9.86709,
+              "input_blocks": 0,
+              "bytes": 473911888,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 69.9908060207963
+            },
+            {
+              "seconds": 51.0992514,
+              "max_rss_bytes": 30064041984,
+              "user_seconds": 41.289598,
+              "system_seconds": 9.807429,
+              "input_blocks": 0,
+              "bytes": 473911888,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 69.96353137493134
+            },
+            {
+              "seconds": 51.2117585,
+              "max_rss_bytes": 30064041984,
+              "user_seconds": 41.783117,
+              "system_seconds": 9.426898,
+              "input_blocks": 0,
+              "bytes": 473911888,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 70.09890957921743
+            }
+          ],
+          "median_seconds": 51.1270476,
+          "median_peak_rss_bytes": 30064041984
+        },
+        {
+          "format": "hdf5-raw",
+          "path": "/benchmark/server/optbin-evaluation-20261027/benchmarks/runs/native-cpu/prod_200_400_02/raw.h5",
+          "bytes": 30056251656,
+          "runs": [
+            {
+              "seconds": 42.961964,
+              "max_rss_bytes": 30061830144,
+              "user_seconds": 29.241955,
+              "system_seconds": 13.719041,
+              "input_blocks": 0,
+              "bytes": 30056251656,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 61.877006351947784
+            },
+            {
+              "seconds": 42.2610439,
+              "max_rss_bytes": 30061801472,
+              "user_seconds": 29.263808,
+              "system_seconds": 12.995914,
+              "input_blocks": 0,
+              "bytes": 30056251656,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 61.17576413601637
+            },
+            {
+              "seconds": 42.193264,
+              "max_rss_bytes": 30061842432,
+              "user_seconds": 29.244703,
+              "system_seconds": 12.948311,
+              "input_blocks": 0,
+              "bytes": 30056251656,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 61.114183351397514
+            }
+          ],
+          "median_seconds": 42.2610439,
+          "median_peak_rss_bytes": 30061830144
+        },
+        {
+          "format": "hdf5-gzip",
+          "path": "/benchmark/server/optbin-evaluation-20261027/benchmarks/runs/native-cpu/prod_200_400_02/gzip.h5",
+          "bytes": 840483502,
+          "runs": [
+            {
+              "seconds": 74.4285356,
+              "max_rss_bytes": 30222307328,
+              "user_seconds": 63.91766,
+              "system_seconds": 10.507615,
+              "input_blocks": 0,
+              "bytes": 840483502,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 93.32064295560122
+            },
+            {
+              "seconds": 74.7701005,
+              "max_rss_bytes": 30222151680,
+              "user_seconds": 64.214618,
+              "system_seconds": 10.551115,
+              "input_blocks": 0,
+              "bytes": 840483502,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 93.6884741410613
+            },
+            {
+              "seconds": 74.5054119,
+              "max_rss_bytes": 30222352384,
+              "user_seconds": 63.682399,
+              "system_seconds": 10.819728,
+              "input_blocks": 0,
+              "bytes": 840483502,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 93.4221622645855
+            }
+          ],
+          "median_seconds": 74.5054119,
+          "median_peak_rss_bytes": 30222307328
+        },
+        {
+          "format": "legacy-bqp",
+          "path": "/benchmark/shared/lp_data/Oliver_Hinder/larger_bqp/prod_200_400_02.bqp",
+          "bytes": 473903552,
+          "runs": [
+            {
+              "seconds": 60.6074022,
+              "max_rss_bytes": 30058688512,
+              "user_seconds": 50.521534,
+              "system_seconds": 10.083507,
+              "input_blocks": 0,
+              "bytes": 473903552,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 79.51249171048403
+            },
+            {
+              "seconds": 60.6102502,
+              "max_rss_bytes": 30058590208,
+              "user_seconds": 50.881883,
+              "system_seconds": 9.723595,
+              "input_blocks": 0,
+              "bytes": 473903552,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 79.50533632934093
+            },
+            {
+              "seconds": 63.1316041,
+              "max_rss_bytes": 30058602496,
+              "user_seconds": 51.095101,
+              "system_seconds": 12.034846,
+              "input_blocks": 0,
+              "bytes": 473903552,
+              "decoded_bytes": 30054440008,
+              "rows": 16361200,
+              "cols": 64560800,
+              "numerical_sha256": "b859cd5d2a1d8e4b0c8edf49114d51cb554e63ae9a02e028f3d94ba264cd8b6b",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 82.14046508073807
+            }
+          ],
+          "median_seconds": 60.6102502,
+          "median_peak_rss_bytes": 30058602496
+        }
+      ]
+    },
+    {
+      "id": "mcf_5000_100_1000",
+      "original": "/benchmark/shared/lp_data/Oliver_Hinder/larger_bqp/mcf_5000_100_1000.bqp",
+      "original_bytes": 4788884696,
+      "preparation": {
+        "bqp_repack": {
+          "bytes": 4788885400,
+          "seconds": 39.9319,
+          "max_rss_bytes": 17969152,
+          "payloads_unchanged": true,
+          "validation": "framing-and-decoded-crc; full-model-at-load",
+          "process_wall_seconds": 39.93366712331772
+        },
+        "encoded": {
+          "bytes": 4788893032,
+          "seconds": 40.6943335,
+          "layout": 0,
+          "process_wall_seconds": 40.69599387049675
+        },
+        "raw": {
+          "bytes": 28259896824,
+          "seconds": 70.995333,
+          "layout": 1,
+          "process_wall_seconds": 70.99712223559618
+        },
+        "gzip": {
+          "bytes": 5080510880,
+          "seconds": 254.799293,
+          "layout": 2,
+          "process_wall_seconds": 254.80191159248352
+        }
+      },
+      "verification": [
+        {
+          "format": "optbin",
+          "seconds": 52.1241401,
+          "max_rss_bytes": 28262842368,
+          "user_seconds": 42.567324,
+          "system_seconds": 9.555848,
+          "input_blocks": 0,
+          "bytes": 4788885400,
+          "decoded_bytes": 28258406008,
+          "rows": 5525100,
+          "cols": 502500100,
+          "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6",
+          "process_wall_seconds": 131.87939808517694
+        },
+        {
+          "format": "hdf5-encoded",
+          "seconds": 52.2258946,
+          "max_rss_bytes": 28268130304,
+          "user_seconds": 42.623575,
+          "system_seconds": 9.599904,
+          "input_blocks": 0,
+          "bytes": 4788893032,
+          "decoded_bytes": 28258406008,
+          "rows": 5525100,
+          "cols": 502500100,
+          "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6",
+          "process_wall_seconds": 142.86496648192406
+        },
+        {
+          "format": "hdf5-raw",
+          "seconds": 40.3546159,
+          "max_rss_bytes": 28265553920,
+          "user_seconds": 27.319603,
+          "system_seconds": 13.03581,
+          "input_blocks": 0,
+          "bytes": 28259896824,
+          "decoded_bytes": 28258406008,
+          "rows": 5525100,
+          "cols": 502500100,
+          "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6",
+          "process_wall_seconds": 138.08603227883577
+        },
+        {
+          "format": "hdf5-gzip",
+          "seconds": 100.951626,
+          "max_rss_bytes": 28346871808,
+          "user_seconds": 91.032883,
+          "system_seconds": 9.91566,
+          "input_blocks": 0,
+          "bytes": 5080510880,
+          "decoded_bytes": 28258406008,
+          "rows": 5525100,
+          "cols": 502500100,
+          "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6",
+          "process_wall_seconds": 180.82469080388546
+        },
+        {
+          "format": "legacy-bqp",
+          "seconds": 58.7436931,
+          "max_rss_bytes": 28262842368,
+          "user_seconds": 48.53507,
+          "system_seconds": 10.206963,
+          "input_blocks": 0,
+          "bytes": 4788884696,
+          "decoded_bytes": 28258406008,
+          "rows": 5525100,
+          "cols": 502500100,
+          "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6",
+          "process_wall_seconds": 138.63891166448593
+        }
+      ],
+      "migration": "Encoded v1 blocks regrouped into v2 sections, no numerical re-encoding",
+      "measurement_order": [
+        [
+          "hdf5-encoded",
+          "optbin",
+          "hdf5-raw",
+          "legacy-bqp",
+          "hdf5-gzip"
+        ],
+        [
+          "hdf5-raw",
+          "hdf5-encoded",
+          "legacy-bqp",
+          "hdf5-gzip",
+          "optbin"
+        ],
+        [
+          "hdf5-gzip",
+          "optbin",
+          "legacy-bqp",
+          "hdf5-raw",
+          "hdf5-encoded"
+        ]
+      ],
+      "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+      "formats": [
+        {
+          "format": "optbin",
+          "path": "/benchmark/server/optbin-evaluation-20261027/benchmarks/runs/native-cpu/mcf_5000_100_1000/mcf_5000_100_1000.optb",
+          "bytes": 4788885400,
+          "runs": [
+            {
+              "seconds": 52.156427,
+              "max_rss_bytes": 28262735872,
+              "user_seconds": 42.487726,
+              "system_seconds": 9.667027,
+              "input_blocks": 0,
+              "bytes": 4788885400,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 69.5621565580368
+            },
+            {
+              "seconds": 52.0686112,
+              "max_rss_bytes": 28262821888,
+              "user_seconds": 42.703436,
+              "system_seconds": 9.363876,
+              "input_blocks": 0,
+              "bytes": 4788885400,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 69.46142666786909
+            },
+            {
+              "seconds": 52.2754226,
+              "max_rss_bytes": 28262862848,
+              "user_seconds": 42.422246,
+              "system_seconds": 9.851592,
+              "input_blocks": 0,
+              "bytes": 4788885400,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 69.6607580408454
+            }
+          ],
+          "median_seconds": 52.156427,
+          "median_peak_rss_bytes": 28262821888
+        },
+        {
+          "format": "hdf5-encoded",
+          "path": "/benchmark/server/optbin-evaluation-20261027/benchmarks/runs/native-cpu/mcf_5000_100_1000/encoded.h5",
+          "bytes": 4788893032,
+          "runs": [
+            {
+              "seconds": 52.446492,
+              "max_rss_bytes": 28268113920,
+              "user_seconds": 42.890538,
+              "system_seconds": 9.555674,
+              "input_blocks": 0,
+              "bytes": 4788893032,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 69.82906729727983
+            },
+            {
+              "seconds": 52.3199179,
+              "max_rss_bytes": 28268126208,
+              "user_seconds": 42.946581,
+              "system_seconds": 9.37169,
+              "input_blocks": 0,
+              "bytes": 4788893032,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 69.70426455140114
+            },
+            {
+              "seconds": 52.3141398,
+              "max_rss_bytes": 28268085248,
+              "user_seconds": 42.901571,
+              "system_seconds": 9.411467,
+              "input_blocks": 0,
+              "bytes": 4788893032,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 69.69606297463179
+            }
+          ],
+          "median_seconds": 52.3199179,
+          "median_peak_rss_bytes": 28268113920
+        },
+        {
+          "format": "hdf5-raw",
+          "path": "/benchmark/server/optbin-evaluation-20261027/benchmarks/runs/native-cpu/mcf_5000_100_1000/raw.h5",
+          "bytes": 28259896824,
+          "runs": [
+            {
+              "seconds": 40.0663451,
+              "max_rss_bytes": 28265463808,
+              "user_seconds": 27.353855,
+              "system_seconds": 12.711003,
+              "input_blocks": 0,
+              "bytes": 28259896824,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 57.45353514701128
+            },
+            {
+              "seconds": 38.9926736,
+              "max_rss_bytes": 28265459712,
+              "user_seconds": 27.412852,
+              "system_seconds": 11.57867,
+              "input_blocks": 0,
+              "bytes": 28259896824,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 56.374849408864975
+            },
+            {
+              "seconds": 38.9951063,
+              "max_rss_bytes": 28265517056,
+              "user_seconds": 27.410577,
+              "system_seconds": 11.583398,
+              "input_blocks": 0,
+              "bytes": 28259896824,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 56.42458405345678
+            }
+          ],
+          "median_seconds": 38.9951063,
+          "median_peak_rss_bytes": 28265463808
+        },
+        {
+          "format": "hdf5-gzip",
+          "path": "/benchmark/server/optbin-evaluation-20261027/benchmarks/runs/native-cpu/mcf_5000_100_1000/gzip.h5",
+          "bytes": 5080510880,
+          "runs": [
+            {
+              "seconds": 101.037778,
+              "max_rss_bytes": 28346871808,
+              "user_seconds": 90.951654,
+              "system_seconds": 10.083961,
+              "input_blocks": 0,
+              "bytes": 5080510880,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 118.42609243094921
+            },
+            {
+              "seconds": 101.21425,
+              "max_rss_bytes": 28346781696,
+              "user_seconds": 91.44718,
+              "system_seconds": 9.763485,
+              "input_blocks": 0,
+              "bytes": 5080510880,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 118.60092271864414
+            },
+            {
+              "seconds": 101.237919,
+              "max_rss_bytes": 28346785792,
+              "user_seconds": 91.315139,
+              "system_seconds": 9.919471,
+              "input_blocks": 0,
+              "bytes": 5080510880,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 118.63891488313675
+            }
+          ],
+          "median_seconds": 101.21425,
+          "median_peak_rss_bytes": 28346785792
+        },
+        {
+          "format": "legacy-bqp",
+          "path": "/benchmark/shared/lp_data/Oliver_Hinder/larger_bqp/mcf_5000_100_1000.bqp",
+          "bytes": 4788884696,
+          "runs": [
+            {
+              "seconds": 58.9103998,
+              "max_rss_bytes": 28262838272,
+              "user_seconds": 49.76641,
+              "system_seconds": 9.138973,
+              "input_blocks": 0,
+              "bytes": 4788884696,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 76.32502828538418
+            },
+            {
+              "seconds": 58.788377,
+              "max_rss_bytes": 28262850560,
+              "user_seconds": 50.015134,
+              "system_seconds": 8.771848,
+              "input_blocks": 0,
+              "bytes": 4788884696,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 76.20291882008314
+            },
+            {
+              "seconds": 59.2766909,
+              "max_rss_bytes": 28262793216,
+              "user_seconds": 49.524308,
+              "system_seconds": 9.751273,
+              "input_blocks": 0,
+              "bytes": 4788884696,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6",
+              "process_wall_seconds": 76.68595311790705
+            }
+          ],
+          "median_seconds": 58.9103998,
+          "median_peak_rss_bytes": 28262838272
+        }
+      ]
+    }
+  ]
+}

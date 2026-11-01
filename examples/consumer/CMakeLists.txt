@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+project(OptBinConsumer LANGUAGES C)
+find_package(OptBin 0.2 CONFIG REQUIRED)
+add_executable(consumer ../load_optb.c)
+target_link_libraries(consumer PRIVATE OptBin::optbin)

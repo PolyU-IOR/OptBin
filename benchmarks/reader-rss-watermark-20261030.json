@@ -1,0 +1,28 @@
+{
+  "scope": "Local Linux subprocess ru_maxrss startup-watermark observation; no minimum-memory claim",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "command": [
+    "/benchmark/workstation/optbin/build-gzip/optb_format_bench",
+    "optbin",
+    "/benchmark/workstation/optbin/benchmarks/runs/gzip-readers-20261029/afiro/afiro.optb",
+    "optbin",
+    "/benchmark/workstation/optbin/benchmarks/runs/gzip-readers-20261029/afiro/afiro.optb"
+  ],
+  "executable_sha256": "4a1b8ce4bdcee6937256039b0b699b6e4bc6800f9716096c64f854aa88e071f9",
+  "input_sha256": "1dccc3d0c9922e9cc8f1c528e75f5604a210eefeb18ee846dd3b6cf2be3d18c7",
+  "procedure": "Run the identical tiny native read twice through subprocess.check_output; retain a bytearray(0), then a bytearray(128*1024*1024), in the parent while launching the child. Read ru_maxrss from the child JSON and resource.getrusage in the parent.",
+  "observations": [
+    {
+      "retained_parent_bytes": 0,
+      "parent_max_rss_bytes": 13979648,
+      "child_read_peak_rss_bytes": 13979648
+    },
+    {
+      "retained_parent_bytes": 134217728,
+      "parent_max_rss_bytes": 147595264,
+      "child_read_peak_rss_bytes": 147595264
+    }
+  ],
+  "interpretation": "Child peak RSS retains a parent pre-exec watermark in this setup; small-case RSS is not interpreted as minimum reader memory. Large measured model allocations dominate this floor."
+}

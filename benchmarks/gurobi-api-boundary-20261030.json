@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "model": "prod_200_400_02",
+  "source_sha256": "56b390b90c15fd81a2070819056877d5e20304b6c660f09cb71fd5d8249f3d76",
+  "gurobi_version": "13.0.3",
+  "observed_query_failure": {
+    "read_succeeded": true,
+    "reported_read_seconds": 346.023,
+    "failure_stage": "Public Model.getA extraction after successful read; not part of timed trials",
+    "exception": "AttributeError: Unable to retrieve attribute 'numNzs'",
+    "source_read_rows": 16361200,
+    "source_read_columns": 64560800,
+    "nnz": 2310559600,
+    "original_worker_sha256": "0295f023f3dacca92c9ae8f06b55e2d326272b8f3ab89fb90c6311387193ddd2",
+    "original_failure_report_sha256": "fac1e8385b36d095629758ca51804377cf65257be320304eb2152ab1bcb0f813",
+    "original_log_sha256": "f968f6371ab6659f3d18a7b63b66fecd53616635e8d0ec3d275b14a6a124f723"
+  },
+  "reproduction": {
+    "interface": "gurobipy 13.0.3",
+    "steps": [
+      "model = gurobipy.read(source_mps_gz)",
+      "model.getA()"
+    ],
+    "note": "Use DNumNZs for the total nonzero count; getA in the observed SDK queries the legacy integer NumNZs attribute."
+  },
+  "workaround": {
+    "method": "Public row-only model copies; no private Gurobi pointers",
+    "full_numerical_comparison_passed": true,
+    "matrix_nnz_checked": 2310559600,
+    "matrix_row_partitions": [
+      [
+        0,
+        16161851
+      ],
+      [
+        16161851,
+        16361200
+      ]
+    ],
+    "read_timer_and_rss_exclude_extraction": true,
+    "report": "benchmarks/gurobi-large-20261030.json",
+    "report_sha256": "431b43ebfc661790c708495aa582e43d47930a1e26feb42d4598c09883ae5f25"
+  },
+  "official_count_reference": "https://docs.gurobi.com/projects/optimizer/en/current/reference/attributes/model.html#numnzs",
+  "interpretation": "A public matrix-query count boundary observed in this SDK version, not a Gurobi source-read failure or an OptBin numerical mismatch. Original failed/stopped verification attempts are excluded from performance trials."
+}

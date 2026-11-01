@@ -1,0 +1,123 @@
+{
+  "scope": "Small analytical fixtures; not large benchmark performance",
+  "versions": {
+    "scs": "3.3.1",
+    "clarabel": "0.11.1",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "results": [
+    {
+      "case": "socp",
+      "solver": "scs",
+      "objective": 2.9999999999984484,
+      "expected": 3.0,
+      "status": "solved"
+    },
+    {
+      "case": "socp",
+      "solver": "clarabel",
+      "objective": 2.9999999966584863,
+      "expected": 3.0,
+      "status": "Solved"
+    },
+    {
+      "case": "rsoc",
+      "solver": "scs",
+      "objective": 2.8284271247898745,
+      "expected": 2.8284271247461903,
+      "status": "solved"
+    },
+    {
+      "case": "rsoc",
+      "solver": "clarabel",
+      "objective": 2.828427120693613,
+      "expected": 2.8284271247461903,
+      "status": "Solved"
+    },
+    {
+      "case": "exp",
+      "solver": "scs",
+      "objective": 2.718281828798386,
+      "expected": 2.718281828459045,
+      "status": "solved"
+    },
+    {
+      "case": "exp",
+      "solver": "clarabel",
+      "objective": 2.718281784239185,
+      "expected": 2.718281828459045,
+      "status": "Solved"
+    },
+    {
+      "case": "power",
+      "solver": "scs",
+      "objective": -1.0000000000068612,
+      "expected": -1.0,
+      "status": "solved"
+    },
+    {
+      "case": "power",
+      "solver": "clarabel",
+      "objective": -0.9999999868180555,
+      "expected": -1.0,
+      "status": "Solved"
+    },
+    {
+      "case": "sdp_var",
+      "solver": "scs",
+      "objective": 1.999999997932608,
+      "expected": 2.0,
+      "status": "solved"
+    },
+    {
+      "case": "sdp_var",
+      "solver": "clarabel",
+      "objective": 1.9999999898765837,
+      "expected": 2.0,
+      "status": "Solved"
+    },
+    {
+      "case": "sdp_constraint",
+      "solver": "scs",
+      "objective": 1.0000000000000113,
+      "expected": 1.0,
+      "status": "solved"
+    },
+    {
+      "case": "sdp_constraint",
+      "solver": "clarabel",
+      "objective": 0.9999999974527394,
+      "expected": 1.0,
+      "status": "Solved"
+    },
+    {
+      "case": "qp",
+      "solver": "scs",
+      "objective": -1.0,
+      "expected": -1.0,
+      "status": "solved"
+    },
+    {
+      "case": "qp",
+      "solver": "clarabel",
+      "objective": -1.0,
+      "expected": -1.0,
+      "status": "Solved"
+    },
+    {
+      "case": "lp",
+      "solver": "scs",
+      "objective": -1.0000000005681606,
+      "expected": -1.0,
+      "status": "solved"
+    },
+    {
+      "case": "lp",
+      "solver": "clarabel",
+      "objective": -0.9999999993929585,
+      "expected": -1.0,
+      "status": "Solved"
+    }
+  ]
+}

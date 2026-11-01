@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "optbin"
+version = "0.2.0rc4"
+description = "Lossless binary storage and native C loading for optimization models"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: C",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+
+[project.scripts]
+optbin-info = "optbin.cli:main"
+
+[project.optional-dependencies]
+solvers = ["numpy", "scipy", "scs", "clarabel"]
+benchmark = ["numpy", "h5py"]
+quadratic = ["numpy", "scipy", "pyscipopt"]
+gurobi = ["numpy", "scipy", "gurobipy"]
+mosek = ["numpy", "Mosek"]
+validation = ["numpy", "scipy", "highspy", "cvxpy"]
+
+[tool.setuptools.packages.find]
+where = ["python"]

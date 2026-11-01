@@ -1,0 +1,49 @@
+{
+  "tool_version": "0.2.0rc4",
+  "purpose": "Practical tool technical report",
+  "report_sha256": {
+    "benchmarks/real-correctness-gurobi-20261030.json": "9892e46fb7543c2e9e14c960c27a88d6bdf2a01f96a4ca91a0f7c0d9c32d94e2",
+    "benchmarks/reader-rss-watermark-20261030.json": "fca8669477940ce15f1c0898f97bfd20ade60e17be40f6bb5098af328602180a",
+    "benchmarks/real-solvers.json": "f1ae3c8cb61f678b6583593cfa78812c196114aba2c25b8a672a0ba97fb8766c",
+    "benchmarks/gzip-readers-20261029.json": "47c780103ff8766f0db80269542a49de2a2a93415470a57ee432cd494f566fd0",
+    "benchmarks/gzip-large-20261029.json": "31575ea1b968991357f017fb3418068e36f0d5a03e6166f6b69dcc2ddce243fc",
+    "benchmarks/gzip-prod-20261029.json": "2fa7586cf7c20958cdb0ba1f1676cd09ae16b9d5ac0196d8a8a13e60e62a2ef3",
+    "benchmarks/gzip-mcf-20261029.json": "026803fd291e7b57816bc118cee69a050f0a4506a97deb68102217acb8b760fc",
+    "benchmarks/large-boundary.json": "27554eafdf71044dd62368e9d186d4dcf403ac3f7fbf0e6de0704165575217f4",
+    "benchmarks/large-inputs.json": "2d58504099e315313ae9c84f3fe4a8428ab23119d1a42f44c3f1085f1202b267",
+    "benchmarks/gurobi-small-20261030.json": "1bb0e2515a6045f645893e439b3df2d92052454bdf46fb4caf7208fdf8c11f7c",
+    "benchmarks/gurobi-large-20261030.json": "431b43ebfc661790c708495aa582e43d47930a1e26feb42d4598c09883ae5f25",
+    "benchmarks/mosek-cbf-20261030.json": "0cd42cb710bc78855d640f7855bb197de8bc288439d1c26ec4297412de1e0f9d",
+    "benchmarks/gurobi-prod-20261030.json": "0c0c18b29b627dfdbec7b79293bed0d083176c21e6bb1962ac40814d32eba0c8",
+    "benchmarks/gurobi-mcf-20261030.json": "8d6a818428fcd8d3d28ffc80f2af6c2994fc133e74631dcf870c7a0db44d7820",
+    "benchmarks/gurobi-api-boundary-20261030.json": "a0a8bf00fcc3c9a3ece6ee086b0c71cb4822d3d6b81b2994d08aee83e525563f",
+    "benchmarks/gurobi-large-profiles-20261030.json": "c070a3c3afb7846226ba6f82ded4d08fc38084e79118f6569c73c45760f7b775",
+    "benchmarks/jump-correctness.json": "f4329bbee1ef2a37d5f4c74882767fcdb04ff5c1bf809f436bcd2391be601c06"
+  },
+  "regions": [
+    "VERSION",
+    "VALIDATION",
+    "INDEX_BOUNDARY",
+    "GZIP_RESULTS",
+    "GZIP_LARGE_RESULTS"
+  ],
+  "large_raw_hdf5_storage": [
+    {
+      "id": "prod_200_400_02",
+      "raw_hdf5_bytes": 30056251656,
+      "raw_hdf5_gzip_bytes": 572512910,
+      "optbin_bytes": 473904256,
+      "raw_hdf5_over_optbin": 63.422624455181094,
+      "source_field": "preparation.raw_hdf5_gzip.input_bytes"
+    },
+    {
+      "id": "mcf_5000_100_1000",
+      "raw_hdf5_bytes": 28259896824,
+      "raw_hdf5_gzip_bytes": 4618229200,
+      "optbin_bytes": 4788885400,
+      "raw_hdf5_over_optbin": 5.901142847143513,
+      "source_field": "preparation.raw_hdf5_gzip.input_bytes"
+    }
+  ],
+  "scope": "Archived development measurements; release packaging is verified separately"
+}

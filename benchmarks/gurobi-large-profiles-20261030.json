@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "complete": true,
+  "purpose": "Post-timing public Gurobi source-profile audit; no timings from this audit enter the performance tables",
+  "hostname": "benchmark-server",
+  "started_utc": "2026-10-29T17:53:51.713006+00:00",
+  "source_revision": "8e734fada886f5597767bc69ebcba0b05713ff24",
+  "worker_source_sha256": "fd6b89fe732dddb2a1ca221b3ad304ed9e897d55d7cad14d9bf59ba2a571ded7",
+  "study_reports": [
+    {
+      "path": "benchmarks/gurobi-prod-20261030.json",
+      "sha256": "0c0c18b29b627dfdbec7b79293bed0d083176c21e6bb1962ac40814d32eba0c8"
+    },
+    {
+      "path": "benchmarks/gurobi-mcf-20261030.json",
+      "sha256": "8d6a818428fcd8d3d28ffc80f2af6c2994fc133e74631dcf870c7a0db44d7820"
+    }
+  ],
+  "results": [
+    {
+      "id": "prod_200_400_02",
+      "source": "/benchmark/datasets/Oliver_Hinder/larger/prod_200_400_02.mps.gz",
+      "source_sha256": "56b390b90c15fd81a2070819056877d5e20304b6c660f09cb71fd5d8249f3d76",
+      "profile_pass": true,
+      "matches_fully_verified_model": true,
+      "read_result": {
+        "reader": "gurobipy.read",
+        "gurobi_version": "13.0.3",
+        "seconds": 344.89238288253546,
+        "environment_seconds": 0.0191718190908432,
+        "max_rss_bytes": 61920538624,
+        "user_seconds": 302.877964,
+        "system_seconds": 41.939119999999996,
+        "rows": 16361200,
+        "cols": 64560800,
+        "nnz": 2310559600,
+        "q_nnz": 0,
+        "q_constraints": 0,
+        "gurobi_threads_parameter": 1,
+        "is_mip": 0,
+        "is_multiobjective": 0,
+        "objectives": 1,
+        "integer_variables": 0,
+        "general_constraints": 0,
+        "sos_constraints": 0,
+        "pwl_objective_variables": 0,
+        "exact_reference_equal": null,
+        "reference_compare_seconds": 0,
+        "gurobi_fingerprint": 352432948
+      },
+      "process_wall_seconds": 358.485694617033,
+      "log_sha256": "482ec186d56f726cf9f0989a338bd571192238c39bdd5bf0deaecf4e4e84ce71"
+    },
+    {
+      "id": "mcf_5000_100_1000",
+      "source": "/benchmark/datasets/Oliver_Hinder/larger/mcf_5000_100_1000.mps.gz",
+      "source_sha256": "fe8ab0887c5eb1f4319893aa7c646620520ace48f0c76ef2df174fc081828745",
+      "profile_pass": true,
+      "matches_fully_verified_model": true,
+      "read_result": {
+        "reader": "gurobipy.read",
+        "gurobi_version": "13.0.3",
+        "seconds": 391.62506921589375,
+        "environment_seconds": 0.037930116057395935,
+        "max_rss_bytes": 75602608128,
+        "user_seconds": 345.01876999999996,
+        "system_seconds": 46.421417,
+        "rows": 5525100,
+        "cols": 502500100,
+        "nnz": 1007500100,
+        "q_nnz": 0,
+        "q_constraints": 0,
+        "gurobi_threads_parameter": 1,
+        "is_mip": 0,
+        "is_multiobjective": 0,
+        "objectives": 1,
+        "integer_variables": 0,
+        "general_constraints": 0,
+        "sos_constraints": 0,
+        "pwl_objective_variables": 0,
+        "exact_reference_equal": null,
+        "reference_compare_seconds": 0,
+        "gurobi_fingerprint": -772228208
+      },
+      "process_wall_seconds": 403.4228651598096,
+      "log_sha256": "33774f36b50a384b992bb54a259634a89e40ec573ccc15cc09351b8ede66594d"
+    }
+  ]
+}

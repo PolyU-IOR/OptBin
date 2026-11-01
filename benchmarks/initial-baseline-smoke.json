@@ -1,0 +1,76 @@
+{
+  "scope": "CPU arrays only; no layout conversion, solver setup or solve",
+  "cache": "Not flushed; potentially warm; formats measured sequentially",
+  "limitations": [
+    "Python/HDF5 vs C reader overhead differs",
+    "Whole-file buffers; no separate RSS measurement",
+    "Baseline manifest metadata is cached; OptBin rereads its directory",
+    "No HDF5 specialized-codec baseline yet",
+    "gzip level 1 and Zstd level 1 are different codecs"
+  ],
+  "input": "/benchmark/workstation/optbin/benchmarks/runs/initial-synthetic/model.optb",
+  "decoded_bytes": 2640027,
+  "environment": {
+    "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "numpy": "2.5.4",
+    "h5py": "3.16.0"
+  },
+  "results": [
+    {
+      "format": "optbin",
+      "bytes": 3160,
+      "read_decode_validate_seconds": [
+        0.0020293148700147867,
+        0.0019018410239368677,
+        0.0017780649941414595
+      ],
+      "median_seconds": 0.0019018410239368677,
+      "bitwise_equal": true
+    },
+    {
+      "format": "raw",
+      "bytes": 2641030,
+      "read_decode_validate_seconds": [
+        0.0012209489941596985,
+        0.0011636950075626373,
+        0.0011306030210107565
+      ],
+      "median_seconds": 0.0011636950075626373,
+      "bitwise_equal": true
+    },
+    {
+      "format": "raw-zstd",
+      "bytes": 51919,
+      "read_decode_validate_seconds": [
+        0.0023314389400184155,
+        0.0017647410277277231,
+        0.0017102409619838
+      ],
+      "median_seconds": 0.0017647410277277231,
+      "bitwise_equal": true
+    },
+    {
+      "format": "hdf5-contiguous",
+      "bytes": 2650267,
+      "read_decode_validate_seconds": [
+        0.0026246141642332077,
+        0.002167403930798173,
+        0.0020946438889950514
+      ],
+      "median_seconds": 0.002167403930798173,
+      "bitwise_equal": true
+    },
+    {
+      "format": "hdf5-gzip-shuffle",
+      "bytes": 70997,
+      "read_decode_validate_seconds": [
+        0.004207628080621362,
+        0.004213895881548524,
+        0.0041946470737457275
+      ],
+      "median_seconds": 0.004207628080621362,
+      "bitwise_equal": true
+    }
+  ]
+}

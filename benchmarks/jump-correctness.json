@@ -1,0 +1,1263 @@
+{
+  "scope": "Full canonical numerical function-in-set comparison with JuMP.read_from_file / MOI; no optimization",
+  "environment": {
+    "julia": "1.12.6",
+    "packages": {
+      "JSON3": {
+        "git_tree_sha1": "411eccfe8aba0814ffa0fdf4860913ed09c34975",
+        "version": "1.14.3"
+      },
+      "MathOptInterface": {
+        "git_tree_sha1": "d10ba577e0b5a0481fab01dfd31fb20af3326954",
+        "version": "1.53.0"
+      },
+      "JuMP": {
+        "git_tree_sha1": "4f27b21df3b47e8c08a83ead049afb621b2f5b3c",
+        "version": "1.31.2"
+      }
+    },
+    "exporter_sha256": "140380b81e9b1627b2b42899b9fec8604223b94b2d8627e20cfd859c8530d58e",
+    "reference_source_sha256": {
+      "src/FileFormats/MPS/MPS.jl": "bc1bd8df295d2908996fd1408c26a05c61a19126d2528a93ed88c173873fdd47",
+      "src/FileFormats/MPS/read.jl": "d89f3fed26d03fd618aafb4de96df36b47a855fc71a8f269d54ec2bd2f8811d0",
+      "src/FileFormats/CBF/read.jl": "95d29696892fceb8dfa5d47ac8ffeafcf64c3dcf47fffebbec516c8326e48b1c"
+    }
+  },
+  "build": "/benchmark/workstation/optbin/build-release",
+  "binary_sha256": {
+    "mps2optb": "01f14ec238000d1f6b7ca75c3505a654bf77e2ed737883302588c3e529fe9c39",
+    "cbf2optb": "68c93246eefa286cf2a5f8f08b72d3f33463a747b2fda617de1547d1c93c2006",
+    "liboptbin.so": "fbcb027ecf14a6827b7f46d7a0cdb6468fd249001bf2c430f0760beb51939731"
+  },
+  "harness_sha256": "87fdda2310d945f038da908a2ddea454368cb6ceb0509efe0ce854225d4dc736",
+  "julia_project_manifest_sha256": "d8f135783e609c2b5316f88b4722f2e286b5bf991c69be48e3881278d9708433",
+  "known_reference_issues_sha256": "2b5a6baeb12b438f94c166d1764d32b34dc71d9353de417741103982a8887092",
+  "normalizations": [
+    "Aggregate duplicate terms and discard numerical zero terms, treating both signs of zero as equal",
+    "Expand scalar intervals/equalities into lower/upper constraints; move affine constants to bounds",
+    "Ignore ordering/names and unconstrained Reals domains; preserve duplicate nontrivial constraints",
+    "Map MOI quadratic coefficients to polynomial monomials, including the half factor on diagonals",
+    "Lift PSD variables to unscaled triangular coordinates, counting trace off-diagonals twice",
+    "Apply CBF-to-MOI exponential coordinate permutations and two-weight power normalization"
+  ],
+  "limits": [
+    "Canonical model comparison, not bytewise equality of unlike physical representations",
+    "Reference-reader unsupported cases are recorded separately from passes",
+    "No original scalar-row names or ordering are compared"
+  ],
+  "summary": {
+    "pass": 37,
+    "known_reference_discrepancy": 5,
+    "reference_unsupported": 1
+  },
+  "results": [
+    {
+      "id": "afiro",
+      "fixture": false,
+      "format": "mps",
+      "input_sha256": "04992b87e57e57c1c417c96b846833bfa12e055eeaa623f043c45fc773b5be41",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "1dccc3d0c9922e9cc8f1c528e75f5604a210eefeb18ee846dd3b6cf2be3d18c7",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "bf8d3f4995e45f60e413f7461bdb3a53f564e518e3d0745ac7a204994cf596b1",
+      "reference_canonical_sha256": "bf8d3f4995e45f60e413f7461bdb3a53f564e518e3d0745ac7a204994cf596b1",
+      "variables": 32,
+      "normalized_constraints": 67,
+      "status": "pass"
+    },
+    {
+      "id": "AUG2D",
+      "fixture": false,
+      "format": "mps",
+      "input_sha256": "c3bad6461e2cad7e1528ec40e788b295274d8c24c6f63341f22224e81855e062",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "71dfd051c05aac91cdacc9cee9283688fec1cdcd3f2864824d5cfaeda3ba2ac9",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "640fe19bbe4354b14fd59cf104501b97e12db16f998690b67f4c65452fed5c3f",
+      "reference_canonical_sha256": "640fe19bbe4354b14fd59cf104501b97e12db16f998690b67f4c65452fed5c3f",
+      "variables": 20200,
+      "normalized_constraints": 20000,
+      "status": "pass"
+    },
+    {
+      "id": "AUG3DCQP",
+      "fixture": false,
+      "format": "mps",
+      "input_sha256": "25ca5ddcf31168eb0b45f2ee61983d376abb8ff697e8e491d99ee665e65ddd08",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "625c3794aa0267358a18d7077369103692c02d676378875f32fbc0bbbda13b7c",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "ff547df3055641ac01f8aca94af4c8ca9d379ab4537f2084a8d38eefdd6d08a4",
+      "reference_canonical_sha256": "ff547df3055641ac01f8aca94af4c8ca9d379ab4537f2084a8d38eefdd6d08a4",
+      "variables": 3873,
+      "normalized_constraints": 5873,
+      "status": "pass"
+    },
+    {
+      "id": "QPLIB_2482",
+      "fixture": false,
+      "format": "mps",
+      "input_sha256": "a7a69603985c058a802247c48e14d6d8c8f84eb9ef26ccfa69f2647498e9bb04",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "1bf288d430ec5519a55a6fed99913e1e0b76e76b4fae25071077f5b4e49d1aad",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "7df36cd6f34a52c5c8c96b8e997f2379025a850700248dff965a23dc59502e58",
+      "reference_canonical_sha256": "7df36cd6f34a52c5c8c96b8e997f2379025a850700248dff965a23dc59502e58",
+      "variables": 1806,
+      "normalized_constraints": 3197,
+      "status": "pass"
+    },
+    {
+      "id": "CVXQP1_S",
+      "fixture": false,
+      "format": "mps",
+      "input_sha256": "918991061ccad305c6e9ffb3258a1540da69dd7de36586a856a106222d4a9ce6",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "87c5621865bfe8be504282b29187a959efe59e951b3f7a251c82475c677aec80",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "e70b27ae3434664effb646430406dfbaca19dc10ecb57f2f8a09ffef2b21a9c6",
+      "reference_canonical_sha256": "e70b27ae3434664effb646430406dfbaca19dc10ecb57f2f8a09ffef2b21a9c6",
+      "variables": 70,
+      "normalized_constraints": 240,
+      "status": "pass"
+    },
+    {
+      "id": "CVXQP2_S",
+      "fixture": false,
+      "format": "mps",
+      "input_sha256": "79ecb37eb46ca4bd1b12359b451b58f329ff7e7dceb04a6f7e2909c7e232236e",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "93bbdbc6804e3682cafb3eca8fc674b01c09c57f469b26322ebdb227ce8b18bc",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "48ef32a6e2013116eb3ae4355b2213b5b4695d926fe584fe86acfb26b2de48bd",
+      "reference_canonical_sha256": "48ef32a6e2013116eb3ae4355b2213b5b4695d926fe584fe86acfb26b2de48bd",
+      "variables": 55,
+      "normalized_constraints": 160,
+      "status": "pass"
+    },
+    {
+      "id": "CVXQP3_S",
+      "fixture": false,
+      "format": "mps",
+      "input_sha256": "6a67e88ae3f21eb609b0246156c5ba25ec9c309b9f502992df30dd3367968cd0",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "f3f5876dd77c14a905ca3af0159ad3e895b7217811a5f41f110979b9f6af9c15",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "ce901e65e4734ab78a5164439bd6b46770558770f45180db88c45353a357fa61",
+      "reference_canonical_sha256": "ce901e65e4734ab78a5164439bd6b46770558770f45180db88c45353a357fa61",
+      "variables": 85,
+      "normalized_constraints": 320,
+      "status": "pass"
+    },
+    {
+      "id": "DUAL1",
+      "fixture": false,
+      "format": "mps",
+      "input_sha256": "573a4fa9137aebfeead25606c751d7fead9e2e732d8e5433061d3ff71daeb8a6",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "537adae26807a80601ae58fd5b37cf5f2ecc64282192fca1aca8e0ed22d2f3a3",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "f4fd7430169f64db777b37ed39aeedf82837de94febaccd2c0afa7aa674e8ba6",
+      "reference_canonical_sha256": "f4fd7430169f64db777b37ed39aeedf82837de94febaccd2c0afa7aa674e8ba6",
+      "variables": 85,
+      "normalized_constraints": 172,
+      "status": "pass"
+    },
+    {
+      "id": "DUAL2",
+      "fixture": false,
+      "format": "mps",
+      "input_sha256": "d2c7b8fca6d4dedc815bce73acc80d363c2f00a2aa13212f62d4d5ac97679d8e",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "8b7e709f8283efe7eb3e9c36636efe55fb0f1cfc8503eeae699f82ebf35fdfeb",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "8f558263700337b644114cad2c18443d8c1ba4edd900a8a6b055bd2c6b43face",
+      "reference_canonical_sha256": "8f558263700337b644114cad2c18443d8c1ba4edd900a8a6b055bd2c6b43face",
+      "variables": 96,
+      "normalized_constraints": 194,
+      "status": "pass"
+    },
+    {
+      "id": "qssp30",
+      "fixture": false,
+      "format": "cbf",
+      "input_sha256": "b6d3c20ee39d89bd48db11343a8c95ca11f0c8e1c5fe2c33633f59a12c7a0406",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "8c05d11d1d894a8c5615dbe494bceb6bbc1af026d6f9e808631957eb5b368dc2",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "94cdb47922889431d26b22d167b09a30935751e9bd93d08e2db57f7beaf6278d",
+      "reference_canonical_sha256": "94cdb47922889431d26b22d167b09a30935751e9bd93d08e2db57f7beaf6278d",
+      "variables": 7565,
+      "normalized_constraints": 1893,
+      "status": "pass"
+    },
+    {
+      "id": "nql30",
+      "fixture": false,
+      "format": "cbf",
+      "input_sha256": "f926413ff08c1c296254f60c54cb7a4154f501ddb9d2f6948918d72d14f93739",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "44d5a7490cea7d7c52161cb4f80fb8f814cfe636cb5f3172e7c4b7719376eff4",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "2a414f85e52e0b28ac6489114bcb72102007247264a81694c6fa10d830bb10ba",
+      "reference_canonical_sha256": "2a414f85e52e0b28ac6489114bcb72102007247264a81694c6fa10d830bb10ba",
+      "variables": 4501,
+      "normalized_constraints": 902,
+      "status": "pass"
+    },
+    {
+      "id": "nb",
+      "fixture": false,
+      "format": "cbf",
+      "input_sha256": "6e137968db4bb094a331efe0186f895b49566a4b5177200b7b3fcaf60da753e7",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "b7823443c54a26b8a967255f26c97e7d69ae869c490170632b3f329ae6559cdd",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "3aabf87d9462d7de5ab07acbd41b8f2bfd34e8fe682b9ef98f9971d3e173a3c9",
+      "reference_canonical_sha256": "3aabf87d9462d7de5ab07acbd41b8f2bfd34e8fe682b9ef98f9971d3e173a3c9",
+      "variables": 2383,
+      "normalized_constraints": 795,
+      "status": "pass"
+    },
+    {
+      "id": "nb_L1",
+      "fixture": false,
+      "format": "cbf",
+      "input_sha256": "43781acdc55fd81a0791e835a3141b5900229e03838885e0673f60fdf9a74310",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "7c99037d39207cda2c850024ac277137c39ce2460a8e7e0078b8ec8e5987c940",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "7ca495bf57bf9148e5d836a25ad0ca489a592b47602240362415f6e4e0e7357b",
+      "reference_canonical_sha256": "7ca495bf57bf9148e5d836a25ad0ca489a592b47602240362415f6e4e0e7357b",
+      "variables": 3176,
+      "normalized_constraints": 795,
+      "status": "pass"
+    },
+    {
+      "id": "nb_L2",
+      "fixture": false,
+      "format": "cbf",
+      "input_sha256": "73b3d4b7511e90d7d3a0fa85db10b2e77028685201523212e0d913babccaaa1f",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "3b52a57b1adda6811da07a8bbb0f54e827541fa1cf0f290e46eac9400926bcbe",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "166683ca105c6254c357cf7c8783585999b5079c10ad012020f260733b2b62d5",
+      "reference_canonical_sha256": "166683ca105c6254c357cf7c8783585999b5079c10ad012020f260733b2b62d5",
+      "variables": 4195,
+      "normalized_constraints": 841,
+      "status": "pass"
+    },
+    {
+      "id": "LogExpCR-n20-m400",
+      "fixture": false,
+      "format": "cbf",
+      "input_sha256": "24246c3298bec9f1e91b4c9c67ffd4fd1960623fe233484f715c7f3948f151ca",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "a31b5822e08379847d21b5049f9e12e962a4fee6b486cc1d6c5bb7a24ef24e43",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "d00c4e4be0dac3d044e27edc5596b91d84040a063985ee333d11591a9a8767ad",
+      "reference_canonical_sha256": "d00c4e4be0dac3d044e27edc5596b91d84040a063985ee333d11591a9a8767ad",
+      "variables": 2022,
+      "normalized_constraints": 405,
+      "status": "pass"
+    },
+    {
+      "id": "infeas_clean_10_10_1",
+      "fixture": false,
+      "format": "cbf",
+      "input_sha256": "11df4bcd15d0abefaca331c79a3c10c8e139417b0c95ad2938c8c8542bdbafc4",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "f39f4bbb1c60531f13db3faa09e590d8e712a31d56c947b3cb90516faa023f38",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "722f3b11c1f595c55db158faf91f6ddaee53ad7066d221647001892c89be699a",
+      "reference_canonical_sha256": "722f3b11c1f595c55db158faf91f6ddaee53ad7066d221647001892c89be699a",
+      "variables": 55,
+      "normalized_constraints": 2,
+      "status": "pass"
+    },
+    {
+      "id": "infeas_messy_10_10_1",
+      "fixture": false,
+      "format": "cbf",
+      "input_sha256": "71a56699a27e18ca9cb9d4c6fb56796af60d1f11ba8f5bedaf76758015d08848",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "81ea6f11c06255dd321a5e7f6f843312d70148e14ee9fe26e2d0298e167a1b83",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "0b3c79720bbdb9072c2fdf5d8bc7cf2d7adebf07382d0d270c20a942e0389038",
+      "reference_canonical_sha256": "0b3c79720bbdb9072c2fdf5d8bc7cf2d7adebf07382d0d270c20a942e0389038",
+      "variables": 55,
+      "normalized_constraints": 2,
+      "status": "pass"
+    },
+    {
+      "id": "sched_50_50_orig",
+      "fixture": false,
+      "format": "cbf",
+      "input_sha256": "852150ed6696116e8db12dd595d5ebfea6c00deb48a31c02cef12bdef149f7f3",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "47b535d5c5dd815031e1fb52ac44b7c53af19f526d5f10cc7cd63ca4699ed374",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "44b41e1cdb5ea2c3a99eabb1bfd9d58133d416a70efa1e1307dd17fa41c00511",
+      "reference_canonical_sha256": "44b41e1cdb5ea2c3a99eabb1bfd9d58133d416a70efa1e1307dd17fa41c00511",
+      "variables": 4979,
+      "normalized_constraints": 4,
+      "status": "pass"
+    },
+    {
+      "id": "QPLIB_2456",
+      "fixture": false,
+      "format": "mps",
+      "input_sha256": "ad80440f67c24b66beb1465272fd46569b878682252770c304075d1ed9435e6c",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "a9150780a1c270f32f0763fb26fb73a36cef7e80685b29713aa497c22c07b1b2",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "a24d5c1c2dc9273a41d7ed119ee77c5403201ee4a067bdf1def56278c92c29b2",
+      "reference_canonical_sha256": "a24d5c1c2dc9273a41d7ed119ee77c5403201ee4a067bdf1def56278c92c29b2",
+      "variables": 5477,
+      "normalized_constraints": 9631,
+      "status": "pass"
+    },
+    {
+      "id": "QPLIB_2519",
+      "fixture": false,
+      "format": "mps",
+      "input_sha256": "6fa76735319a7ead500a6306c4edf23454218ed68a4384168b4a2029a3c098f2",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "aebcc99b2304d2c0bbaba7b2901bc18a5f9e8291c499eee2b1a146f1c9fc939e",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "9b277db2c38a47bae3a610681bf1096bbe5a562522189962a3e073c31952a9ea",
+      "reference_canonical_sha256": "9b277db2c38a47bae3a610681bf1096bbe5a562522189962a3e073c31952a9ea",
+      "variables": 4806,
+      "normalized_constraints": 8565,
+      "status": "pass"
+    },
+    {
+      "id": "QPLIB_2676",
+      "fixture": false,
+      "format": "mps",
+      "input_sha256": "c4090d8d268cf0759bfd3471ce033b90e89f54cd4f6b4780c977a058821c86ae",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "a3bd0ca65f29b9229742903443cb4007c9cbc8ff1f9fd997d97c1cf8f1da65d7",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "e6d5b9d654b85136e4b650a3588437dca734c0c39aecda6f85f59a1d7b5b8f07",
+      "reference_canonical_sha256": "e6d5b9d654b85136e4b650a3588437dca734c0c39aecda6f85f59a1d7b5b8f07",
+      "variables": 1445,
+      "normalized_constraints": 2551,
+      "status": "pass"
+    },
+    {
+      "id": "QPLIB_3185",
+      "fixture": false,
+      "format": "mps",
+      "input_sha256": "27e7dbe3f5d3fe808524f262f6a7520431e118f469ac96d6b647bda2b0b77e5f",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "fa73e90c8cf6ccff0af2b25f127456462a8906796b3d98302e4cb62a798ff7ac",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "f44675b4f5de1f4c8c3c077bf291548dfc59fed41875db2e3ade122cc8610991",
+      "reference_canonical_sha256": "f44675b4f5de1f4c8c3c077bf291548dfc59fed41875db2e3ade122cc8610991",
+      "variables": 18001,
+      "normalized_constraints": 32720,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_lp",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "549ac2959715d08c765572767cf0674b34f620bb766429c2734d85ca55511cb8",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "03ecbc9f0fc64c7c8aa071b4f0292f5835eb371b9703719018f2b73cc9478b3f",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "3c9ea7ddbf684c54e2654d8ba3cdd4685efed11b4690059b9aace034821b67be",
+      "reference_canonical_sha256": "3c9ea7ddbf684c54e2654d8ba3cdd4685efed11b4690059b9aace034821b67be",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_qp",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "1c801d19a370cc7eb2592b9c518c71c7edfdd6296ea00cd6897553be54843fce",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "7f1401d40788cd118f75dead4b8a0741f79cdead5fcae428244b0d1a6138d662",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "9d4e81ebcf090efe16400d5c1eb37e96eaa1bb8fe9f5c988788d59f7d30f01d1",
+      "reference_canonical_sha256": "9d4e81ebcf090efe16400d5c1eb37e96eaa1bb8fe9f5c988788d59f7d30f01d1",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_qcqp_gurobi",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "3e41ed69f46218507e19ab847afedcfa7f52765eeea204697eae301477e6fa96",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "4366470ce83c0a6b85bc2e08880cb66d5b2c29a0cab693f0531e81fecf660f04",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "reference_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_qcqp_mosek",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "3e41ed69f46218507e19ab847afedcfa7f52765eeea204697eae301477e6fa96",
+      "dialect": "mosek",
+      "converter_exit_code": 0,
+      "optbin_sha256": "ce1884301ce67ce2f4eb502fdb16735d131333952125f06da2d8e0d958ba6ec8",
+      "reference_dialect": "mosek",
+      "native_full_validation": true,
+      "pass": false,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": false
+      },
+      "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "reference_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "native_only": [
+        {
+          "count": 1,
+          "sha256": "3037777d42c41c3d280f973d5502dec3cac3aef0738f459230dc8447fe3efdcf",
+          "prefix": "[\"scalar\",\"upper\",[[0,\"c008000000000000\"],[1,\"4010000000000000\"]],[[0,0,\"4000000000000000\"],[0,1,\"4018000000000000\"],[1,1,\"4010000000000000\"]],\"4014000000000000\"]"
+        }
+      ],
+      "reference_only": [
+        {
+          "count": 1,
+          "sha256": "d2554f5f662a604038807e46b16e9dc87148902e95c0beeb1f09f82a9fdba07d",
+          "prefix": "[\"scalar\",\"upper\",[[0,\"c008000000000000\"],[1,\"4010000000000000\"]],[[0,0,\"3ff0000000000000\"],[0,1,\"4008000000000000\"],[1,1,\"4000000000000000\"]],\"4014000000000000\"]"
+        }
+      ],
+      "status": "known_reference_discrepancy",
+      "mosek_sdk": {
+        "version": "11.2.7",
+        "pass": true,
+        "checks": {
+          "variables": true,
+          "sense": true,
+          "objective": true,
+          "constraints": true
+        },
+        "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+        "reference_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+        "variables": 2,
+        "normalized_constraints": 5
+      },
+      "reference_issue": "MOI Mosek quadratic_format applies a half factor to QCMATRIX constraints; the actual MOSEK 11.2.7 reader uses xQx for QCMATRIX"
+    },
+    {
+      "id": "fixture_psd_operators",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "c172e76b80b7cf39bdcfb0aded5b898ba2e4ea7d9673b8588f7fa3be030d7b81",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "7d894e5fc77585d16c0eca99bc0ef6e42dda233b5afc9c9b385282ad1d7eb6ff",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "8cc498e17665d42777f71b5ad186a8bb638d28e026f118e4cd3987318325a007",
+      "reference_canonical_sha256": "8cc498e17665d42777f71b5ad186a8bb638d28e026f118e4cd3987318325a007",
+      "variables": 5,
+      "normalized_constraints": 3,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_soc",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "20ad4049b6cb21b5616dd4e87aa0fd74a77f0f7478affd804397bf31c29cff90",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "edfd9f8d8add35d4178b320d7ab1a099859e86f0a8c5e0f1e704e0d46f06f9d2",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "ce86b3329a13cff6e529fff9758068b91c90c5fe5531dfdb15fdfddc7e9dda7f",
+      "reference_canonical_sha256": "ce86b3329a13cff6e529fff9758068b91c90c5fe5531dfdb15fdfddc7e9dda7f",
+      "variables": 2,
+      "normalized_constraints": 2,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_qmatrix",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "47f7b82d7bd3fccc7f6e36debc9f3c1e2065e33e223c45a4dd02a35f60287c64",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "7f1401d40788cd118f75dead4b8a0741f79cdead5fcae428244b0d1a6138d662",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "9d4e81ebcf090efe16400d5c1eb37e96eaa1bb8fe9f5c988788d59f7d30f01d1",
+      "reference_canonical_sha256": "9d4e81ebcf090efe16400d5c1eb37e96eaa1bb8fe9f5c988788d59f7d30f01d1",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_ranges_bounds_max",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "bd427eab0d9301c4a2959524d5f15d78b90a6e61e1b8e68f08993cab5050e116",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "0543392d950d0a890fc443acea1fb0648f8bf4a433ab8268168328ff47f75716",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "0264633c7294e32105e6383c58f0e679146f70a2779722da9030de867ab25ae9",
+      "reference_canonical_sha256": "0264633c7294e32105e6383c58f0e679146f70a2779722da9030de867ab25ae9",
+      "variables": 3,
+      "normalized_constraints": 11,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_negative_upper_default",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "433a2d79899d7b9eff3b3b0a97b28a637eace0c4845f458ff1198a2f47f27a12",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "107f6130ef82c94fc1b780d2f90ecc4063319f506a2844dde128489c2aee3ed2",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": false,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": false
+      },
+      "native_canonical_sha256": "f0e02bc8ebb1e17e2045c7d46d2ae7a502099a4de06a2eff7e3fa87ac36e401c",
+      "reference_canonical_sha256": "001e9625af2f9d346cc521b1ad4217c4ba4ddb0f7dd4e5e7bcd140d8d1e57964",
+      "variables": 2,
+      "normalized_constraints": 4,
+      "native_only": [
+        {
+          "count": 1,
+          "sha256": "c6474b7d338770d40d9abef541763688420ae902f7b7de91b52d0cdebfb48400",
+          "prefix": "[\"scalar\",\"upper\",[[1,\"3ff0000000000000\"]],[],\"c000000000000000\"]"
+        }
+      ],
+      "reference_only": [],
+      "status": "known_reference_discrepancy",
+      "gurobi_sdk": {
+        "version": "13.0.3",
+        "pass": true,
+        "checks": [
+          {
+            "field": "profile",
+            "pass": true,
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "field": "rows",
+            "pass": true,
+            "expected": 2,
+            "actual": 2
+          },
+          {
+            "field": "cols",
+            "pass": true,
+            "expected": 2,
+            "actual": 2
+          },
+          {
+            "field": "sense",
+            "pass": true,
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "field": "objective_offset",
+            "pass": true,
+            "expected": 7.0,
+            "actual": 7.0
+          },
+          {
+            "field": "1",
+            "elements": 3,
+            "pass": true
+          },
+          {
+            "field": "2",
+            "elements": 4,
+            "pass": true
+          },
+          {
+            "field": "3",
+            "elements": 4,
+            "pass": true
+          },
+          {
+            "field": "4",
+            "elements": 2,
+            "pass": true
+          },
+          {
+            "field": "5",
+            "elements": 2,
+            "pass": true
+          },
+          {
+            "field": "6",
+            "elements": 2,
+            "pass": true
+          },
+          {
+            "field": "7",
+            "elements": 2,
+            "pass": true
+          },
+          {
+            "field": "8",
+            "elements": 2,
+            "pass": true
+          },
+          {
+            "field": "objective quadratic polynomial",
+            "elements": 0,
+            "pass": true
+          },
+          {
+            "field": "quadratic row IDs",
+            "pass": true
+          }
+        ],
+        "compared_elements": 21
+      },
+      "reference_issue": "With a negative UP and no explicit lower bound, OptBin follows Gurobi (-Inf, upper). MOI retains an internal lower bound of zero, then bounds_to_set drops both bounds when lower > upper. An explicit MI lower-bound record avoids the ambiguity."
+    },
+    {
+      "id": "fixture_duplicate_entries",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "b7dd1ec73657a58f243a2345c549f6f20574b94353895926c63d4c3d9fe23a8f",
+      "dialect": "gurobi",
+      "converter_exit_code": 0,
+      "optbin_sha256": "07598c7521591d738d2c0d248168aa6aa9ee3b7a8411233c021b74b49e3a8397",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "18bfddfbd2ffa3ffdb01f5b9caecce4da14154d20b3283beba8684462a64fa63",
+      "reference_canonical_sha256": "18bfddfbd2ffa3ffdb01f5b9caecce4da14154d20b3283beba8684462a64fa63",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_mosek_QCMATRIX",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "55f1e31aebfd5f9c268c4101c0444f5cfe20cdffdca1c6fc71266740320285cb",
+      "dialect": "mosek",
+      "converter_exit_code": 0,
+      "optbin_sha256": "ce1884301ce67ce2f4eb502fdb16735d131333952125f06da2d8e0d958ba6ec8",
+      "reference_dialect": "mosek",
+      "native_full_validation": true,
+      "pass": false,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": false,
+        "constraints": false
+      },
+      "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "reference_canonical_sha256": "96ed6d328b0aa6927e6ad3acf742ef160c98d47403194960036129bc3d0d4548",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "native_objective_prefix": "(((0, '3ff0000000000000'), (1, 'c000000000000000')), ((0, 0, '3ff0000000000000'), (0, 1, '3fe0000000000000'), (1, 1, '4000000000000000')), '401c000000000000')",
+      "reference_objective_prefix": "(((0, '3ff0000000000000'), (1, 'c000000000000000')), (), '401c000000000000')",
+      "native_only": [
+        {
+          "count": 1,
+          "sha256": "3037777d42c41c3d280f973d5502dec3cac3aef0738f459230dc8447fe3efdcf",
+          "prefix": "[\"scalar\",\"upper\",[[0,\"c008000000000000\"],[1,\"4010000000000000\"]],[[0,0,\"4000000000000000\"],[0,1,\"4018000000000000\"],[1,1,\"4010000000000000\"]],\"4014000000000000\"]"
+        }
+      ],
+      "reference_only": [
+        {
+          "count": 1,
+          "sha256": "d2554f5f662a604038807e46b16e9dc87148902e95c0beeb1f09f82a9fdba07d",
+          "prefix": "[\"scalar\",\"upper\",[[0,\"c008000000000000\"],[1,\"4010000000000000\"]],[[0,0,\"3ff0000000000000\"],[0,1,\"4008000000000000\"],[1,1,\"4000000000000000\"]],\"4014000000000000\"]"
+        }
+      ],
+      "status": "known_reference_discrepancy",
+      "mosek_sdk": {
+        "version": "11.2.7",
+        "pass": true,
+        "checks": {
+          "variables": true,
+          "sense": true,
+          "objective": true,
+          "constraints": true
+        },
+        "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+        "reference_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+        "variables": 2,
+        "normalized_constraints": 5
+      },
+      "reference_issue": "MOI reads quadratic objectives from QSECTION only when the matrix name is literal OBJ; the valid source objective is named obj; MOI Mosek quadratic_format applies a half factor to QCMATRIX constraints; the actual MOSEK 11.2.7 reader uses xQx for QCMATRIX"
+    },
+    {
+      "id": "fixture_mosek_QCMATRIX_OBJ",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "a086aa2a83e432c143104bed98f0de9dee5aa1f305e14049458b7624243a6e36",
+      "dialect": "mosek",
+      "converter_exit_code": 0,
+      "optbin_sha256": "ce1884301ce67ce2f4eb502fdb16735d131333952125f06da2d8e0d958ba6ec8",
+      "reference_dialect": "mosek",
+      "native_full_validation": true,
+      "pass": false,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": false
+      },
+      "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "reference_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "native_only": [
+        {
+          "count": 1,
+          "sha256": "3037777d42c41c3d280f973d5502dec3cac3aef0738f459230dc8447fe3efdcf",
+          "prefix": "[\"scalar\",\"upper\",[[0,\"c008000000000000\"],[1,\"4010000000000000\"]],[[0,0,\"4000000000000000\"],[0,1,\"4018000000000000\"],[1,1,\"4010000000000000\"]],\"4014000000000000\"]"
+        }
+      ],
+      "reference_only": [
+        {
+          "count": 1,
+          "sha256": "d2554f5f662a604038807e46b16e9dc87148902e95c0beeb1f09f82a9fdba07d",
+          "prefix": "[\"scalar\",\"upper\",[[0,\"c008000000000000\"],[1,\"4010000000000000\"]],[[0,0,\"3ff0000000000000\"],[0,1,\"4008000000000000\"],[1,1,\"4000000000000000\"]],\"4014000000000000\"]"
+        }
+      ],
+      "status": "known_reference_discrepancy",
+      "mosek_sdk": {
+        "version": "11.2.7",
+        "pass": true,
+        "checks": {
+          "variables": true,
+          "sense": true,
+          "objective": true,
+          "constraints": true
+        },
+        "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+        "reference_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+        "variables": 2,
+        "normalized_constraints": 5
+      },
+      "reference_issue": "MOI Mosek quadratic_format applies a half factor to QCMATRIX constraints; the actual MOSEK 11.2.7 reader uses xQx for QCMATRIX"
+    },
+    {
+      "id": "fixture_mosek_QSECTION",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "2375f125ebf93257e9964eb7f1555baa324d145190117ab7aac21966cec81cc7",
+      "dialect": "mosek",
+      "converter_exit_code": 0,
+      "optbin_sha256": "8a35c4dba074586329644f791d2deb8cefee5a5e164484c2a1bc9a6a0dccf132",
+      "reference_dialect": "mosek",
+      "native_full_validation": true,
+      "pass": false,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": false,
+        "constraints": true
+      },
+      "native_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+      "reference_canonical_sha256": "96ed6d328b0aa6927e6ad3acf742ef160c98d47403194960036129bc3d0d4548",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "native_objective_prefix": "(((0, '3ff0000000000000'), (1, 'c000000000000000')), ((0, 0, '3ff0000000000000'), (0, 1, '3fe0000000000000'), (1, 1, '4000000000000000')), '401c000000000000')",
+      "reference_objective_prefix": "(((0, '3ff0000000000000'), (1, 'c000000000000000')), (), '401c000000000000')",
+      "status": "known_reference_discrepancy",
+      "mosek_sdk": {
+        "version": "11.2.7",
+        "pass": true,
+        "checks": {
+          "variables": true,
+          "sense": true,
+          "objective": true,
+          "constraints": true
+        },
+        "native_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+        "reference_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+        "variables": 2,
+        "normalized_constraints": 5
+      },
+      "reference_issue": "MOI reads quadratic objectives from QSECTION only when the matrix name is literal OBJ; the valid source objective is named obj"
+    },
+    {
+      "id": "fixture_mosek_QSECTION_OBJ",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "0e31364313894bec00d428616dc852114c52495d4e461f4913134ea1997504ce",
+      "dialect": "mosek",
+      "converter_exit_code": 0,
+      "optbin_sha256": "8a35c4dba074586329644f791d2deb8cefee5a5e164484c2a1bc9a6a0dccf132",
+      "reference_dialect": "mosek",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+      "reference_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "status": "pass",
+      "mosek_sdk": {
+        "version": "11.2.7",
+        "pass": true,
+        "checks": {
+          "variables": true,
+          "sense": true,
+          "objective": true,
+          "constraints": true
+        },
+        "native_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+        "reference_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+        "variables": 2,
+        "normalized_constraints": 5
+      }
+    },
+    {
+      "id": "fixture_cone_EXP",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "26abce073d928c6869f3bd8b442ea03b47998e86675b680998cd7fbc5850b2ca",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "a890dfb4229456642e8cb66bba4d63bcb6a136e74615350b183bae7193a0ec43",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "41ec5a138b57c77ada418ee3c8a6cfcfbf797d6728d9bc9a830ba8e5ee4e91ac",
+      "reference_canonical_sha256": "41ec5a138b57c77ada418ee3c8a6cfcfbf797d6728d9bc9a830ba8e5ee4e91ac",
+      "variables": 3,
+      "normalized_constraints": 2,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_cone_EXP_dual",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "c9a932afcafdadc5d66b4a7840e50af4d5225ee17d39511fd76e4fbf0650deec",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "8cb34878a9491be0189ee7df3f02d664fc8e9415f89447046310504e7260c36c",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "86654b7f37a15318c3fd6e11ac5d9c45e61f5c5d67637a52b81a2bf2583cea8e",
+      "reference_canonical_sha256": "86654b7f37a15318c3fd6e11ac5d9c45e61f5c5d67637a52b81a2bf2583cea8e",
+      "variables": 3,
+      "normalized_constraints": 2,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_cone_QR",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "21a9db2602bf3e24a104de7f7021bed9d0ea0ade8a233f6ca5d4599d0115d4da",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "b302424ed8592d4cb43058af0c089d8210630f8d702bd27966ba560f4b3918cb",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "08e7cf3357bf161637251ed2dbc7302ec97135d559c0146b87302da74871657c",
+      "reference_canonical_sha256": "08e7cf3357bf161637251ed2dbc7302ec97135d559c0146b87302da74871657c",
+      "variables": 3,
+      "normalized_constraints": 2,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_cone_POW",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "e15fb4b4fee9f24117b28d5229ea6baea084ebb63f2a851d199f1b35d0af23bc",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "0c399df67332b882adbfaf91542e7558fabfbeaf2e3d81012382b5f084b82d9a",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "31fb8f27c91a04fdd7e95a4d0b11343a4bc4f2dde781b30f6d0a4019d8902bbe",
+      "reference_canonical_sha256": "31fb8f27c91a04fdd7e95a4d0b11343a4bc4f2dde781b30f6d0a4019d8902bbe",
+      "variables": 3,
+      "normalized_constraints": 2,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_cone_POW_dual",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "5c1ca5ced81440597216944a1f5b6d092e9e2e0e6ae2e7c61927c7705a058654",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "501b7f6f158c71434e2e2c09afd7ae771d0f91269f0384c5db6604addd04fbdd",
+      "reference_dialect": "none",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "9eb26c15618b7c0e764861aca400a14deda789761e2600b55908016ffd11b8fe",
+      "reference_canonical_sha256": "9eb26c15618b7c0e764861aca400a14deda789761e2600b55908016ffd11b8fe",
+      "variables": 3,
+      "normalized_constraints": 2,
+      "status": "pass"
+    },
+    {
+      "id": "fixture_generalized_power",
+      "fixture": true,
+      "format": "cbf",
+      "input_sha256": "8ff0587ece4f226592ddc0c8ea9ee05396b83c908923374d25033d46c6acfd7c",
+      "dialect": null,
+      "converter_exit_code": 0,
+      "optbin_sha256": "669984fce6fb71f5d2352a368c2923fb2f3c58427936baaa07d5e53979752dc0",
+      "native_full_validation": true,
+      "status": "reference_unsupported",
+      "error": "Only 3-dimensional power cones are supported.",
+      "error_type": "ErrorException"
+    },
+    {
+      "id": "fixture_qcqp_mosek_gurobi_option",
+      "fixture": true,
+      "format": "mps",
+      "input_sha256": "3e41ed69f46218507e19ab847afedcfa7f52765eeea204697eae301477e6fa96",
+      "dialect": "mosek",
+      "converter_exit_code": 0,
+      "optbin_sha256": "ce1884301ce67ce2f4eb502fdb16735d131333952125f06da2d8e0d958ba6ec8",
+      "reference_dialect": "gurobi",
+      "native_full_validation": true,
+      "pass": true,
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": true
+      },
+      "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "reference_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "variables": 2,
+      "normalized_constraints": 5,
+      "status": "pass",
+      "mosek_sdk": {
+        "version": "11.2.7",
+        "pass": true,
+        "checks": {
+          "variables": true,
+          "sense": true,
+          "objective": true,
+          "constraints": true
+        },
+        "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+        "reference_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+        "variables": 2,
+        "normalized_constraints": 5
+      }
+    }
+  ]
+}

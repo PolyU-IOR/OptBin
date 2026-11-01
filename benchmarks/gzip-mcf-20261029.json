@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "scope": "Practical complete numerical model loading; no solve or model-file writing",
+  "cache": "Warm cache; one untimed numerical verification per measured format; shuffled fresh-process trials",
+  "reader": "Native OptBin source parsers with an in-memory array sink; same optb_validate as binary paths",
+  "gzip": {
+    "level_for_generated_files": 6,
+    "program_for_generation": "/benchmark/server/optbin-gzip-evaluation-20261029/data/deps/pigz-2.8/pigz",
+    "compression_threads": 16,
+    "existing_text_gzip": "Retained verbatim; original producer compression settings unknown",
+    "binary_loading": "zlib gzip to seekable disk temporary plus native load; all inside timer",
+    "optbin_gzip": "Outer gzip around the default internally Zstd-compressed OptBin file",
+    "creation": "Recorded separately from repeated reads; includes output write/close, no fsync"
+  },
+  "limitations": [
+    "Text parser is not an independent performance baseline for JuMP/HiGHS/MOSEK",
+    "Warm-cache single-host observations, not controlled cold-I/O or transfer timings",
+    "Binary gzip paths require expanded seekable temporary storage; text gzip streams directly",
+    "OptBin default versus gzip combines encoding and compressor choices",
+    "Peak RSS excludes filesystem page cache and temporary-file space"
+  ],
+  "environment": {
+    "hostname": "benchmark-server",
+    "platform": "Linux-5.15.0-138-generic-x86_64-with-glibc2.35",
+    "started_utc": "2026-10-29T14:54:46.277590+00:00",
+    "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+    "gzip_version": "pigz 2.8",
+    "binary_sha256": "4b85ad8849a9e293b025803f3576a646842899974448cac591b6c30ec69cfdef",
+    "source_sha256": {
+      "scripts/benchmark_gzip.py": "aa7365a4acd861562e3eeb0aa81292385740b70641aa318b95eda57780a34ac8",
+      "src/native_bench.c": "6a1246ff9fbf00ca6d4f108cb2028270c759a409a765345a8bee6f3a395d1bc4",
+      "src/text_bench_loader.cpp": "507ca997c8967eb60d826104a43c74cf316b00a435fb928c6f3055ab77ea3eb8",
+      "src/mps_parser.hpp": "935f62a949330e418ec9a12e76d6a2a56653d77b4f0063ac8e80d696f3df62ac",
+      "src/cbf_parser.hpp": "bfe7a41719e7f9aaccd0e80dc92508f5236154a51f508262fe33d2ea0909a824",
+      "src/converter_common.hpp": "d143b61fcab1e1de3ab48e4c0efd185677b9b6fb07cbc096f7ac43f7f278504a"
+    },
+    "library_sha256": {
+      "liboptbin.so": "4f2c58d18b5cdb5539d2f9269e519636400574ec4e0455506734ce93e6d0fb29",
+      "liboptbin_hdf5.so": "da2c94916d9101446d49f36a2c1f1e9ffc8f32a97127a059ea20860a2b464e3d"
+    }
+  },
+  "results": [
+    {
+      "id": "mcf_5000_100_1000",
+      "source_format": "mps",
+      "source": "/benchmark/datasets/Oliver_Hinder/larger/mcf_5000_100_1000.mps.gz",
+      "source_sha256": "fe8ab0887c5eb1f4319893aa7c646620520ace48f0c76ef2df174fc081828745",
+      "preparation": {
+        "raw_hdf5_gzip": {
+          "seconds": 48.48821695894003,
+          "input_bytes": 28259896824,
+          "output_bytes": 4618229200
+        },
+        "optbin_gzip": {
+          "seconds": 8.299696311354637,
+          "input_bytes": 4788885400,
+          "output_bytes": 4632649760
+        }
+      },
+      "formats": [
+        {
+          "format": "text-gzip",
+          "path": "/benchmark/datasets/Oliver_Hinder/larger/mcf_5000_100_1000.mps.gz",
+          "bytes": 11331226412,
+          "sha256": "fe8ab0887c5eb1f4319893aa7c646620520ace48f0c76ef2df174fc081828745",
+          "runs": [],
+          "timing_status": "not measured; compressed storage only"
+        },
+        {
+          "format": "raw-hdf5-gzip",
+          "path": "/benchmark/server/optbin-gzip-evaluation-20261029/benchmarks/runs/gzip-pigz/mcf_5000_100_1000/raw.h5.gz",
+          "bytes": 4618229200,
+          "sha256": "9ec00e33c5a3391f1bfd30bb114e28ebb828f9029426f89c81013c4e5f1035c1",
+          "runs": [
+            {
+              "seconds": 120.015161,
+              "gzip_to_temporary_seconds": 76.8344941,
+              "max_rss_bytes": 28268302336,
+              "user_seconds": 88.417654,
+              "system_seconds": 31.570877,
+              "input_blocks": 0,
+              "bytes": 4618229200,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6"
+            },
+            {
+              "seconds": 118.293273,
+              "gzip_to_temporary_seconds": 75.9070751,
+              "max_rss_bytes": 28268417024,
+              "user_seconds": 88.185199,
+              "system_seconds": 30.090724,
+              "input_blocks": 0,
+              "bytes": 4618229200,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6"
+            },
+            {
+              "seconds": 120.41829,
+              "gzip_to_temporary_seconds": 76.1065103,
+              "max_rss_bytes": 28268331008,
+              "user_seconds": 89.439057,
+              "system_seconds": 30.908909,
+              "input_blocks": 0,
+              "bytes": 4618229200,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6"
+            }
+          ],
+          "median_seconds": 120.015161,
+          "median_peak_rss_bytes": 28268331008
+        },
+        {
+          "format": "optbin",
+          "path": "/benchmark/server/optbin-evaluation-20261027/benchmarks/runs/native-cpu/mcf_5000_100_1000/mcf_5000_100_1000.optb",
+          "bytes": 4788885400,
+          "sha256": "980073f0cc7002884976368ffcd271aa059a3d5c2dc6feeda41e0db2662c2da4",
+          "runs": [
+            {
+              "seconds": 53.551394,
+              "gzip_to_temporary_seconds": 0,
+              "max_rss_bytes": 28264759296,
+              "user_seconds": 42.756121,
+              "system_seconds": 10.79502,
+              "input_blocks": 0,
+              "bytes": 4788885400,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6"
+            },
+            {
+              "seconds": 53.3360165,
+              "gzip_to_temporary_seconds": 0,
+              "max_rss_bytes": 28264599552,
+              "user_seconds": 42.697525,
+              "system_seconds": 10.64038,
+              "input_blocks": 0,
+              "bytes": 4788885400,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6"
+            },
+            {
+              "seconds": 53.3580634,
+              "gzip_to_temporary_seconds": 0,
+              "max_rss_bytes": 28264665088,
+              "user_seconds": 42.85586,
+              "system_seconds": 10.503965,
+              "input_blocks": 0,
+              "bytes": 4788885400,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6"
+            }
+          ],
+          "median_seconds": 53.3580634,
+          "median_peak_rss_bytes": 28264665088
+        },
+        {
+          "format": "optbin-gzip",
+          "path": "/benchmark/server/optbin-gzip-evaluation-20261029/benchmarks/runs/gzip-pigz/mcf_5000_100_1000/mcf_5000_100_1000.optb.gz",
+          "bytes": 4632649760,
+          "sha256": "965e1d595bc42ab549713f22be674acbafa513207ef8a43a3ed3cf337c7add92",
+          "runs": [
+            {
+              "seconds": 73.1826762,
+              "gzip_to_temporary_seconds": 19.8693802,
+              "max_rss_bytes": 28265865216,
+              "user_seconds": 59.900698,
+              "system_seconds": 13.279268,
+              "input_blocks": 0,
+              "bytes": 4632649760,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6"
+            },
+            {
+              "seconds": 73.3946427,
+              "gzip_to_temporary_seconds": 19.8437279,
+              "max_rss_bytes": 28265742336,
+              "user_seconds": 59.678204,
+              "system_seconds": 13.715587,
+              "input_blocks": 0,
+              "bytes": 4632649760,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6"
+            },
+            {
+              "seconds": 72.6772518,
+              "gzip_to_temporary_seconds": 19.7330413,
+              "max_rss_bytes": 28265865216,
+              "user_seconds": 59.56704,
+              "system_seconds": 13.106908,
+              "input_blocks": 0,
+              "bytes": 4632649760,
+              "decoded_bytes": 28258406008,
+              "rows": 5525100,
+              "cols": 502500100,
+              "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+              "bitwise_reference_equal": null,
+              "hdf5_version": "HDF5 library version: 1.14.6"
+            }
+          ],
+          "median_seconds": 73.1826762,
+          "median_peak_rss_bytes": 28265865216
+        }
+      ],
+      "verification": [
+        {
+          "format": "raw-hdf5-gzip",
+          "seconds": 119.774677,
+          "gzip_to_temporary_seconds": 76.6549689,
+          "max_rss_bytes": 28268265472,
+          "user_seconds": 88.217754,
+          "system_seconds": 31.538906,
+          "input_blocks": 0,
+          "bytes": 4618229200,
+          "decoded_bytes": 28258406008,
+          "rows": 5525100,
+          "cols": 502500100,
+          "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6"
+        },
+        {
+          "format": "optbin",
+          "seconds": 54.0828688,
+          "gzip_to_temporary_seconds": 0,
+          "max_rss_bytes": 28264566784,
+          "user_seconds": 43.071662,
+          "system_seconds": 11.011913,
+          "input_blocks": 0,
+          "bytes": 4788885400,
+          "decoded_bytes": 28258406008,
+          "rows": 5525100,
+          "cols": 502500100,
+          "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6"
+        },
+        {
+          "format": "optbin-gzip",
+          "seconds": 73.999308,
+          "gzip_to_temporary_seconds": 20.0113942,
+          "max_rss_bytes": 28265816064,
+          "user_seconds": 60.03061,
+          "system_seconds": 13.967676,
+          "input_blocks": 0,
+          "bytes": 4632649760,
+          "decoded_bytes": 28258406008,
+          "rows": 5525100,
+          "cols": 502500100,
+          "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+          "bitwise_reference_equal": true,
+          "hdf5_version": "HDF5 library version: 1.14.6"
+        }
+      ],
+      "numerical_sha256": "22ac50a338f3b1d6bf19ad25eca8e8ab9acd5a50f3619100ef67f4ced91ae373",
+      "measurement_order": [
+        [
+          "raw-hdf5-gzip",
+          "optbin",
+          "optbin-gzip"
+        ],
+        [
+          "optbin-gzip",
+          "optbin",
+          "raw-hdf5-gzip"
+        ],
+        [
+          "raw-hdf5-gzip",
+          "optbin-gzip",
+          "optbin"
+        ]
+      ],
+      "status": "complete"
+    }
+  ],
+  "complete": true
+}

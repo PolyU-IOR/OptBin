@@ -1,0 +1,178 @@
+{
+  "scope": "Historical HPR-LP v1 integration; source parsing plus solver model construction; single possibly cached runs, not v2/HDF5 native timings",
+  "provenance": "/benchmark/external/summary.json",
+  "results": [
+    {
+      "name": "prod_200_400_02",
+      "command": [
+        "/benchmark/server/workspace/HPR-LP-C-private-bqp-native-20261019/build/bqp_compare",
+        "/benchmark/datasets/Oliver_Hinder/larger/prod_200_400_02.mps.gz",
+        "/benchmark/datasets/Oliver_Hinder/larger_bqp/prod_200_400_02.bqp",
+        "/benchmark/server/bqp-large-native-compare-20261020/prod_200_400_02.comparison.json",
+        "--decoded-limit-bytes",
+        "137438953472"
+      ],
+      "pid": 1879272,
+      "started": "2026-10-19T16:20:14.957747+00:00",
+      "start_monotonic": 46427270.36372946,
+      "mps_file_bytes": 7832133628,
+      "bqp_file_bytes": 473903552,
+      "state": "FINISHED",
+      "returncode": 0,
+      "finished": "2026-10-19T16:38:15.987242+00:00",
+      "wall_seconds": 1081.0294980555773,
+      "comparison": {
+        "model_bitwise_equal": true,
+        "dimensions_equal": true,
+        "rows": 16361200,
+        "columns": 64560800,
+        "nnz": 2310559600,
+        "mps_read_seconds": 955.52294287,
+        "bqp_read_seconds": 106.192174226,
+        "fields": [
+          {
+            "name": "row_ptr",
+            "elements": 16361201,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "column_index",
+            "elements": 2310559600,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "matrix_value",
+            "elements": 2310559600,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "row_lower",
+            "elements": 16361200,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "row_upper",
+            "elements": 16361200,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "variable_lower",
+            "elements": 64560800,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "variable_upper",
+            "elements": 64560800,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "objective",
+            "elements": 64560800,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "objective_constant",
+            "elements": 1,
+            "mismatches": 0,
+            "first_mismatch": null
+          }
+        ],
+        "success": true
+      }
+    },
+    {
+      "name": "mcf_5000_100_1000",
+      "command": [
+        "/benchmark/server/workspace/HPR-LP-C-private-bqp-native-20261019/build/bqp_compare",
+        "/benchmark/datasets/Oliver_Hinder/larger/mcf_5000_100_1000.mps.gz",
+        "/benchmark/datasets/Oliver_Hinder/larger_bqp/mcf_5000_100_1000.bqp",
+        "/benchmark/server/bqp-large-native-compare-20261020/mcf_5000_100_1000.comparison.json",
+        "--decoded-limit-bytes",
+        "137438953472"
+      ],
+      "pid": 1879274,
+      "started": "2026-10-19T16:20:14.958871+00:00",
+      "start_monotonic": 46427270.364851445,
+      "mps_file_bytes": 11331226412,
+      "bqp_file_bytes": 4788884696,
+      "state": "FINISHED",
+      "returncode": 0,
+      "finished": "2026-10-19T16:38:15.987422+00:00",
+      "wall_seconds": 1081.02854411304,
+      "comparison": {
+        "model_bitwise_equal": true,
+        "dimensions_equal": true,
+        "rows": 5525100,
+        "columns": 502500100,
+        "nnz": 1007500100,
+        "mps_read_seconds": 923.612425159,
+        "bqp_read_seconds": 97.454958386,
+        "fields": [
+          {
+            "name": "row_ptr",
+            "elements": 5525101,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "column_index",
+            "elements": 1007500100,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "matrix_value",
+            "elements": 1007500100,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "row_lower",
+            "elements": 5525100,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "row_upper",
+            "elements": 5525100,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "variable_lower",
+            "elements": 502500100,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "variable_upper",
+            "elements": 502500100,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "objective",
+            "elements": 502500100,
+            "mismatches": 0,
+            "first_mismatch": null
+          },
+          {
+            "name": "objective_constant",
+            "elements": 1,
+            "mismatches": 0,
+            "first_mismatch": null
+          }
+        ],
+        "success": true
+      }
+    }
+  ]
+}

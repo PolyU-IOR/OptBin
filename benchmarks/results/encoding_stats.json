@@ -1,0 +1,1262 @@
+[
+  {
+    "file": "mcf_10000_100_1000.bqp",
+    "file_bytes": 10036181720,
+    "arrays": {
+      "A_index": {
+        "elements": 2015000100,
+        "decoded_bytes": 8060000400,
+        "stored_payload_bytes": 6967357145,
+        "record_bytes": 6969432328,
+        "encodings": {
+          "delta": {
+            "elements": 2015000100,
+            "blocks": 30747,
+            "packed_bytes": 7935444224,
+            "stored_bytes": 6967357145,
+            "zstd_blocks": 30747
+          }
+        }
+      },
+      "A_value": {
+        "elements": 2015000100,
+        "decoded_bytes": 16120000800,
+        "stored_payload_bytes": 3058278959,
+        "record_bytes": 3060353960,
+        "encodings": {
+          "raw": {
+            "elements": 15007744,
+            "blocks": 229,
+            "packed_bytes": 120061952,
+            "stored_bytes": 115503487,
+            "zstd_blocks": 229
+          },
+          "dictionary": {
+            "elements": 1999992356,
+            "blocks": 30518,
+            "packed_bytes": 3809385842,
+            "stored_bytes": 2942775472,
+            "zstd_blocks": 30518
+          }
+        }
+      },
+      "A_ptr": {
+        "elements": 1005000101,
+        "decoded_bytes": 8040000808,
+        "stored_payload_bytes": 414074,
+        "record_bytes": 1472248,
+        "encodings": {
+          "delta": {
+            "elements": 1005000101,
+            "blocks": 15336,
+            "packed_bytes": 1005107453,
+            "stored_bytes": 414074,
+            "zstd_blocks": 15336
+          }
+        }
+      },
+      "row_lower": {
+        "elements": 11050100,
+        "decoded_bytes": 88400800,
+        "stored_payload_bytes": 416541,
+        "record_bytes": 427912,
+        "encodings": {
+          "dictionary": {
+            "elements": 10067060,
+            "blocks": 154,
+            "packed_bytes": 1621647,
+            "stored_bytes": 416421,
+            "zstd_blocks": 154
+          },
+          "constant": {
+            "elements": 983040,
+            "blocks": 15,
+            "packed_bytes": 120,
+            "stored_bytes": 120,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "row_upper": {
+        "elements": 11050100,
+        "decoded_bytes": 88400800,
+        "stored_payload_bytes": 418647,
+        "record_bytes": 430024,
+        "encodings": {
+          "dictionary": {
+            "elements": 10067060,
+            "blocks": 154,
+            "packed_bytes": 1629847,
+            "stored_bytes": 418527,
+            "zstd_blocks": 154
+          },
+          "constant": {
+            "elements": 983040,
+            "blocks": 15,
+            "packed_bytes": 120,
+            "stored_bytes": 120,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "c": {
+        "elements": 1005000100,
+        "decoded_bytes": 8040000800,
+        "stored_payload_bytes": 839842,
+        "record_bytes": 1856736,
+        "encodings": {
+          "dictionary": {
+            "elements": 691929088,
+            "blocks": 10558,
+            "packed_bytes": 86660064,
+            "stored_bytes": 801618,
+            "zstd_blocks": 10558
+          },
+          "constant": {
+            "elements": 313071012,
+            "blocks": 4778,
+            "packed_bytes": 38224,
+            "stored_bytes": 38224,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "x_lower": {
+        "elements": 1005000100,
+        "decoded_bytes": 8040000800,
+        "stored_payload_bytes": 122688,
+        "record_bytes": 1104192,
+        "encodings": {
+          "constant": {
+            "elements": 1005000100,
+            "blocks": 15336,
+            "packed_bytes": 122688,
+            "stored_bytes": 122688,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "x_upper": {
+        "elements": 1005000100,
+        "decoded_bytes": 8040000800,
+        "stored_payload_bytes": 122688,
+        "record_bytes": 1104192,
+        "encodings": {
+          "constant": {
+            "elements": 1005000100,
+            "blocks": 15336,
+            "packed_bytes": 122688,
+            "stored_bytes": 122688,
+            "zstd_blocks": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "file": "mcf_10000_120_1000.bqp",
+    "file_bytes": 11680855240,
+    "arrays": {
+      "A_index": {
+        "elements": 2418000120,
+        "decoded_bytes": 9672000480,
+        "stored_payload_bytes": 7998538822,
+        "record_bytes": 8001029152,
+        "encodings": {
+          "delta": {
+            "elements": 2145566968,
+            "blocks": 32739,
+            "packed_bytes": 8456009214,
+            "stored_bytes": 7416333586,
+            "zstd_blocks": 32739
+          },
+          "raw": {
+            "elements": 272433152,
+            "blocks": 4157,
+            "packed_bytes": 1089732608,
+            "stored_bytes": 582205236,
+            "zstd_blocks": 4157
+          }
+        }
+      },
+      "A_value": {
+        "elements": 2418000120,
+        "decoded_bytes": 19344000960,
+        "stored_payload_bytes": 3669837783,
+        "record_bytes": 3672328336,
+        "encodings": {
+          "raw": {
+            "elements": 18022400,
+            "blocks": 275,
+            "packed_bytes": 144179200,
+            "stored_bytes": 138626217,
+            "zstd_blocks": 275
+          },
+          "dictionary": {
+            "elements": 2399977720,
+            "blocks": 36621,
+            "packed_bytes": 4571240996,
+            "stored_bytes": 3531211566,
+            "zstd_blocks": 36621
+          }
+        }
+      },
+      "A_ptr": {
+        "elements": 1206000121,
+        "decoded_bytes": 9648000968,
+        "stored_payload_bytes": 496883,
+        "record_bytes": 1766680,
+        "encodings": {
+          "delta": {
+            "elements": 1206000121,
+            "blocks": 18403,
+            "packed_bytes": 1206128942,
+            "stored_bytes": 496883,
+            "zstd_blocks": 18403
+          }
+        }
+      },
+      "row_lower": {
+        "elements": 11250120,
+        "decoded_bytes": 90000960,
+        "stored_payload_bytes": 415950,
+        "record_bytes": 427512,
+        "encodings": {
+          "dictionary": {
+            "elements": 10070472,
+            "blocks": 154,
+            "packed_bytes": 1613873,
+            "stored_bytes": 415806,
+            "zstd_blocks": 154
+          },
+          "constant": {
+            "elements": 1179648,
+            "blocks": 18,
+            "packed_bytes": 144,
+            "stored_bytes": 144,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "row_upper": {
+        "elements": 11250120,
+        "decoded_bytes": 90000960,
+        "stored_payload_bytes": 418051,
+        "record_bytes": 429616,
+        "encodings": {
+          "dictionary": {
+            "elements": 10070472,
+            "blocks": 154,
+            "packed_bytes": 1622073,
+            "stored_bytes": 417907,
+            "zstd_blocks": 154
+          },
+          "constant": {
+            "elements": 1179648,
+            "blocks": 18,
+            "packed_bytes": 144,
+            "stored_bytes": 144,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "c": {
+        "elements": 1206000120,
+        "decoded_bytes": 9648000960,
+        "stored_payload_bytes": 1004026,
+        "record_bytes": 2223784,
+        "encodings": {
+          "dictionary": {
+            "elements": 823132160,
+            "blocks": 12560,
+            "packed_bytes": 103092480,
+            "stored_bytes": 957282,
+            "zstd_blocks": 12560
+          },
+          "constant": {
+            "elements": 382867960,
+            "blocks": 5843,
+            "packed_bytes": 46744,
+            "stored_bytes": 46744,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "x_lower": {
+        "elements": 1206000120,
+        "decoded_bytes": 9648000960,
+        "stored_payload_bytes": 147224,
+        "record_bytes": 1325016,
+        "encodings": {
+          "constant": {
+            "elements": 1206000120,
+            "blocks": 18403,
+            "packed_bytes": 147224,
+            "stored_bytes": 147224,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "x_upper": {
+        "elements": 1206000120,
+        "decoded_bytes": 9648000960,
+        "stored_payload_bytes": 147224,
+        "record_bytes": 1325016,
+        "encodings": {
+          "constant": {
+            "elements": 1206000120,
+            "blocks": 18403,
+            "packed_bytes": 147224,
+            "stored_bytes": 147224,
+            "zstd_blocks": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "file": "mcf_10000_150_1000.bqp",
+    "file_bytes": 13891110840,
+    "arrays": {
+      "A_index": {
+        "elements": 3022500150,
+        "decoded_bytes": 12090000600,
+        "stored_payload_bytes": 9288077731,
+        "record_bytes": 9291190336,
+        "encodings": {
+          "delta": {
+            "elements": 2150150454,
+            "blocks": 32809,
+            "packed_bytes": 8472602132,
+            "stored_bytes": 7427395844,
+            "zstd_blocks": 32809
+          },
+          "raw": {
+            "elements": 872349696,
+            "blocks": 13311,
+            "packed_bytes": 3489398784,
+            "stored_bytes": 1860681887,
+            "zstd_blocks": 13311
+          }
+        }
+      },
+      "A_value": {
+        "elements": 3022500150,
+        "decoded_bytes": 24180001200,
+        "stored_payload_bytes": 4587648239,
+        "record_bytes": 4590761368,
+        "encodings": {
+          "raw": {
+            "elements": 22544384,
+            "blocks": 344,
+            "packed_bytes": 180355072,
+            "stored_bytes": 173297188,
+            "zstd_blocks": 344
+          },
+          "dictionary": {
+            "elements": 2999955766,
+            "blocks": 45776,
+            "packed_bytes": 5714022937,
+            "stored_bytes": 4414351051,
+            "zstd_blocks": 45776
+          }
+        }
+      },
+      "A_ptr": {
+        "elements": 1507500151,
+        "decoded_bytes": 12060001208,
+        "stored_payload_bytes": 621083,
+        "record_bytes": 2208280,
+        "encodings": {
+          "delta": {
+            "elements": 1507500151,
+            "blocks": 23003,
+            "packed_bytes": 1507661172,
+            "stored_bytes": 621083,
+            "zstd_blocks": 23003
+          }
+        }
+      },
+      "row_lower": {
+        "elements": 11550150,
+        "decoded_bytes": 92401200,
+        "stored_payload_bytes": 413410,
+        "record_bytes": 425312,
+        "encodings": {
+          "dictionary": {
+            "elements": 10108358,
+            "blocks": 155,
+            "packed_bytes": 1585825,
+            "stored_bytes": 413234,
+            "zstd_blocks": 155
+          },
+          "constant": {
+            "elements": 1441792,
+            "blocks": 22,
+            "packed_bytes": 176,
+            "stored_bytes": 176,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "row_upper": {
+        "elements": 11550150,
+        "decoded_bytes": 92401200,
+        "stored_payload_bytes": 415514,
+        "record_bytes": 427416,
+        "encodings": {
+          "dictionary": {
+            "elements": 10108358,
+            "blocks": 155,
+            "packed_bytes": 1594025,
+            "stored_bytes": 415338,
+            "zstd_blocks": 155
+          },
+          "constant": {
+            "elements": 1441792,
+            "blocks": 22,
+            "packed_bytes": 176,
+            "stored_bytes": 176,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "c": {
+        "elements": 1507500150,
+        "decoded_bytes": 12060001200,
+        "stored_payload_bytes": 1260326,
+        "record_bytes": 2785568,
+        "encodings": {
+          "dictionary": {
+            "elements": 1039597568,
+            "blocks": 15863,
+            "packed_bytes": 130203504,
+            "stored_bytes": 1203206,
+            "zstd_blocks": 15863
+          },
+          "constant": {
+            "elements": 467902582,
+            "blocks": 7140,
+            "packed_bytes": 57120,
+            "stored_bytes": 57120,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "x_lower": {
+        "elements": 1507500150,
+        "decoded_bytes": 12060001200,
+        "stored_payload_bytes": 184024,
+        "record_bytes": 1656216,
+        "encodings": {
+          "constant": {
+            "elements": 1507500150,
+            "blocks": 23003,
+            "packed_bytes": 184024,
+            "stored_bytes": 184024,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "x_upper": {
+        "elements": 1507500150,
+        "decoded_bytes": 12060001200,
+        "stored_payload_bytes": 184024,
+        "record_bytes": 1656216,
+        "encodings": {
+          "constant": {
+            "elements": 1507500150,
+            "blocks": 23003,
+            "packed_bytes": 184024,
+            "stored_bytes": 184024,
+            "zstd_blocks": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "file": "mcf_5000_100_1000.bqp",
+    "file_bytes": 4788884696,
+    "arrays": {
+      "A_index": {
+        "elements": 1007500100,
+        "decoded_bytes": 4030000400,
+        "stored_payload_bytes": 3334480299,
+        "record_bytes": 3335517864,
+        "encodings": {
+          "delta": {
+            "elements": 1007500100,
+            "blocks": 15374,
+            "packed_bytes": 3862322558,
+            "stored_bytes": 3334480299,
+            "zstd_blocks": 15374
+          }
+        }
+      },
+      "A_value": {
+        "elements": 1007500100,
+        "decoded_bytes": 8060000800,
+        "stored_payload_bytes": 1449056122,
+        "record_bytes": 1450093624,
+        "encodings": {
+          "raw": {
+            "elements": 1007484928,
+            "blocks": 15373,
+            "packed_bytes": 8059879424,
+            "stored_bytes": 1449033016,
+            "zstd_blocks": 15373
+          },
+          "dictionary": {
+            "elements": 15172,
+            "blocks": 1,
+            "packed_bytes": 30502,
+            "stored_bytes": 23106,
+            "zstd_blocks": 1
+          }
+        }
+      },
+      "A_ptr": {
+        "elements": 502500101,
+        "decoded_bytes": 4020000808,
+        "stored_payload_bytes": 207038,
+        "record_bytes": 736120,
+        "encodings": {
+          "delta": {
+            "elements": 502500101,
+            "blocks": 7668,
+            "packed_bytes": 502553777,
+            "stored_bytes": 207038,
+            "zstd_blocks": 7668
+          }
+        }
+      },
+      "row_lower": {
+        "elements": 5525100,
+        "decoded_bytes": 44200800,
+        "stored_payload_bytes": 204465,
+        "record_bytes": 210168,
+        "encodings": {
+          "dictionary": {
+            "elements": 5066348,
+            "blocks": 78,
+            "packed_bytes": 790342,
+            "stored_bytes": 204409,
+            "zstd_blocks": 78
+          },
+          "constant": {
+            "elements": 458752,
+            "blocks": 7,
+            "packed_bytes": 56,
+            "stored_bytes": 56,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "row_upper": {
+        "elements": 5525100,
+        "decoded_bytes": 44200800,
+        "stored_payload_bytes": 205555,
+        "record_bytes": 211264,
+        "encodings": {
+          "dictionary": {
+            "elements": 5066348,
+            "blocks": 78,
+            "packed_bytes": 798542,
+            "stored_bytes": 205499,
+            "zstd_blocks": 78
+          },
+          "constant": {
+            "elements": 458752,
+            "blocks": 7,
+            "packed_bytes": 56,
+            "stored_bytes": 56,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "c": {
+        "elements": 502500100,
+        "decoded_bytes": 4020000800,
+        "stored_payload_bytes": 497488,
+        "record_bytes": 1011336,
+        "encodings": {
+          "dictionary": {
+            "elements": 446204676,
+            "blocks": 6809,
+            "packed_bytes": 55884529,
+            "stored_bytes": 490616,
+            "zstd_blocks": 6809
+          },
+          "constant": {
+            "elements": 56295424,
+            "blocks": 859,
+            "packed_bytes": 6872,
+            "stored_bytes": 6872,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "x_lower": {
+        "elements": 502500100,
+        "decoded_bytes": 4020000800,
+        "stored_payload_bytes": 61344,
+        "record_bytes": 552096,
+        "encodings": {
+          "constant": {
+            "elements": 502500100,
+            "blocks": 7668,
+            "packed_bytes": 61344,
+            "stored_bytes": 61344,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "x_upper": {
+        "elements": 502500100,
+        "decoded_bytes": 4020000800,
+        "stored_payload_bytes": 61344,
+        "record_bytes": 552096,
+        "encodings": {
+          "constant": {
+            "elements": 502500100,
+            "blocks": 7668,
+            "packed_bytes": 61344,
+            "stored_bytes": 61344,
+            "zstd_blocks": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "file": "mcf_5000_150_1000.bqp",
+    "file_bytes": 7188342472,
+    "arrays": {
+      "A_index": {
+        "elements": 1511250150,
+        "decoded_bytes": 6045000600,
+        "stored_payload_bytes": 5006933766,
+        "record_bytes": 5008490712,
+        "encodings": {
+          "delta": {
+            "elements": 1511250150,
+            "blocks": 23060,
+            "packed_bytes": 5831051236,
+            "stored_bytes": 5006933766,
+            "zstd_blocks": 23060
+          }
+        }
+      },
+      "A_value": {
+        "elements": 1511250150,
+        "decoded_bytes": 12090001200,
+        "stored_payload_bytes": 2173601406,
+        "record_bytes": 2175157800,
+        "encodings": {
+          "raw": {
+            "elements": 1511194624,
+            "blocks": 23059,
+            "packed_bytes": 12089556992,
+            "stored_bytes": 2173508899,
+            "zstd_blocks": 23059
+          },
+          "dictionary": {
+            "elements": 55526,
+            "blocks": 1,
+            "packed_bytes": 115233,
+            "stored_bytes": 92507,
+            "zstd_blocks": 1
+          }
+        }
+      },
+      "A_ptr": {
+        "elements": 753750151,
+        "decoded_bytes": 6030001208,
+        "stored_payload_bytes": 310556,
+        "record_bytes": 1104184,
+        "encodings": {
+          "delta": {
+            "elements": 753750151,
+            "blocks": 11502,
+            "packed_bytes": 753830665,
+            "stored_bytes": 310556,
+            "zstd_blocks": 11502
+          }
+        }
+      },
+      "row_lower": {
+        "elements": 5775150,
+        "decoded_bytes": 46201200,
+        "stored_payload_bytes": 204300,
+        "record_bytes": 210272,
+        "encodings": {
+          "dictionary": {
+            "elements": 5119790,
+            "blocks": 79,
+            "packed_bytes": 797038,
+            "stored_bytes": 204220,
+            "zstd_blocks": 79
+          },
+          "constant": {
+            "elements": 655360,
+            "blocks": 10,
+            "packed_bytes": 80,
+            "stored_bytes": 80,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "row_upper": {
+        "elements": 5775150,
+        "decoded_bytes": 46201200,
+        "stored_payload_bytes": 205395,
+        "record_bytes": 211368,
+        "encodings": {
+          "dictionary": {
+            "elements": 5119790,
+            "blocks": 79,
+            "packed_bytes": 805238,
+            "stored_bytes": 205315,
+            "zstd_blocks": 79
+          },
+          "constant": {
+            "elements": 655360,
+            "blocks": 10,
+            "packed_bytes": 80,
+            "stored_bytes": 80,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "c": {
+        "elements": 753750150,
+        "decoded_bytes": 6030001200,
+        "stored_payload_bytes": 741504,
+        "record_bytes": 1511720,
+        "encodings": {
+          "dictionary": {
+            "elements": 662196358,
+            "blocks": 10105,
+            "packed_bytes": 82936225,
+            "stored_bytes": 730328,
+            "zstd_blocks": 10105
+          },
+          "constant": {
+            "elements": 91553792,
+            "blocks": 1397,
+            "packed_bytes": 11176,
+            "stored_bytes": 11176,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "x_lower": {
+        "elements": 753750150,
+        "decoded_bytes": 6030001200,
+        "stored_payload_bytes": 92016,
+        "record_bytes": 828144,
+        "encodings": {
+          "constant": {
+            "elements": 753750150,
+            "blocks": 11502,
+            "packed_bytes": 92016,
+            "stored_bytes": 92016,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "x_upper": {
+        "elements": 753750150,
+        "decoded_bytes": 6030001200,
+        "stored_payload_bytes": 92016,
+        "record_bytes": 828144,
+        "encodings": {
+          "constant": {
+            "elements": 753750150,
+            "blocks": 11502,
+            "packed_bytes": 92016,
+            "stored_bytes": 92016,
+            "zstd_blocks": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "file": "mcf_5000_200_1000.bqp",
+    "file_bytes": 9588252736,
+    "arrays": {
+      "A_index": {
+        "elements": 2015000200,
+        "decoded_bytes": 8060000800,
+        "stored_payload_bytes": 6679888285,
+        "record_bytes": 6681963656,
+        "encodings": {
+          "delta": {
+            "elements": 2015000200,
+            "blocks": 30747,
+            "packed_bytes": 7824807094,
+            "stored_bytes": 6679888285,
+            "zstd_blocks": 30747
+          }
+        }
+      },
+      "A_value": {
+        "elements": 2015000200,
+        "decoded_bytes": 16120001600,
+        "stored_payload_bytes": 2898088395,
+        "record_bytes": 2900163912,
+        "encodings": {
+          "raw": {
+            "elements": 2014969856,
+            "blocks": 30746,
+            "packed_bytes": 16119758848,
+            "stored_bytes": 2898041026,
+            "zstd_blocks": 30746
+          },
+          "dictionary": {
+            "elements": 30344,
+            "blocks": 1,
+            "packed_bytes": 62644,
+            "stored_bytes": 47369,
+            "zstd_blocks": 1
+          }
+        }
+      },
+      "A_ptr": {
+        "elements": 1005000201,
+        "decoded_bytes": 8040001608,
+        "stored_payload_bytes": 414074,
+        "record_bytes": 1472248,
+        "encodings": {
+          "delta": {
+            "elements": 1005000201,
+            "blocks": 15336,
+            "packed_bytes": 1005107553,
+            "stored_bytes": 414074,
+            "zstd_blocks": 15336
+          }
+        }
+      },
+      "row_lower": {
+        "elements": 6025200,
+        "decoded_bytes": 48201600,
+        "stored_payload_bytes": 203693,
+        "record_bytes": 209824,
+        "encodings": {
+          "dictionary": {
+            "elements": 5107696,
+            "blocks": 78,
+            "packed_bytes": 787310,
+            "stored_bytes": 203581,
+            "zstd_blocks": 78
+          },
+          "constant": {
+            "elements": 917504,
+            "blocks": 14,
+            "packed_bytes": 112,
+            "stored_bytes": 112,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "row_upper": {
+        "elements": 6025200,
+        "decoded_bytes": 48201600,
+        "stored_payload_bytes": 204787,
+        "record_bytes": 210920,
+        "encodings": {
+          "dictionary": {
+            "elements": 5107696,
+            "blocks": 78,
+            "packed_bytes": 795510,
+            "stored_bytes": 204675,
+            "zstd_blocks": 78
+          },
+          "constant": {
+            "elements": 917504,
+            "blocks": 14,
+            "packed_bytes": 112,
+            "stored_bytes": 112,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "c": {
+        "elements": 1005000200,
+        "decoded_bytes": 8040001600,
+        "stored_payload_bytes": 995718,
+        "record_bytes": 2023664,
+        "encodings": {
+          "dictionary": {
+            "elements": 892212744,
+            "blocks": 13615,
+            "packed_bytes": 111744433,
+            "stored_bytes": 981950,
+            "zstd_blocks": 13615
+          },
+          "constant": {
+            "elements": 112787456,
+            "blocks": 1721,
+            "packed_bytes": 13768,
+            "stored_bytes": 13768,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "x_lower": {
+        "elements": 1005000200,
+        "decoded_bytes": 8040001600,
+        "stored_payload_bytes": 122688,
+        "record_bytes": 1104192,
+        "encodings": {
+          "constant": {
+            "elements": 1005000200,
+            "blocks": 15336,
+            "packed_bytes": 122688,
+            "stored_bytes": 122688,
+            "zstd_blocks": 0
+          }
+        }
+      },
+      "x_upper": {
+        "elements": 1005000200,
+        "decoded_bytes": 8040001600,
+        "stored_payload_bytes": 122688,
+        "record_bytes": 1104192,
+        "encodings": {
+          "constant": {
+            "elements": 1005000200,
+            "blocks": 15336,
+            "packed_bytes": 122688,
+            "stored_bytes": 122688,
+            "zstd_blocks": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "file": "prod_200_400_02.bqp",
+    "file_bytes": 473903552,
+    "arrays": {
+      "A_index": {
+        "elements": 2310559600,
+        "decoded_bytes": 9242238400,
+        "stored_payload_bytes": 353855841,
+        "record_bytes": 356235944,
+        "encodings": {
+          "delta": {
+            "elements": 2310559600,
+            "blocks": 35257,
+            "packed_bytes": 2740005828,
+            "stored_bytes": 353855841,
+            "zstd_blocks": 35257
+          }
+        }
+      },
+      "A_value": {
+        "elements": 2310559600,
+        "decoded_bytes": 18484476800,
+        "stored_payload_bytes": 114247981,
+        "record_bytes": 116627592,
+        "encodings": {
+          "dictionary": {
+            "elements": 2310078464,
+            "blocks": 35249,
+            "packed_bytes": 2515763024,
+            "stored_bytes": 112846021,
+            "zstd_blocks": 35249
+          },
+          "raw": {
+            "elements": 481136,
+            "blocks": 8,
+            "packed_bytes": 3849088,
+            "stored_bytes": 1401960,
+            "zstd_blocks": 8
+          }
+        }
+      },
+      "A_ptr": {
+        "elements": 64560801,
+        "decoded_bytes": 516486408,
+        "stored_payload_bytes": 722965,
+        "record_bytes": 790272,
+        "encodings": {
+          "delta": {
+            "elements": 64560801,
+            "blocks": 986,
+            "packed_bytes": 76167521,
+            "stored_bytes": 722965,
+            "zstd_blocks": 986
+          }
+        }
+      },
+      "row_lower": {
+        "elements": 16361200,
+        "decoded_bytes": 130889600,
+        "stored_payload_bytes": 2045,
+        "record_bytes": 18056,
+        "encodings": {
+          "constant": {
+            "elements": 16230128,
+            "blocks": 248,
+            "packed_bytes": 1984,
+            "stored_bytes": 1984,
+            "zstd_blocks": 0
+          },
+          "dictionary": {
+            "elements": 131072,
+            "blocks": 2,
+            "packed_bytes": 16416,
+            "stored_bytes": 61,
+            "zstd_blocks": 2
+          }
+        }
+      },
+      "row_upper": {
+        "elements": 16361200,
+        "decoded_bytes": 130889600,
+        "stored_payload_bytes": 2277,
+        "record_bytes": 18288,
+        "encodings": {
+          "constant": {
+            "elements": 16187392,
+            "blocks": 247,
+            "packed_bytes": 1976,
+            "stored_bytes": 1976,
+            "zstd_blocks": 0
+          },
+          "dictionary": {
+            "elements": 173808,
+            "blocks": 3,
+            "packed_bytes": 32482,
+            "stored_bytes": 301,
+            "zstd_blocks": 3
+          }
+        }
+      },
+      "c": {
+        "elements": 64560800,
+        "decoded_bytes": 516486400,
+        "stored_payload_bytes": 8153,
+        "record_bytes": 71264,
+        "encodings": {
+          "constant": {
+            "elements": 64495264,
+            "blocks": 985,
+            "packed_bytes": 7880,
+            "stored_bytes": 7880,
+            "zstd_blocks": 0
+          },
+          "dictionary": {
+            "elements": 65536,
+            "blocks": 1,
+            "packed_bytes": 24616,
+            "stored_bytes": 273,
+            "zstd_blocks": 1
+          }
+        }
+      },
+      "x_lower": {
+        "elements": 64560800,
+        "decoded_bytes": 516486400,
+        "stored_payload_bytes": 7911,
+        "record_bytes": 71016,
+        "encodings": {
+          "constant": {
+            "elements": 64495264,
+            "blocks": 985,
+            "packed_bytes": 7880,
+            "stored_bytes": 7880,
+            "zstd_blocks": 0
+          },
+          "dictionary": {
+            "elements": 65536,
+            "blocks": 1,
+            "packed_bytes": 8208,
+            "stored_bytes": 31,
+            "zstd_blocks": 1
+          }
+        }
+      },
+      "x_upper": {
+        "elements": 64560800,
+        "decoded_bytes": 516486400,
+        "stored_payload_bytes": 7888,
+        "record_bytes": 70992,
+        "encodings": {
+          "constant": {
+            "elements": 64560800,
+            "blocks": 986,
+            "packed_bytes": 7888,
+            "stored_bytes": 7888,
+            "zstd_blocks": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "file": "prod_200_500_02.bqp",
+    "file_bytes": 776048624,
+    "arrays": {
+      "A_index": {
+        "elements": 4443349500,
+        "decoded_bytes": 17773398000,
+        "stored_payload_bytes": 552328354,
+        "record_bytes": 556904032,
+        "encodings": {
+          "delta": {
+            "elements": 4443349500,
+            "blocks": 67801,
+            "packed_bytes": 5117286470,
+            "stored_bytes": 552328354,
+            "zstd_blocks": 67801
+          }
+        }
+      },
+      "A_value": {
+        "elements": 4443349500,
+        "decoded_bytes": 35546796000,
+        "stored_payload_bytes": 213032364,
+        "record_bytes": 217608544,
+        "encodings": {
+          "dictionary": {
+            "elements": 4442554368,
+            "blocks": 67788,
+            "packed_bytes": 4809772552,
+            "stored_bytes": 210680756,
+            "zstd_blocks": 67788
+          },
+          "raw": {
+            "elements": 795132,
+            "blocks": 13,
+            "packed_bytes": 6361056,
+            "stored_bytes": 2351608,
+            "zstd_blocks": 13
+          }
+        }
+      },
+      "A_ptr": {
+        "elements": 100801001,
+        "decoded_bytes": 806408008,
+        "stored_payload_bytes": 1041767,
+        "record_bytes": 1146832,
+        "encodings": {
+          "delta": {
+            "elements": 100801001,
+            "blocks": 1539,
+            "packed_bytes": 120221475,
+            "stored_bytes": 1041767,
+            "zstd_blocks": 1539
+          }
+        }
+      },
+      "row_lower": {
+        "elements": 25476450,
+        "decoded_bytes": 203811600,
+        "stored_payload_bytes": 3161,
+        "record_bytes": 28064,
+        "encodings": {
+          "constant": {
+            "elements": 25345378,
+            "blocks": 387,
+            "packed_bytes": 3096,
+            "stored_bytes": 3096,
+            "zstd_blocks": 0
+          },
+          "dictionary": {
+            "elements": 131072,
+            "blocks": 2,
+            "packed_bytes": 16416,
+            "stored_bytes": 65,
+            "zstd_blocks": 2
+          }
+        }
+      },
+      "row_upper": {
+        "elements": 25476450,
+        "decoded_bytes": 203811600,
+        "stored_payload_bytes": 3403,
+        "record_bytes": 28304,
+        "encodings": {
+          "constant": {
+            "elements": 25296896,
+            "blocks": 386,
+            "packed_bytes": 3088,
+            "stored_bytes": 3088,
+            "zstd_blocks": 0
+          },
+          "dictionary": {
+            "elements": 179554,
+            "blocks": 3,
+            "packed_bytes": 34637,
+            "stored_bytes": 315,
+            "zstd_blocks": 3
+          }
+        }
+      },
+      "c": {
+        "elements": 100801000,
+        "decoded_bytes": 806408000,
+        "stored_payload_bytes": 12579,
+        "record_bytes": 111080,
+        "encodings": {
+          "constant": {
+            "elements": 100735464,
+            "blocks": 1538,
+            "packed_bytes": 12304,
+            "stored_bytes": 12304,
+            "zstd_blocks": 0
+          },
+          "dictionary": {
+            "elements": 65536,
+            "blocks": 1,
+            "packed_bytes": 24616,
+            "stored_bytes": 275,
+            "zstd_blocks": 1
+          }
+        }
+      },
+      "x_lower": {
+        "elements": 100801000,
+        "decoded_bytes": 806408000,
+        "stored_payload_bytes": 12334,
+        "record_bytes": 110832,
+        "encodings": {
+          "constant": {
+            "elements": 100735464,
+            "blocks": 1538,
+            "packed_bytes": 12304,
+            "stored_bytes": 12304,
+            "zstd_blocks": 0
+          },
+          "dictionary": {
+            "elements": 65536,
+            "blocks": 1,
+            "packed_bytes": 8208,
+            "stored_bytes": 30,
+            "zstd_blocks": 1
+          }
+        }
+      },
+      "x_upper": {
+        "elements": 100801000,
+        "decoded_bytes": 806408000,
+        "stored_payload_bytes": 12312,
+        "record_bytes": 110808,
+        "encodings": {
+          "constant": {
+            "elements": 100801000,
+            "blocks": 1539,
+            "packed_bytes": 12312,
+            "stored_bytes": 12312,
+            "zstd_blocks": 0
+          }
+        }
+      }
+    }
+  }
+]

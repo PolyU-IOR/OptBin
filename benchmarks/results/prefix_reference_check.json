@@ -1,0 +1,42 @@
+[
+  {
+    "instance": "mcf_10000_100_1000.mps.gz",
+    "entries_checked": 65536,
+    "match": true
+  },
+  {
+    "instance": "mcf_10000_120_1000.mps.gz",
+    "entries_checked": 65536,
+    "match": true
+  },
+  {
+    "instance": "mcf_10000_150_1000.mps.gz",
+    "entries_checked": 65536,
+    "match": true
+  },
+  {
+    "instance": "mcf_5000_100_1000.mps.gz",
+    "entries_checked": 65536,
+    "match": true
+  },
+  {
+    "instance": "mcf_5000_150_1000.mps.gz",
+    "entries_checked": 65536,
+    "match": true
+  },
+  {
+    "instance": "mcf_5000_200_1000.mps.gz",
+    "entries_checked": 65536,
+    "match": true
+  },
+  {
+    "instance": "prod_200_400_02.mps.gz",
+    "entries_checked": 65536,
+    "match": true
+  },
+  {
+    "instance": "prod_200_500_02.mps.gz",
+    "entries_checked": 65536,
+    "match": true
+  }
+]

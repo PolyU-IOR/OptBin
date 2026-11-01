@@ -1,0 +1,2125 @@
+{
+  "scope": "Small/medium real-model CPU arrays; not large-scale or GPU performance",
+  "timing_conditions": "Warm cache; one warmup; shuffled six-format rounds. Ablations sequential.",
+  "limitations": [
+    "Python raw/HDF5 frontends and native C loading have different overheads",
+    "Same-codec HDF5 uses Python orchestration around the identical C block decoder",
+    "No separate RSS, disk-cold, GPU, layout-conversion or solver-setup measurement",
+    "Conversion includes parsing/encoding/writing; it is not source-reader-only timing",
+    "Stored sizes count metadata and checksums; raw baselines include a JSON manifest"
+  ],
+  "environment": {
+    "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+    "cpu": "12th Gen Intel(R) Core(TM) i9-12900",
+    "python": "3.12.3",
+    "threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1"
+    }
+  },
+  "binaries": {
+    "mps2optb": "9dec3ecd5b20b7700247f3f3f4f80ce1982f303af68cad2776395ba7a535e4e8",
+    "cbf2optb": "e2ba68e2633dfb22910593656bbb7dc5a472fb0fe34fecd7e599ea782b0d6774",
+    "liboptbin.so": "2cf51d0ffbb2cc87c732809b1c157880d9d8a6473d9dbdb895f8acf08132e458"
+  },
+  "results": [
+    {
+      "id": "AUG2D",
+      "source": "/benchmark/external/AUG2D.mps",
+      "source_bytes": 2963920,
+      "source_sha256": "c3bad6461e2cad7e1528ec40e788b295274d8c24c6f63341f22224e81855e062",
+      "model_info": {
+        "sections": 12,
+        "blocks": 12,
+        "file_bytes": 2392,
+        "cols": 20200,
+        "rows": 10000,
+        "block_elements": 65536,
+        "profile": 1,
+        "sense": 1,
+        "objective_offset": 9900.0
+      },
+      "decoded_bytes": 1685655,
+      "ablations": [
+        {
+          "encoding": "all",
+          "zstd_level": 0,
+          "bytes": 129744,
+          "conversion": {
+            "rows": 10000,
+            "cols": 20200,
+            "nnz": 40000,
+            "qc": 0,
+            "file_bytes": 129744,
+            "seconds": 0.0395254
+          },
+          "conversion_wall_seconds": 0.04175922484137118,
+          "load_validate_seconds": [
+            0.000886811874806881,
+            0.0008666960056871176,
+            0.0008540779817849398,
+            0.0008553201332688332,
+            0.0008426900021731853
+          ],
+          "median_seconds": 0.0008553201332688332,
+          "bitwise_equal": true,
+          "sha256": "70a6434c607b5a078baa438b5d3d313ae2b9cc8dcac2fa908e213bee99a5a5fb"
+        },
+        {
+          "encoding": "all",
+          "zstd_level": 1,
+          "bytes": 2184,
+          "conversion": {
+            "rows": 10000,
+            "cols": 20200,
+            "nnz": 40000,
+            "qc": 0,
+            "file_bytes": 2184,
+            "seconds": 0.0362307
+          },
+          "conversion_wall_seconds": 0.039008168037980795,
+          "load_validate_seconds": [
+            0.0009877989068627357,
+            0.0009237700141966343,
+            0.0008782909717410803,
+            0.0009202649816870689,
+            0.0009136919397860765
+          ],
+          "median_seconds": 0.0009202649816870689,
+          "bitwise_equal": true,
+          "sha256": "e9ddcb9423d8f1145b85bdb27241775084c10f65e39e8dd090f933715d3d7830"
+        },
+        {
+          "encoding": "raw",
+          "zstd_level": 0,
+          "bytes": 1687320,
+          "conversion": {
+            "rows": 10000,
+            "cols": 20200,
+            "nnz": 40000,
+            "qc": 0,
+            "file_bytes": 1687320,
+            "seconds": 0.0336461
+          },
+          "conversion_wall_seconds": 0.03616194589994848,
+          "load_validate_seconds": [
+            0.0007338339928537607,
+            0.0006626700051128864,
+            0.0007095229811966419,
+            0.0007095360197126865,
+            0.0006571600679308176
+          ],
+          "median_seconds": 0.0007095229811966419,
+          "bitwise_equal": true,
+          "sha256": "b46b6878271b454964bf23dfe0cfac33f6d138c516480c8af584e8196f932d94"
+        },
+        {
+          "encoding": "raw",
+          "zstd_level": 1,
+          "bytes": 129312,
+          "conversion": {
+            "rows": 10000,
+            "cols": 20200,
+            "nnz": 40000,
+            "qc": 0,
+            "file_bytes": 129312,
+            "seconds": 0.0333214
+          },
+          "conversion_wall_seconds": 0.0356301749125123,
+          "load_validate_seconds": [
+            0.0014612500090152025,
+            0.0013579318765550852,
+            0.0013287069741636515,
+            0.0013502039946615696,
+            0.0013858170714229345
+          ],
+          "median_seconds": 0.0013579318765550852,
+          "bitwise_equal": true,
+          "sha256": "1e1b95d303051b8a3494163dfab566b186a7b090a57153839867ef415426005c"
+        },
+        {
+          "encoding": "values",
+          "zstd_level": 0,
+          "bytes": 571720,
+          "conversion": {
+            "rows": 10000,
+            "cols": 20200,
+            "nnz": 40000,
+            "qc": 0,
+            "file_bytes": 571720,
+            "seconds": 0.0395331
+          },
+          "conversion_wall_seconds": 0.04218036797828972,
+          "load_validate_seconds": [
+            0.0007015119772404432,
+            0.0006846820469945669,
+            0.000654296949505806,
+            0.0006048001814633608,
+            0.0006575349252671003
+          ],
+          "median_seconds": 0.0006575349252671003,
+          "bitwise_equal": true,
+          "sha256": "bc8836943f358b183474743ec3b6a0eddddd3dfc52dbd0c8a962063d0a8c4476"
+        },
+        {
+          "encoding": "values",
+          "zstd_level": 1,
+          "bytes": 129104,
+          "conversion": {
+            "rows": 10000,
+            "cols": 20200,
+            "nnz": 40000,
+            "qc": 0,
+            "file_bytes": 129104,
+            "seconds": 0.0338911
+          },
+          "conversion_wall_seconds": 0.03632807289250195,
+          "load_validate_seconds": [
+            0.001263167941942811,
+            0.0012743889819830656,
+            0.0012452160008251667,
+            0.001240490935742855,
+            0.0012004179880023003
+          ],
+          "median_seconds": 0.0012452160008251667,
+          "bitwise_equal": true,
+          "sha256": "8c0b27285752125fefdfd41b341ca47775aee97cfd2feab89644c2cb96c67e0c"
+        },
+        {
+          "encoding": "indices",
+          "zstd_level": 0,
+          "bytes": 1245344,
+          "conversion": {
+            "rows": 10000,
+            "cols": 20200,
+            "nnz": 40000,
+            "qc": 0,
+            "file_bytes": 1245344,
+            "seconds": 0.0334769
+          },
+          "conversion_wall_seconds": 0.03581300703808665,
+          "load_validate_seconds": [
+            0.0009000860154628754,
+            0.0008438460063189268,
+            0.0009064588230103254,
+            0.0008565390016883612,
+            0.0009000850841403008
+          ],
+          "median_seconds": 0.0009000850841403008,
+          "bitwise_equal": true,
+          "sha256": "502af110cbe22737a54720f315f7ada40ffb477779803829e1802b7d8f02d9c7"
+        },
+        {
+          "encoding": "indices",
+          "zstd_level": 1,
+          "bytes": 2392,
+          "conversion": {
+            "rows": 10000,
+            "cols": 20200,
+            "nnz": 40000,
+            "qc": 0,
+            "file_bytes": 2392,
+            "seconds": 0.0346738
+          },
+          "conversion_wall_seconds": 0.03750168206170201,
+          "load_validate_seconds": [
+            0.0010545740369707346,
+            0.0010754780378192663,
+            0.0010696598328649998,
+            0.0010686959140002728,
+            0.0010916679166257381
+          ],
+          "median_seconds": 0.0010696598328649998,
+          "bitwise_equal": true,
+          "sha256": "a92ab6d29c6710b1a974b49ce5d32d5d5aa9210eccd8fbebde415d55ba4bffff"
+        }
+      ],
+      "baselines": {
+        "scope": "CPU arrays only; no layout conversion, solver setup or solve",
+        "cache": "Warm: one unmeasured load per format; shuffled measurement rounds; no cache flush",
+        "measurement_order": [
+          [
+            "hdf5-identical-optbin-codecs",
+            "raw-zstd",
+            "hdf5-contiguous",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "optbin"
+          ],
+          [
+            "hdf5-contiguous",
+            "raw-zstd",
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle"
+          ],
+          [
+            "optbin",
+            "hdf5-contiguous",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "raw-zstd"
+          ],
+          [
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle",
+            "raw-zstd",
+            "hdf5-contiguous"
+          ],
+          [
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "hdf5-contiguous",
+            "raw-zstd"
+          ]
+        ],
+        "limitations": [
+          "Python/HDF5 vs C reader overhead differs",
+          "Whole-file buffers; no separate RSS measurement",
+          "Baseline manifest metadata is cached; OptBin rereads its directory",
+          "Encoded HDF5 uses the same C codecs, with Python frontend overhead",
+          "gzip level 1 and Zstd level 1 are different codecs"
+        ],
+        "input": "/benchmark/workstation/optbin/benchmarks/runs/real-storage/AUG2D/all-zstd1.optb",
+        "decoded_bytes": 1685655,
+        "environment": {
+          "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+          "python": "3.12.3",
+          "numpy": "2.5.4",
+          "h5py": "3.16.0",
+          "hdf5": "2.0.0",
+          "zstd": "1.5.5"
+        },
+        "results": [
+          {
+            "format": "optbin",
+            "bytes": 2184,
+            "read_decode_validate_seconds": [
+              0.0012016689870506525,
+              0.0012124599888920784,
+              0.0011044121347367764,
+              0.0010847121011465788,
+              0.0011441339738667011
+            ],
+            "median_seconds": 0.0011441339738667011,
+            "bitwise_equal": true
+          },
+          {
+            "format": "raw",
+            "bytes": 1686704,
+            "read_decode_validate_seconds": [
+              0.0006884750910103321,
+              0.0006139159668236971,
+              0.000901967054232955,
+              0.0006453660316765308,
+              0.0009323430713266134
+            ],
+            "median_seconds": 0.0006884750910103321,
+            "bitwise_equal": true
+          },
+          {
+            "format": "raw-zstd",
+            "bytes": 147406,
+            "read_decode_validate_seconds": [
+              0.0012254221364855766,
+              0.0017972770147025585,
+              0.0016018059104681015,
+              0.0017038211226463318,
+              0.0017667529173195362
+            ],
+            "median_seconds": 0.0017038211226463318,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-contiguous",
+            "bytes": 1695895,
+            "read_decode_validate_seconds": [
+              0.0015885960310697556,
+              0.001689624972641468,
+              0.0017980239354074001,
+              0.0016483948566019535,
+              0.0019091279245913029
+            ],
+            "median_seconds": 0.001689624972641468,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-gzip-shuffle",
+            "bytes": 48318,
+            "read_decode_validate_seconds": [
+              0.0026405081152915955,
+              0.0029373569414019585,
+              0.0027072830125689507,
+              0.002676488133147359,
+              0.0027343700639903545
+            ],
+            "median_seconds": 0.0027072830125689507,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-identical-optbin-codecs",
+            "bytes": 11416,
+            "read_decode_validate_seconds": [
+              0.002088984940201044,
+              0.0024993501137942076,
+              0.0023821049835532904,
+              0.0021211770363152027,
+              0.002248393138870597
+            ],
+            "median_seconds": 0.002248393138870597,
+            "bitwise_equal": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "QPLIB_2676",
+      "source": "/benchmark/workstation/optbin/data/real/QPLIB_2676.mps",
+      "source_bytes": 590149,
+      "source_sha256": "c4090d8d268cf0759bfd3471ce033b90e89f54cd4f6b4780c977a058821c86ae",
+      "model_info": {
+        "sections": 18,
+        "blocks": 15,
+        "file_bytes": 7864,
+        "cols": 1445,
+        "rows": 1456,
+        "block_elements": 65536,
+        "profile": 1,
+        "sense": 1,
+        "objective_offset": 0.0
+      },
+      "decoded_bytes": 257991,
+      "ablations": [
+        {
+          "encoding": "all",
+          "zstd_level": 0,
+          "bytes": 32224,
+          "conversion": {
+            "rows": 1456,
+            "cols": 1445,
+            "nnz": 13534,
+            "qc": 361,
+            "file_bytes": 32224,
+            "seconds": 0.00726734
+          },
+          "conversion_wall_seconds": 0.00924000097438693,
+          "load_validate_seconds": [
+            0.00026158615946769714,
+            0.00023026601411402225,
+            0.00022764108143746853,
+            0.00022530602291226387,
+            0.00022934400476515293
+          ],
+          "median_seconds": 0.00022934400476515293,
+          "bitwise_equal": true,
+          "sha256": "4833687b96d00a75a820962738135e02a4c3f2b6fddf226186724d6b38e679a5"
+        },
+        {
+          "encoding": "all",
+          "zstd_level": 1,
+          "bytes": 7768,
+          "conversion": {
+            "rows": 1456,
+            "cols": 1445,
+            "nnz": 13534,
+            "qc": 361,
+            "file_bytes": 7768,
+            "seconds": 0.00898088
+          },
+          "conversion_wall_seconds": 0.011084407800808549,
+          "load_validate_seconds": [
+            0.00028066313825547695,
+            0.00025467807427048683,
+            0.00025003706105053425,
+            0.0002595190890133381,
+            0.00025778915733098984
+          ],
+          "median_seconds": 0.00025778915733098984,
+          "bitwise_equal": true,
+          "sha256": "3b4951ca002e6b6e29691b38d92c9f6ec1a167de1bde2bdb9b33f3a873d30dea"
+        },
+        {
+          "encoding": "raw",
+          "zstd_level": 0,
+          "bytes": 260232,
+          "conversion": {
+            "rows": 1456,
+            "cols": 1445,
+            "nnz": 13534,
+            "qc": 361,
+            "file_bytes": 260232,
+            "seconds": 0.00583327
+          },
+          "conversion_wall_seconds": 0.007365365047007799,
+          "load_validate_seconds": [
+            0.00021415692754089832,
+            0.00020334613509476185,
+            0.0002008529845625162,
+            0.0001968899741768837,
+            0.00019536376930773258
+          ],
+          "median_seconds": 0.0002008529845625162,
+          "bitwise_equal": true,
+          "sha256": "ca51e0328f6c10d9675fa579ff30db9726bd00d1eb280361847c7f570da60827"
+        },
+        {
+          "encoding": "raw",
+          "zstd_level": 1,
+          "bytes": 19416,
+          "conversion": {
+            "rows": 1456,
+            "cols": 1445,
+            "nnz": 13534,
+            "qc": 361,
+            "file_bytes": 19416,
+            "seconds": 0.0061665
+          },
+          "conversion_wall_seconds": 0.008052427088841796,
+          "load_validate_seconds": [
+            0.0003276269417256117,
+            0.0003147921524941921,
+            0.0003125839866697788,
+            0.00030368496663868427,
+            0.00030417810194194317
+          ],
+          "median_seconds": 0.0003125839866697788,
+          "bitwise_equal": true,
+          "sha256": "3f04a77a4ae873cf803d8445458867e7fe3f09f9c00287ba4815522ec1e26ad9"
+        },
+        {
+          "encoding": "values",
+          "zstd_level": 0,
+          "bytes": 96600,
+          "conversion": {
+            "rows": 1456,
+            "cols": 1445,
+            "nnz": 13534,
+            "qc": 361,
+            "file_bytes": 96600,
+            "seconds": 0.00694625
+          },
+          "conversion_wall_seconds": 0.009040965000167489,
+          "load_validate_seconds": [
+            0.00022875587455928326,
+            0.00021721911616623402,
+            0.0002176240086555481,
+            0.00021050218492746353,
+            0.00021285098046064377
+          ],
+          "median_seconds": 0.00021721911616623402,
+          "bitwise_equal": true,
+          "sha256": "ac572b1e660d1fd446b7d105a4599c47c2a0ced5182024a5244edf4a266bc8da"
+        },
+        {
+          "encoding": "values",
+          "zstd_level": 1,
+          "bytes": 19320,
+          "conversion": {
+            "rows": 1456,
+            "cols": 1445,
+            "nnz": 13534,
+            "qc": 361,
+            "file_bytes": 19320,
+            "seconds": 0.00644483
+          },
+          "conversion_wall_seconds": 0.008068779949098825,
+          "load_validate_seconds": [
+            0.0008970980998128653,
+            0.00035578315146267414,
+            0.0003028309438377619,
+            0.0003045308403670788,
+            0.00028828601352870464
+          ],
+          "median_seconds": 0.0003045308403670788,
+          "bitwise_equal": true,
+          "sha256": "0f6d6b9c212a29d57ef1fd5827cd06dbe466da0c80edf91f1df06b3b7ba6fba7"
+        },
+        {
+          "encoding": "indices",
+          "zstd_level": 0,
+          "bytes": 195856,
+          "conversion": {
+            "rows": 1456,
+            "cols": 1445,
+            "nnz": 13534,
+            "qc": 361,
+            "file_bytes": 195856,
+            "seconds": 0.0091274
+          },
+          "conversion_wall_seconds": 0.011298269033432007,
+          "load_validate_seconds": [
+            0.0004804478958249092,
+            0.0004993490874767303,
+            0.000469607999548316,
+            0.0004586877766996622,
+            0.00044922996312379837
+          ],
+          "median_seconds": 0.000469607999548316,
+          "bitwise_equal": true,
+          "sha256": "1bc58e34e9355a891dd19449a6ad536800465d336a1f2c1014276b3fdca0e1fd"
+        },
+        {
+          "encoding": "indices",
+          "zstd_level": 1,
+          "bytes": 7864,
+          "conversion": {
+            "rows": 1456,
+            "cols": 1445,
+            "nnz": 13534,
+            "qc": 361,
+            "file_bytes": 7864,
+            "seconds": 0.00637529
+          },
+          "conversion_wall_seconds": 0.008439842145889997,
+          "load_validate_seconds": [
+            0.00030838395468890667,
+            0.00028624292463064194,
+            0.00028153788298368454,
+            0.00027537113055586815,
+            0.00026980508118867874
+          ],
+          "median_seconds": 0.00028153788298368454,
+          "bitwise_equal": true,
+          "sha256": "6f01a37914e425a394cc7b4bcdf259aadfb052670b7c7959e8304b96b5b221ec"
+        }
+      ],
+      "baselines": {
+        "scope": "CPU arrays only; no layout conversion, solver setup or solve",
+        "cache": "Warm: one unmeasured load per format; shuffled measurement rounds; no cache flush",
+        "measurement_order": [
+          [
+            "hdf5-identical-optbin-codecs",
+            "raw-zstd",
+            "hdf5-contiguous",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "optbin"
+          ],
+          [
+            "hdf5-contiguous",
+            "raw-zstd",
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle"
+          ],
+          [
+            "optbin",
+            "hdf5-contiguous",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "raw-zstd"
+          ],
+          [
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle",
+            "raw-zstd",
+            "hdf5-contiguous"
+          ],
+          [
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "hdf5-contiguous",
+            "raw-zstd"
+          ]
+        ],
+        "limitations": [
+          "Python/HDF5 vs C reader overhead differs",
+          "Whole-file buffers; no separate RSS measurement",
+          "Baseline manifest metadata is cached; OptBin rereads its directory",
+          "Encoded HDF5 uses the same C codecs, with Python frontend overhead",
+          "gzip level 1 and Zstd level 1 are different codecs"
+        ],
+        "input": "/benchmark/workstation/optbin/benchmarks/runs/real-storage/QPLIB_2676/all-zstd1.optb",
+        "decoded_bytes": 257991,
+        "environment": {
+          "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+          "python": "3.12.3",
+          "numpy": "2.5.4",
+          "h5py": "3.16.0",
+          "hdf5": "2.0.0",
+          "zstd": "1.5.5"
+        },
+        "results": [
+          {
+            "format": "optbin",
+            "bytes": 7768,
+            "read_decode_validate_seconds": [
+              0.00046265311539173126,
+              0.00041985511779785156,
+              0.0004270649515092373,
+              0.0004141279496252537,
+              0.00047599291428923607
+            ],
+            "median_seconds": 0.0004270649515092373,
+            "bitwise_equal": true
+          },
+          {
+            "format": "raw",
+            "bytes": 259413,
+            "read_decode_validate_seconds": [
+              0.0002042609266936779,
+              0.00017579598352313042,
+              0.0002219029702246189,
+              0.000181577168405056,
+              0.00019777705892920494
+            ],
+            "median_seconds": 0.00019777705892920494,
+            "bitwise_equal": true
+          },
+          {
+            "format": "raw-zstd",
+            "bytes": 19405,
+            "read_decode_validate_seconds": [
+              0.0002735028974711895,
+              0.00027347798459231853,
+              0.0003100389149039984,
+              0.0002747708931565285,
+              0.0002825499977916479
+            ],
+            "median_seconds": 0.0002747708931565285,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-contiguous",
+            "bytes": 270279,
+            "read_decode_validate_seconds": [
+              0.0014195251278579235,
+              0.001535296905785799,
+              0.001707941060885787,
+              0.0014191640075296164,
+              0.0014260541647672653
+            ],
+            "median_seconds": 0.0014260541647672653,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-gzip-shuffle",
+            "bytes": 62805,
+            "read_decode_validate_seconds": [
+              0.001896415138617158,
+              0.0021276548504829407,
+              0.001971276942640543,
+              0.0020847839768975973,
+              0.0020517718512564898
+            ],
+            "median_seconds": 0.0020517718512564898,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-identical-optbin-codecs",
+            "bytes": 18976,
+            "read_decode_validate_seconds": [
+              0.001987803028896451,
+              0.002098698867484927,
+              0.0021980609744787216,
+              0.001974561018869281,
+              0.00222402298822999
+            ],
+            "median_seconds": 0.002098698867484927,
+            "bitwise_equal": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "nql30",
+      "source": "/benchmark/workstation/optbin/data/real/nql30.cbf.gz",
+      "source_bytes": 72814,
+      "source_sha256": "f926413ff08c1c296254f60c54cb7a4154f501ddb9d2f6948918d72d14f93739",
+      "model_info": {
+        "sections": 34,
+        "blocks": 12,
+        "file_bytes": 29408,
+        "cols": 4501,
+        "rows": 6380,
+        "block_elements": 65536,
+        "profile": 2,
+        "sense": 1,
+        "objective_offset": 0.0
+      },
+      "decoded_bytes": 387981,
+      "ablations": [
+        {
+          "encoding": "all",
+          "zstd_level": 0,
+          "bytes": 49112,
+          "conversion": {
+            "rows": 6380,
+            "cols": 4501,
+            "nnz": 20569,
+            "file_bytes": 49112,
+            "seconds": 0.00920809
+          },
+          "conversion_wall_seconds": 0.011401023948565125,
+          "load_validate_seconds": [
+            0.00032994593493640423,
+            0.00030922191217541695,
+            0.00030260300263762474,
+            0.0003046479541808367,
+            0.0003229391295462847
+          ],
+          "median_seconds": 0.00030922191217541695,
+          "bitwise_equal": true,
+          "sha256": "168e11280997935b4922597ab7412a67ec1067b704541ce85594e7deb09fdc95"
+        },
+        {
+          "encoding": "all",
+          "zstd_level": 1,
+          "bytes": 22056,
+          "conversion": {
+            "rows": 6380,
+            "cols": 4501,
+            "nnz": 20569,
+            "file_bytes": 22056,
+            "seconds": 0.0103517
+          },
+          "conversion_wall_seconds": 0.012189259054139256,
+          "load_validate_seconds": [
+            0.00040022702887654305,
+            0.000394787872210145,
+            0.00042405095882713795,
+            0.00038797385059297085,
+            0.0003891540691256523
+          ],
+          "median_seconds": 0.000394787872210145,
+          "bitwise_equal": true,
+          "sha256": "44d5a7490cea7d7c52161cb4f80fb8f814cfe636cb5f3172e7c4b7719376eff4"
+        },
+        {
+          "encoding": "raw",
+          "zstd_level": 0,
+          "bytes": 391064,
+          "conversion": {
+            "rows": 6380,
+            "cols": 4501,
+            "nnz": 20569,
+            "file_bytes": 391064,
+            "seconds": 0.00748359
+          },
+          "conversion_wall_seconds": 0.009372021071612835,
+          "load_validate_seconds": [
+            0.0003154519945383072,
+            0.00029128207825124264,
+            0.0004014167934656143,
+            0.0003047229256480932,
+            0.0002903409767895937
+          ],
+          "median_seconds": 0.0003047229256480932,
+          "bitwise_equal": true,
+          "sha256": "0cd31c30e69f468ead3642aea66c2895db97af4ddf94aa101f307a5d087a6937"
+        },
+        {
+          "encoding": "raw",
+          "zstd_level": 1,
+          "bytes": 44488,
+          "conversion": {
+            "rows": 6380,
+            "cols": 4501,
+            "nnz": 20569,
+            "file_bytes": 44488,
+            "seconds": 0.00753175
+          },
+          "conversion_wall_seconds": 0.009368106024339795,
+          "load_validate_seconds": [
+            0.0005525499582290649,
+            0.000527706928551197,
+            0.0005250361282378435,
+            0.0005269420798867941,
+            0.0005174789112061262
+          ],
+          "median_seconds": 0.0005269420798867941,
+          "bitwise_equal": true,
+          "sha256": "0f4d4e16a7dd8a1551546e2f6b8676eb73fedcf2afcf18e047a2aafb88c56164"
+        },
+        {
+          "encoding": "values",
+          "zstd_level": 0,
+          "bytes": 148632,
+          "conversion": {
+            "rows": 6380,
+            "cols": 4501,
+            "nnz": 20569,
+            "file_bytes": 148632,
+            "seconds": 0.01156
+          },
+          "conversion_wall_seconds": 0.013681795913726091,
+          "load_validate_seconds": [
+            0.0005939509719610214,
+            0.0005715950392186642,
+            0.0005816379562020302,
+            0.0005681330803781748,
+            0.0005214049015194178
+          ],
+          "median_seconds": 0.0005715950392186642,
+          "bitwise_equal": true,
+          "sha256": "85f46296c254e4ac1b785e7affff627d81032765225578af2e9966f907506273"
+        },
+        {
+          "encoding": "values",
+          "zstd_level": 1,
+          "bytes": 37136,
+          "conversion": {
+            "rows": 6380,
+            "cols": 4501,
+            "nnz": 20569,
+            "file_bytes": 37136,
+            "seconds": 0.00879572
+          },
+          "conversion_wall_seconds": 0.010554529959335923,
+          "load_validate_seconds": [
+            0.00045158108696341515,
+            0.00044090207666158676,
+            0.0004365909844636917,
+            0.00043551414273679256,
+            0.00044611794874072075
+          ],
+          "median_seconds": 0.00044090207666158676,
+          "bitwise_equal": true,
+          "sha256": "dc50e74a18c2fadd8cc741e96a1e0cc6b5938a7732b27fbc0ca4e263bda6dfb2"
+        },
+        {
+          "encoding": "indices",
+          "zstd_level": 0,
+          "bytes": 291544,
+          "conversion": {
+            "rows": 6380,
+            "cols": 4501,
+            "nnz": 20569,
+            "file_bytes": 291544,
+            "seconds": 0.0166041
+          },
+          "conversion_wall_seconds": 0.0185658261179924,
+          "load_validate_seconds": [
+            0.00036378693766891956,
+            0.0003416959661990404,
+            0.00034476607106626034,
+            0.0003367871977388859,
+            0.00034294486977159977
+          ],
+          "median_seconds": 0.00034294486977159977,
+          "bitwise_equal": true,
+          "sha256": "12937290e36253bbc114f4384c6f73ca81ea9ae8bb3327e9de96ed40bc6eb936"
+        },
+        {
+          "encoding": "indices",
+          "zstd_level": 1,
+          "bytes": 29408,
+          "conversion": {
+            "rows": 6380,
+            "cols": 4501,
+            "nnz": 20569,
+            "file_bytes": 29408,
+            "seconds": 0.0106302
+          },
+          "conversion_wall_seconds": 0.012552046915516257,
+          "load_validate_seconds": [
+            0.0005064969882369041,
+            0.0004851690027862787,
+            0.0004786839708685875,
+            0.0004732739180326462,
+            0.00048202089965343475
+          ],
+          "median_seconds": 0.00048202089965343475,
+          "bitwise_equal": true,
+          "sha256": "5d221b24d0db873d2d0949fd284f9c77342e442fee664b0bcf8b9711cf090664"
+        }
+      ],
+      "baselines": {
+        "scope": "CPU arrays only; no layout conversion, solver setup or solve",
+        "cache": "Warm: one unmeasured load per format; shuffled measurement rounds; no cache flush",
+        "measurement_order": [
+          [
+            "hdf5-identical-optbin-codecs",
+            "raw-zstd",
+            "hdf5-contiguous",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "optbin"
+          ],
+          [
+            "hdf5-contiguous",
+            "raw-zstd",
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle"
+          ],
+          [
+            "optbin",
+            "hdf5-contiguous",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "raw-zstd"
+          ],
+          [
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle",
+            "raw-zstd",
+            "hdf5-contiguous"
+          ],
+          [
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "hdf5-contiguous",
+            "raw-zstd"
+          ]
+        ],
+        "limitations": [
+          "Python/HDF5 vs C reader overhead differs",
+          "Whole-file buffers; no separate RSS measurement",
+          "Baseline manifest metadata is cached; OptBin rereads its directory",
+          "Encoded HDF5 uses the same C codecs, with Python frontend overhead",
+          "gzip level 1 and Zstd level 1 are different codecs"
+        ],
+        "input": "/benchmark/workstation/optbin/benchmarks/runs/real-storage/nql30/all-zstd1.optb",
+        "decoded_bytes": 387981,
+        "environment": {
+          "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+          "python": "3.12.3",
+          "numpy": "2.5.4",
+          "h5py": "3.16.0",
+          "hdf5": "2.0.0",
+          "zstd": "1.5.5"
+        },
+        "results": [
+          {
+            "format": "optbin",
+            "bytes": 22056,
+            "read_decode_validate_seconds": [
+              0.0005208412185311317,
+              0.0005147061310708523,
+              0.0004794769920408726,
+              0.0006855749525129795,
+              0.0005467510782182217
+            ],
+            "median_seconds": 0.0005208412185311317,
+            "bitwise_equal": true
+          },
+          {
+            "format": "raw",
+            "bytes": 390314,
+            "read_decode_validate_seconds": [
+              0.0002976518590003252,
+              0.0002740069758147001,
+              0.00029517197981476784,
+              0.00028496701270341873,
+              0.00029885093681514263
+            ],
+            "median_seconds": 0.00029517197981476784,
+            "bitwise_equal": true
+          },
+          {
+            "format": "raw-zstd",
+            "bytes": 48358,
+            "read_decode_validate_seconds": [
+              0.0005243879277259111,
+              0.0005277399905025959,
+              0.0005121489521116018,
+              0.000562089029699564,
+              0.00047873309813439846
+            ],
+            "median_seconds": 0.0005243879277259111,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-contiguous",
+            "bytes": 407308,
+            "read_decode_validate_seconds": [
+              0.002463547047227621,
+              0.0026432559825479984,
+              0.002395804040133953,
+              0.0024353950284421444,
+              0.0023827189579606056
+            ],
+            "median_seconds": 0.0024353950284421444,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-gzip-shuffle",
+            "bytes": 58728,
+            "read_decode_validate_seconds": [
+              0.002852702047675848,
+              0.0028879200108349323,
+              0.002885157009586692,
+              0.003028678009286523,
+              0.002948222914710641
+            ],
+            "median_seconds": 0.0028879200108349323,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-identical-optbin-codecs",
+            "bytes": 38512,
+            "read_decode_validate_seconds": [
+              0.0035294911358505487,
+              0.0032333550043404102,
+              0.004173147026449442,
+              0.0036299910861998796,
+              0.0034118760377168655
+            ],
+            "median_seconds": 0.0035294911358505487,
+            "bitwise_equal": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "nb_L2",
+      "source": "/benchmark/workstation/optbin/data/real/nb_L2.cbf.gz",
+      "source_bytes": 2246739,
+      "source_sha256": "73b3d4b7511e90d7d3a0fa85db10b2e77028685201523212e0d913babccaaa1f",
+      "model_info": {
+        "sections": 34,
+        "blocks": 24,
+        "file_bytes": 669944,
+        "cols": 4195,
+        "rows": 123,
+        "block_elements": 65536,
+        "profile": 2,
+        "sense": 1,
+        "objective_offset": 0.0
+      },
+      "decoded_bytes": 4912381,
+      "ablations": [
+        {
+          "encoding": "all",
+          "zstd_level": 0,
+          "bytes": 2309224,
+          "conversion": {
+            "rows": 123,
+            "cols": 4195,
+            "nnz": 402285,
+            "file_bytes": 2309224,
+            "seconds": 0.106787
+          },
+          "conversion_wall_seconds": 0.10943540697917342,
+          "load_validate_seconds": [
+            0.002727486891672015,
+            0.0026827410329133272,
+            0.002639245940372348,
+            0.0026286731008440256,
+            0.0029239319264888763
+          ],
+          "median_seconds": 0.0026827410329133272,
+          "bitwise_equal": true,
+          "sha256": "54af08ba595fbd4bfacf76d1a6d5d4f380a4d772dc52b2f49ca9bc6c7977d4b9"
+        },
+        {
+          "encoding": "all",
+          "zstd_level": 1,
+          "bytes": 628728,
+          "conversion": {
+            "rows": 123,
+            "cols": 4195,
+            "nnz": 402285,
+            "file_bytes": 628728,
+            "seconds": 0.118663
+          },
+          "conversion_wall_seconds": 0.12122173584066331,
+          "load_validate_seconds": [
+            0.004271266050636768,
+            0.004117957083508372,
+            0.004062286112457514,
+            0.00409771385602653,
+            0.004102970007807016
+          ],
+          "median_seconds": 0.004102970007807016,
+          "bitwise_equal": true,
+          "sha256": "3b52a57b1adda6811da07a8bbb0f54e827541fa1cf0f290e46eac9400926bcbe"
+        },
+        {
+          "encoding": "raw",
+          "zstd_level": 0,
+          "bytes": 4916232,
+          "conversion": {
+            "rows": 123,
+            "cols": 4195,
+            "nnz": 402285,
+            "file_bytes": 4916232,
+            "seconds": 0.100445
+          },
+          "conversion_wall_seconds": 0.1027042989153415,
+          "load_validate_seconds": [
+            0.0023040000814944506,
+            0.0023314200807362795,
+            0.002185343997552991,
+            0.0021255689207464457,
+            0.0020444360561668873
+          ],
+          "median_seconds": 0.002185343997552991,
+          "bitwise_equal": true,
+          "sha256": "7c01229c551e16f1d535886d0c6b7a0b885a32e9546085910de5e35f3f20c13b"
+        },
+        {
+          "encoding": "raw",
+          "zstd_level": 1,
+          "bytes": 669896,
+          "conversion": {
+            "rows": 123,
+            "cols": 4195,
+            "nnz": 402285,
+            "file_bytes": 669896,
+            "seconds": 0.105431
+          },
+          "conversion_wall_seconds": 0.10750448401086032,
+          "load_validate_seconds": [
+            0.003925324184820056,
+            0.004084654850885272,
+            0.004351867130026221,
+            0.004006912931799889,
+            0.003932354040443897
+          ],
+          "median_seconds": 0.004006912931799889,
+          "bitwise_equal": true,
+          "sha256": "65494f531bce8898b44f4dd4d36768cff5a0d4f5bd0830632ebabbca7427e4e0"
+        },
+        {
+          "encoding": "values",
+          "zstd_level": 0,
+          "bytes": 3552920,
+          "conversion": {
+            "rows": 123,
+            "cols": 4195,
+            "nnz": 402285,
+            "file_bytes": 3552920,
+            "seconds": 0.111061
+          },
+          "conversion_wall_seconds": 0.11370770004577935,
+          "load_validate_seconds": [
+            0.0026552630588412285,
+            0.0024038651026785374,
+            0.002240499947220087,
+            0.0021407350432127714,
+            0.0021152538247406483
+          ],
+          "median_seconds": 0.002240499947220087,
+          "bitwise_equal": true,
+          "sha256": "dfc48186a52ad0bcfc737e504e6436a683f10314e9c2a432e2a925b3981d37dd"
+        },
+        {
+          "encoding": "values",
+          "zstd_level": 1,
+          "bytes": 628680,
+          "conversion": {
+            "rows": 123,
+            "cols": 4195,
+            "nnz": 402285,
+            "file_bytes": 628680,
+            "seconds": 0.108688
+          },
+          "conversion_wall_seconds": 0.11109533300623298,
+          "load_validate_seconds": [
+            0.0038857078179717064,
+            0.0035449331626296043,
+            0.003433624980971217,
+            0.0033257920295000076,
+            0.0033597589936107397
+          ],
+          "median_seconds": 0.003433624980971217,
+          "bitwise_equal": true,
+          "sha256": "0967031b3d1236f3fdfc729cb677e23052685e84ed0026f8cb2b4b30adc186b4"
+        },
+        {
+          "encoding": "indices",
+          "zstd_level": 0,
+          "bytes": 3672536,
+          "conversion": {
+            "rows": 123,
+            "cols": 4195,
+            "nnz": 402285,
+            "file_bytes": 3672536,
+            "seconds": 0.101174
+          },
+          "conversion_wall_seconds": 0.10378531808964908,
+          "load_validate_seconds": [
+            0.0026421360671520233,
+            0.002793919062241912,
+            0.0029895969200879335,
+            0.002736999886110425,
+            0.0025740950368344784
+          ],
+          "median_seconds": 0.002736999886110425,
+          "bitwise_equal": true,
+          "sha256": "d057819366c7609bf6c88b903e3fd6c30638732a7d4d7b048afe93c4e3399e1d"
+        },
+        {
+          "encoding": "indices",
+          "zstd_level": 1,
+          "bytes": 669944,
+          "conversion": {
+            "rows": 123,
+            "cols": 4195,
+            "nnz": 402285,
+            "file_bytes": 669944,
+            "seconds": 0.105281
+          },
+          "conversion_wall_seconds": 0.10758641106076539,
+          "load_validate_seconds": [
+            0.004637141013517976,
+            0.004914531949907541,
+            0.004799115937203169,
+            0.004566754912957549,
+            0.004582345951348543
+          ],
+          "median_seconds": 0.004637141013517976,
+          "bitwise_equal": true,
+          "sha256": "bfaa0b0a6dbb9d80023f94b99d36096789c426ee33c1bc81d9664a6a09422858"
+        }
+      ],
+      "baselines": {
+        "scope": "CPU arrays only; no layout conversion, solver setup or solve",
+        "cache": "Warm: one unmeasured load per format; shuffled measurement rounds; no cache flush",
+        "measurement_order": [
+          [
+            "hdf5-identical-optbin-codecs",
+            "raw-zstd",
+            "hdf5-contiguous",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "optbin"
+          ],
+          [
+            "hdf5-contiguous",
+            "raw-zstd",
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle"
+          ],
+          [
+            "optbin",
+            "hdf5-contiguous",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "raw-zstd"
+          ],
+          [
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle",
+            "raw-zstd",
+            "hdf5-contiguous"
+          ],
+          [
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "hdf5-contiguous",
+            "raw-zstd"
+          ]
+        ],
+        "limitations": [
+          "Python/HDF5 vs C reader overhead differs",
+          "Whole-file buffers; no separate RSS measurement",
+          "Baseline manifest metadata is cached; OptBin rereads its directory",
+          "Encoded HDF5 uses the same C codecs, with Python frontend overhead",
+          "gzip level 1 and Zstd level 1 are different codecs"
+        ],
+        "input": "/benchmark/workstation/optbin/benchmarks/runs/real-storage/nb_L2/all-zstd1.optb",
+        "decoded_bytes": 4912381,
+        "environment": {
+          "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+          "python": "3.12.3",
+          "numpy": "2.5.4",
+          "h5py": "3.16.0",
+          "hdf5": "2.0.0",
+          "zstd": "1.5.5"
+        },
+        "results": [
+          {
+            "format": "optbin",
+            "bytes": 628728,
+            "read_decode_validate_seconds": [
+              0.004758988972753286,
+              0.004724451806396246,
+              0.004534563980996609,
+              0.0051540290005505085,
+              0.00505127408541739
+            ],
+            "median_seconds": 0.004758988972753286,
+            "bitwise_equal": true
+          },
+          {
+            "format": "raw",
+            "bytes": 4914719,
+            "read_decode_validate_seconds": [
+              0.0020531979389488697,
+              0.0023413521703332663,
+              0.0023326869122684,
+              0.002037889091297984,
+              0.00235139112919569
+            ],
+            "median_seconds": 0.0023326869122684,
+            "bitwise_equal": true
+          },
+          {
+            "format": "raw-zstd",
+            "bytes": 616951,
+            "read_decode_validate_seconds": [
+              0.0046835849061608315,
+              0.005497501930221915,
+              0.004760996904224157,
+              0.0053506349213421345,
+              0.004573621787130833
+            ],
+            "median_seconds": 0.004760996904224157,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-contiguous",
+            "bytes": 4931708,
+            "read_decode_validate_seconds": [
+              0.004552413010969758,
+              0.004717662930488586,
+              0.004570676013827324,
+              0.004866102011874318,
+              0.004864673828706145
+            ],
+            "median_seconds": 0.004717662930488586,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-gzip-shuffle",
+            "bytes": 1453015,
+            "read_decode_validate_seconds": [
+              0.016652588034048676,
+              0.016684429021552205,
+              0.015748750884085894,
+              0.01727035897783935,
+              0.016205625142902136
+            ],
+            "median_seconds": 0.016652588034048676,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-identical-optbin-codecs",
+            "bytes": 645504,
+            "read_decode_validate_seconds": [
+              0.006802359130233526,
+              0.008076793979853392,
+              0.008045501075685024,
+              0.007370218867436051,
+              0.008401963161304593
+            ],
+            "median_seconds": 0.008045501075685024,
+            "bitwise_equal": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "LogExpCR-n20-m400",
+      "source": "/benchmark/workstation/optbin/data/real/LogExpCR-n20-m400.cbf.gz",
+      "source_bytes": 112604,
+      "source_sha256": "24246c3298bec9f1e91b4c9c67ffd4fd1960623fe233484f715c7f3948f151ca",
+      "model_info": {
+        "sections": 34,
+        "blocks": 12,
+        "file_bytes": 67744,
+        "cols": 2022,
+        "rows": 1603,
+        "block_elements": 65536,
+        "profile": 2,
+        "sense": 1,
+        "objective_offset": 0.0
+      },
+      "decoded_bytes": 192749,
+      "ablations": [
+        {
+          "encoding": "all",
+          "zstd_level": 0,
+          "bytes": 113568,
+          "conversion": {
+            "rows": 1603,
+            "cols": 2022,
+            "nnz": 11618,
+            "file_bytes": 113568,
+            "seconds": 0.00876782
+          },
+          "conversion_wall_seconds": 0.011162786046043038,
+          "load_validate_seconds": [
+            0.0004096338525414467,
+            0.0003907131031155586,
+            0.0003975890576839447,
+            0.0003842310979962349,
+            0.0003863680176436901
+          ],
+          "median_seconds": 0.0003907131031155586,
+          "bitwise_equal": true,
+          "sha256": "a2e72767aaa03329deec65e8d2c0eccc2b552533b01b7588a1a5f97933a9bd1d"
+        },
+        {
+          "encoding": "all",
+          "zstd_level": 1,
+          "bytes": 67744,
+          "conversion": {
+            "rows": 1603,
+            "cols": 2022,
+            "nnz": 11618,
+            "file_bytes": 67744,
+            "seconds": 0.00650869
+          },
+          "conversion_wall_seconds": 0.008378576021641493,
+          "load_validate_seconds": [
+            0.00028470205143094063,
+            0.0002744840458035469,
+            0.0002732439897954464,
+            0.000261557986959815,
+            0.0002637270372360945
+          ],
+          "median_seconds": 0.0002732439897954464,
+          "bitwise_equal": true,
+          "sha256": "a31b5822e08379847d21b5049f9e12e962a4fee6b486cc1d6c5bb7a24ef24e43"
+        },
+        {
+          "encoding": "raw",
+          "zstd_level": 0,
+          "bytes": 195824,
+          "conversion": {
+            "rows": 1603,
+            "cols": 2022,
+            "nnz": 11618,
+            "file_bytes": 195824,
+            "seconds": 0.00828296
+          },
+          "conversion_wall_seconds": 0.01040062797255814,
+          "load_validate_seconds": [
+            0.0003582090139389038,
+            0.0005391589365899563,
+            0.0003582318313419819,
+            0.0003510070964694023,
+            0.0003666828852146864
+          ],
+          "median_seconds": 0.0003582318313419819,
+          "bitwise_equal": true,
+          "sha256": "56d30f57520a92a02f45d4d7219cb0687d24aabef84e9e2fefb3dbb7c9bb0d04"
+        },
+        {
+          "encoding": "raw",
+          "zstd_level": 1,
+          "bytes": 73528,
+          "conversion": {
+            "rows": 1603,
+            "cols": 2022,
+            "nnz": 11618,
+            "file_bytes": 73528,
+            "seconds": 0.00625808
+          },
+          "conversion_wall_seconds": 0.008183153113350272,
+          "load_validate_seconds": [
+            0.00030017108656466007,
+            0.00028801686130464077,
+            0.00028405385091900826,
+            0.0002867691218852997,
+            0.0002773560117930174
+          ],
+          "median_seconds": 0.0002867691218852997,
+          "bitwise_equal": true,
+          "sha256": "f1268e118b6e774a46f491058d077cdbd578a1e0645e0f2afc758d20953d7007"
+        },
+        {
+          "encoding": "values",
+          "zstd_level": 0,
+          "bytes": 167800,
+          "conversion": {
+            "rows": 1603,
+            "cols": 2022,
+            "nnz": 11618,
+            "file_bytes": 167800,
+            "seconds": 0.00868386
+          },
+          "conversion_wall_seconds": 0.010610474972054362,
+          "load_validate_seconds": [
+            0.0003906481433659792,
+            0.0003784589935094118,
+            0.00035304995253682137,
+            0.0003505740314722061,
+            0.0003500808961689472
+          ],
+          "median_seconds": 0.00035304995253682137,
+          "bitwise_equal": true,
+          "sha256": "7fe710089d70b53caaa73d2ea64f622c4bc405dcfc93a79398317bffae93a401"
+        },
+        {
+          "encoding": "values",
+          "zstd_level": 1,
+          "bytes": 73528,
+          "conversion": {
+            "rows": 1603,
+            "cols": 2022,
+            "nnz": 11618,
+            "file_bytes": 73528,
+            "seconds": 0.00653571
+          },
+          "conversion_wall_seconds": 0.008458344032987952,
+          "load_validate_seconds": [
+            0.0003087411168962717,
+            0.0002888520248234272,
+            0.0002852629404515028,
+            0.0002845199778676033,
+            0.00027301907539367676
+          ],
+          "median_seconds": 0.0002852629404515028,
+          "bitwise_equal": true,
+          "sha256": "d012e9475d0755aebbcec403d0586dd19237459f7cd6316b03202543d0c6b6cc"
+        },
+        {
+          "encoding": "indices",
+          "zstd_level": 0,
+          "bytes": 141592,
+          "conversion": {
+            "rows": 1603,
+            "cols": 2022,
+            "nnz": 11618,
+            "file_bytes": 141592,
+            "seconds": 0.00816178
+          },
+          "conversion_wall_seconds": 0.01036606403067708,
+          "load_validate_seconds": [
+            0.0004115819465368986,
+            0.0004098790232092142,
+            0.0004065120592713356,
+            0.00039336993359029293,
+            0.00039912411011755466
+          ],
+          "median_seconds": 0.0004065120592713356,
+          "bitwise_equal": true,
+          "sha256": "03adbf0ab17614cfd4a6871f42f0da87d1b37da31ccc1be380f53eabb03dd3cf"
+        },
+        {
+          "encoding": "indices",
+          "zstd_level": 1,
+          "bytes": 67744,
+          "conversion": {
+            "rows": 1603,
+            "cols": 2022,
+            "nnz": 11618,
+            "file_bytes": 67744,
+            "seconds": 0.00849711
+          },
+          "conversion_wall_seconds": 0.010763367172330618,
+          "load_validate_seconds": [
+            0.000509532168507576,
+            0.0005084997974336147,
+            0.0004973150789737701,
+            0.000539971049875021,
+            0.0007251698989421129
+          ],
+          "median_seconds": 0.000509532168507576,
+          "bitwise_equal": true,
+          "sha256": "d736c4073407c94756b7f37aaf57688731d9b71522683113b58d8c415cacfff3"
+        }
+      ],
+      "baselines": {
+        "scope": "CPU arrays only; no layout conversion, solver setup or solve",
+        "cache": "Warm: one unmeasured load per format; shuffled measurement rounds; no cache flush",
+        "measurement_order": [
+          [
+            "hdf5-identical-optbin-codecs",
+            "raw-zstd",
+            "hdf5-contiguous",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "optbin"
+          ],
+          [
+            "hdf5-contiguous",
+            "raw-zstd",
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle"
+          ],
+          [
+            "optbin",
+            "hdf5-contiguous",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "raw-zstd"
+          ],
+          [
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle",
+            "raw-zstd",
+            "hdf5-contiguous"
+          ],
+          [
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "hdf5-contiguous",
+            "raw-zstd"
+          ]
+        ],
+        "limitations": [
+          "Python/HDF5 vs C reader overhead differs",
+          "Whole-file buffers; no separate RSS measurement",
+          "Baseline manifest metadata is cached; OptBin rereads its directory",
+          "Encoded HDF5 uses the same C codecs, with Python frontend overhead",
+          "gzip level 1 and Zstd level 1 are different codecs"
+        ],
+        "input": "/benchmark/workstation/optbin/benchmarks/runs/real-storage/LogExpCR-n20-m400/all-zstd1.optb",
+        "decoded_bytes": 192749,
+        "environment": {
+          "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+          "python": "3.12.3",
+          "numpy": "2.5.4",
+          "h5py": "3.16.0",
+          "hdf5": "2.0.0",
+          "zstd": "1.5.5"
+        },
+        "results": [
+          {
+            "format": "optbin",
+            "bytes": 67744,
+            "read_decode_validate_seconds": [
+              0.0006878958083689213,
+              0.0004318258725106716,
+              0.00042391405440866947,
+              0.0005314711015671492,
+              0.0003607110120356083
+            ],
+            "median_seconds": 0.0004318258725106716,
+            "bitwise_equal": true
+          },
+          {
+            "format": "raw",
+            "bytes": 195087,
+            "read_decode_validate_seconds": [
+              0.0003947869408875704,
+              0.00034209201112389565,
+              0.00020127813331782818,
+              0.0001787880901247263,
+              0.00022221100516617298
+            ],
+            "median_seconds": 0.00022221100516617298,
+            "bitwise_equal": true
+          },
+          {
+            "format": "raw-zstd",
+            "bytes": 75436,
+            "read_decode_validate_seconds": [
+              0.00030028680339455605,
+              0.0005008808802813292,
+              0.00033227214589715004,
+              0.00031121703796088696,
+              0.0003291189204901457
+            ],
+            "median_seconds": 0.0003291189204901457,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-contiguous",
+            "bytes": 212016,
+            "read_decode_validate_seconds": [
+              0.00231662904843688,
+              0.0061331200413405895,
+              0.002256459090858698,
+              0.0022305650636553764,
+              0.0023291870020329952
+            ],
+            "median_seconds": 0.00231662904843688,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-gzip-shuffle",
+            "bytes": 104296,
+            "read_decode_validate_seconds": [
+              0.00627368688583374,
+              0.0029363459907472134,
+              0.0027360739186406136,
+              0.0028757210820913315,
+              0.0027984189800918102
+            ],
+            "median_seconds": 0.0028757210820913315,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-identical-optbin-codecs",
+            "bytes": 84496,
+            "read_decode_validate_seconds": [
+              0.0030837689992040396,
+              0.0071782139129936695,
+              0.0031277439557015896,
+              0.0031076250597834587,
+              0.003058103146031499
+            ],
+            "median_seconds": 0.0031076250597834587,
+            "bitwise_equal": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "infeas_clean_10_10_1",
+      "source": "/benchmark/workstation/optbin/data/real/infeas_clean_10_10_1.cbf.gz",
+      "source_bytes": 1335,
+      "source_sha256": "11df4bcd15d0abefaca331c79a3c10c8e139417b0c95ad2938c8c8542bdbafc4",
+      "model_info": {
+        "sections": 34,
+        "blocks": 17,
+        "file_bytes": 4400,
+        "cols": 0,
+        "rows": 10,
+        "block_elements": 65536,
+        "profile": 2,
+        "sense": -1,
+        "objective_offset": 0.0
+      },
+      "decoded_bytes": 17185,
+      "ablations": [
+        {
+          "encoding": "all",
+          "zstd_level": 0,
+          "bytes": 5584,
+          "conversion": {
+            "rows": 10,
+            "cols": 0,
+            "nnz": 0,
+            "file_bytes": 5584,
+            "seconds": 0.00244972
+          },
+          "conversion_wall_seconds": 0.004295962164178491,
+          "load_validate_seconds": [
+            0.00013524596579372883,
+            0.00012714508920907974,
+            0.00012646103277802467,
+            0.0001242819707840681,
+            0.00012289686128497124
+          ],
+          "median_seconds": 0.00012646103277802467,
+          "bitwise_equal": true,
+          "sha256": "215d3d035c0607d4c7bb6430d647f4b2aa953c23a650d92a4a83572908091903"
+        },
+        {
+          "encoding": "all",
+          "zstd_level": 1,
+          "bytes": 4192,
+          "conversion": {
+            "rows": 10,
+            "cols": 0,
+            "nnz": 0,
+            "file_bytes": 4192,
+            "seconds": 0.00215371
+          },
+          "conversion_wall_seconds": 0.0037742869462817907,
+          "load_validate_seconds": [
+            0.0001445729285478592,
+            0.00013411510735750198,
+            0.00014449795708060265,
+            0.00013198493979871273,
+            0.0001287302002310753
+          ],
+          "median_seconds": 0.00013411510735750198,
+          "bitwise_equal": true,
+          "sha256": "f39f4bbb1c60531f13db3faa09e590d8e712a31d56c947b3cb90516faa023f38"
+        },
+        {
+          "encoding": "raw",
+          "zstd_level": 0,
+          "bytes": 20584,
+          "conversion": {
+            "rows": 10,
+            "cols": 0,
+            "nnz": 0,
+            "file_bytes": 20584,
+            "seconds": 0.00210054
+          },
+          "conversion_wall_seconds": 0.0035470491275191307,
+          "load_validate_seconds": [
+            0.00012968294322490692,
+            0.00013261404819786549,
+            0.00012268591672182083,
+            0.00012064515613019466,
+            0.00012066005729138851
+          ],
+          "median_seconds": 0.00012268591672182083,
+          "bitwise_equal": true,
+          "sha256": "ab2ad6a11d041928981e6d443e09cabcbe9feb398d50f92a89a46e164794f355"
+        },
+        {
+          "encoding": "raw",
+          "zstd_level": 1,
+          "bytes": 5024,
+          "conversion": {
+            "rows": 10,
+            "cols": 0,
+            "nnz": 0,
+            "file_bytes": 5024,
+            "seconds": 0.00346585
+          },
+          "conversion_wall_seconds": 0.005357970949262381,
+          "load_validate_seconds": [
+            0.00032879714854061604,
+            0.00033091800287365913,
+            0.0003117220476269722,
+            0.0003550041001290083,
+            0.0002370281144976616
+          ],
+          "median_seconds": 0.00032879714854061604,
+          "bitwise_equal": true,
+          "sha256": "830a055a7f9a9866810a6ada2a3d53a9d1f9495172ba3bcd1b5d10b7633eaace"
+        },
+        {
+          "encoding": "values",
+          "zstd_level": 0,
+          "bytes": 17400,
+          "conversion": {
+            "rows": 10,
+            "cols": 0,
+            "nnz": 0,
+            "file_bytes": 17400,
+            "seconds": 0.00289964
+          },
+          "conversion_wall_seconds": 0.0046559039037674665,
+          "load_validate_seconds": [
+            0.00012935511767864227,
+            0.00012467894703149796,
+            0.00012569688260555267,
+            0.00012088799849152565,
+            0.00013837311416864395
+          ],
+          "median_seconds": 0.00012569688260555267,
+          "bitwise_equal": true,
+          "sha256": "71b03bcd0e598afd7d4585799f09b3cdb59354ce3760b8969dfae2b3712f2313"
+        },
+        {
+          "encoding": "values",
+          "zstd_level": 1,
+          "bytes": 4816,
+          "conversion": {
+            "rows": 10,
+            "cols": 0,
+            "nnz": 0,
+            "file_bytes": 4816,
+            "seconds": 0.0032325
+          },
+          "conversion_wall_seconds": 0.005017983028665185,
+          "load_validate_seconds": [
+            0.00031548505648970604,
+            0.00030181114561855793,
+            0.00030145212076604366,
+            0.0002945421729236841,
+            0.0002900289837270975
+          ],
+          "median_seconds": 0.00030145212076604366,
+          "bitwise_equal": true,
+          "sha256": "bf89fcbb787b8ab33374a5c9a38f8031bf8de550ca544e0a6cd9cb20bd48d2c2"
+        },
+        {
+          "encoding": "indices",
+          "zstd_level": 0,
+          "bytes": 8768,
+          "conversion": {
+            "rows": 10,
+            "cols": 0,
+            "nnz": 0,
+            "file_bytes": 8768,
+            "seconds": 0.00308691
+          },
+          "conversion_wall_seconds": 0.004866020055487752,
+          "load_validate_seconds": [
+            0.0002846901770681143,
+            0.000271152937784791,
+            0.0002790309954434633,
+            0.000269551994279027,
+            0.0002693419810384512
+          ],
+          "median_seconds": 0.000271152937784791,
+          "bitwise_equal": true,
+          "sha256": "9d78a320a794bac0a1a9d19d9db50033494ebdeb05aefc1a819421edba7a3e87"
+        },
+        {
+          "encoding": "indices",
+          "zstd_level": 1,
+          "bytes": 4400,
+          "conversion": {
+            "rows": 10,
+            "cols": 0,
+            "nnz": 0,
+            "file_bytes": 4400,
+            "seconds": 0.00275523
+          },
+          "conversion_wall_seconds": 0.004327946109697223,
+          "load_validate_seconds": [
+            0.00016471697017550468,
+            0.0001475780736654997,
+            0.00015747593715786934,
+            0.00014304183423519135,
+            0.00013483315706253052
+          ],
+          "median_seconds": 0.0001475780736654997,
+          "bitwise_equal": true,
+          "sha256": "69ca21ab55bd9101fb4f8f58e91f968a4ee6223c69fa270fc5d859040e912e36"
+        }
+      ],
+      "baselines": {
+        "scope": "CPU arrays only; no layout conversion, solver setup or solve",
+        "cache": "Warm: one unmeasured load per format; shuffled measurement rounds; no cache flush",
+        "measurement_order": [
+          [
+            "hdf5-identical-optbin-codecs",
+            "raw-zstd",
+            "hdf5-contiguous",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "optbin"
+          ],
+          [
+            "hdf5-contiguous",
+            "raw-zstd",
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle"
+          ],
+          [
+            "optbin",
+            "hdf5-contiguous",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "raw-zstd"
+          ],
+          [
+            "raw",
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle",
+            "raw-zstd",
+            "hdf5-contiguous"
+          ],
+          [
+            "hdf5-identical-optbin-codecs",
+            "optbin",
+            "hdf5-gzip-shuffle",
+            "raw",
+            "hdf5-contiguous",
+            "raw-zstd"
+          ]
+        ],
+        "limitations": [
+          "Python/HDF5 vs C reader overhead differs",
+          "Whole-file buffers; no separate RSS measurement",
+          "Baseline manifest metadata is cached; OptBin rereads its directory",
+          "Encoded HDF5 uses the same C codecs, with Python frontend overhead",
+          "gzip level 1 and Zstd level 1 are different codecs"
+        ],
+        "input": "/benchmark/workstation/optbin/benchmarks/runs/real-storage/infeas_clean_10_10_1/all-zstd1.optb",
+        "decoded_bytes": 17185,
+        "environment": {
+          "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+          "python": "3.12.3",
+          "numpy": "2.5.4",
+          "h5py": "3.16.0",
+          "hdf5": "2.0.0",
+          "zstd": "1.5.5"
+        },
+        "results": [
+          {
+            "format": "optbin",
+            "bytes": 4192,
+            "read_decode_validate_seconds": [
+              0.0003098100423812866,
+              0.00024896999821066856,
+              0.00025668786838650703,
+              0.000319476006552577,
+              0.00023545720614492893
+            ],
+            "median_seconds": 0.00025668786838650703,
+            "bitwise_equal": true
+          },
+          {
+            "format": "raw",
+            "bytes": 19554,
+            "read_decode_validate_seconds": [
+              0.00018037203699350357,
+              0.000136201037093997,
+              0.00015729502774775028,
+              0.0001320678275078535,
+              0.00017316406592726707
+            ],
+            "median_seconds": 0.00015729502774775028,
+            "bitwise_equal": true
+          },
+          {
+            "format": "raw-zstd",
+            "bytes": 3525,
+            "read_decode_validate_seconds": [
+              0.00017560296691954136,
+              0.00019558914937078953,
+              0.00017234799452126026,
+              0.0001867481041699648,
+              0.00020224601030349731
+            ],
+            "median_seconds": 0.0001867481041699648,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-contiguous",
+            "bytes": 36200,
+            "read_decode_validate_seconds": [
+              0.0022695239167660475,
+              0.0022946640383452177,
+              0.0022555089090019464,
+              0.0022034889552742243,
+              0.002304638968780637
+            ],
+            "median_seconds": 0.0022695239167660475,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-gzip-shuffle",
+            "bytes": 55080,
+            "read_decode_validate_seconds": [
+              0.0025205279234796762,
+              0.0024718758650124073,
+              0.00240004388615489,
+              0.0024580617900937796,
+              0.0025452962145209312
+            ],
+            "median_seconds": 0.0024718758650124073,
+            "bitwise_equal": true
+          },
+          {
+            "format": "hdf5-identical-optbin-codecs",
+            "bytes": 19720,
+            "read_decode_validate_seconds": [
+              0.002917868085205555,
+              0.0031549350824207067,
+              0.00296595087274909,
+              0.00293694413267076,
+              0.002985880011692643
+            ],
+            "median_seconds": 0.00296595087274909,
+            "bitwise_equal": true
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+[
+  {
+    "id": "afiro",
+    "format": "mps",
+    "path": "/benchmark/external/afiro.mps",
+    "dialect": "gurobi",
+    "sha256": "04992b87e57e57c1c417c96b846833bfa12e055eeaa623f043c45fc773b5be41"
+  },
+  {
+    "id": "AUG2D",
+    "format": "mps",
+    "path": "/benchmark/external/AUG2D.mps",
+    "dialect": "gurobi",
+    "sha256": "c3bad6461e2cad7e1528ec40e788b295274d8c24c6f63341f22224e81855e062"
+  },
+  {
+    "id": "AUG3DCQP",
+    "format": "mps",
+    "path": "/benchmark/external/AUG3DCQP.mps",
+    "dialect": "gurobi",
+    "sha256": "25ca5ddcf31168eb0b45f2ee61983d376abb8ff697e8e491d99ee665e65ddd08"
+  },
+  {
+    "id": "QPLIB_2482",
+    "format": "mps",
+    "path": "/benchmark/external/QPLIB_2482.mps",
+    "dialect": "gurobi",
+    "sha256": "a7a69603985c058a802247c48e14d6d8c8f84eb9ef26ccfa69f2647498e9bb04"
+  },
+  {
+    "id": "CVXQP1_S",
+    "format": "mps",
+    "path": "/benchmark/external/CVXQP1_S.mps",
+    "dialect": "gurobi",
+    "sha256": "918991061ccad305c6e9ffb3258a1540da69dd7de36586a856a106222d4a9ce6",
+    "variant": "Local presolved QPPAL-v4 variant; not asserted identical to the original benchmark"
+  },
+  {
+    "id": "CVXQP2_S",
+    "format": "mps",
+    "path": "/benchmark/external/CVXQP2_S.mps",
+    "dialect": "gurobi",
+    "sha256": "79ecb37eb46ca4bd1b12359b451b58f329ff7e7dceb04a6f7e2909c7e232236e",
+    "variant": "Local presolved QPPAL-v4 variant; not asserted identical to the original benchmark"
+  },
+  {
+    "id": "CVXQP3_S",
+    "format": "mps",
+    "path": "/benchmark/external/CVXQP3_S.mps",
+    "dialect": "gurobi",
+    "sha256": "6a67e88ae3f21eb609b0246156c5ba25ec9c309b9f502992df30dd3367968cd0",
+    "variant": "Local presolved QPPAL-v4 variant; not asserted identical to the original benchmark"
+  },
+  {
+    "id": "DUAL1",
+    "format": "mps",
+    "path": "/benchmark/external/DUAL1.mps",
+    "dialect": "gurobi",
+    "sha256": "573a4fa9137aebfeead25606c751d7fead9e2e732d8e5433061d3ff71daeb8a6",
+    "variant": "Local presolved QPPAL-v4 variant; not asserted identical to the original benchmark"
+  },
+  {
+    "id": "DUAL2",
+    "format": "mps",
+    "path": "/benchmark/external/DUAL2.mps",
+    "dialect": "gurobi",
+    "sha256": "d2c7b8fca6d4dedc815bce73acc80d363c2f00a2aa13212f62d4d5ac97679d8e",
+    "variant": "Local presolved QPPAL-v4 variant; not asserted identical to the original benchmark"
+  },
+  {
+    "id": "qssp30",
+    "format": "cbf",
+    "path": "data/real/qssp30.cbf.gz",
+    "source_url": "https://cblib.zib.de/download/all/qssp30.cbf.gz",
+    "sha256": "b6d3c20ee39d89bd48db11343a8c95ca11f0c8e1c5fe2c33633f59a12c7a0406",
+    "integer": false
+  },
+  {
+    "id": "nql30",
+    "format": "cbf",
+    "path": "data/real/nql30.cbf.gz",
+    "source_url": "https://cblib.zib.de/download/all/nql30.cbf.gz",
+    "sha256": "f926413ff08c1c296254f60c54cb7a4154f501ddb9d2f6948918d72d14f93739",
+    "integer": false
+  },
+  {
+    "id": "nb",
+    "format": "cbf",
+    "path": "data/real/nb.cbf.gz",
+    "source_url": "https://cblib.zib.de/download/all/nb.cbf.gz",
+    "sha256": "6e137968db4bb094a331efe0186f895b49566a4b5177200b7b3fcaf60da753e7",
+    "integer": false
+  },
+  {
+    "id": "nb_L1",
+    "format": "cbf",
+    "path": "data/real/nb_L1.cbf.gz",
+    "source_url": "https://cblib.zib.de/download/all/nb_L1.cbf.gz",
+    "sha256": "43781acdc55fd81a0791e835a3141b5900229e03838885e0673f60fdf9a74310",
+    "integer": false
+  },
+  {
+    "id": "nb_L2",
+    "format": "cbf",
+    "path": "data/real/nb_L2.cbf.gz",
+    "source_url": "https://cblib.zib.de/download/all/nb_L2.cbf.gz",
+    "sha256": "73b3d4b7511e90d7d3a0fa85db10b2e77028685201523212e0d913babccaaa1f",
+    "integer": false
+  },
+  {
+    "id": "10_std",
+    "format": "cbf",
+    "path": "data/real/10_std.cbf.gz",
+    "source_url": "https://cblib.zib.de/download/all/10_std.cbf.gz",
+    "sha256": "980c1fecfa2e468859c81bf38425271993a58d542eb04580f6c8d172ab7b8076",
+    "integer": true
+  },
+  {
+    "id": "2x3_3bars",
+    "format": "cbf",
+    "path": "data/real/2x3_3bars.cbf.gz",
+    "source_url": "https://cblib.zib.de/download/all/2x3_3bars.cbf.gz",
+    "sha256": "b0d55930c4e80af2c6ae2ca924e65673c8f85093985b4df344b4d936b9da62b0",
+    "integer": true
+  },
+  {
+    "id": "2g_4_164_k3_5_6",
+    "format": "cbf",
+    "path": "data/real/2g_4_164_k3_5_6.cbf.gz",
+    "source_url": "https://cblib.zib.de/download/all/2g_4_164_k3_5_6.cbf.gz",
+    "sha256": "f045c48fb492c368a05ff7c7593b4e684820888134910b96d15b40a1b36b635e",
+    "integer": true
+  },
+  {
+    "id": "ex4",
+    "format": "cbf",
+    "path": "data/real/ex4.cbf.gz",
+    "source_url": "https://cblib.zib.de/download/all/ex4.cbf.gz",
+    "sha256": "b668890807fc8487004ecc7a9e54fc2a06978b69283d5458953149fb8770f9c5",
+    "integer": true
+  },
+  {
+    "id": "LogExpCR-n20-m400",
+    "format": "cbf",
+    "path": "data/real/LogExpCR-n20-m400.cbf.gz",
+    "source_url": "https://cblib.zib.de/download/all/LogExpCR-n20-m400.cbf.gz",
+    "sha256": "24246c3298bec9f1e91b4c9c67ffd4fd1960623fe233484f715c7f3948f151ca",
+    "integer": false
+  },
+  {
+    "id": "infeas_clean_10_10_1",
+    "format": "cbf",
+    "path": "data/real/infeas_clean_10_10_1.cbf.gz",
+    "source_url": "https://cblib.zib.de/download/all/infeas_clean_10_10_1.cbf.gz",
+    "sha256": "11df4bcd15d0abefaca331c79a3c10c8e139417b0c95ad2938c8c8542bdbafc4",
+    "integer": false
+  },
+  {
+    "id": "infeas_messy_10_10_1",
+    "format": "cbf",
+    "path": "data/real/infeas_messy_10_10_1.cbf.gz",
+    "source_url": "https://cblib.zib.de/download/all/infeas_messy_10_10_1.cbf.gz",
+    "sha256": "71a56699a27e18ca9cb9d4c6fb56796af60d1f11ba8f5bedaf76758015d08848",
+    "integer": false
+  },
+  {
+    "id": "expdesign_A_8_4",
+    "format": "cbf",
+    "path": "data/real/expdesign_A_8_4.cbf.gz",
+    "source_url": "https://cblib.zib.de/download/all/expdesign_A_8_4.cbf.gz",
+    "sha256": "0f9bfc444154b9957aea2518fed7fcf2cc5c03a2e6e7a597bfe0dc90db67c69d",
+    "integer": true
+  },
+  {
+    "id": "expdesign_E_8_4",
+    "format": "cbf",
+    "path": "data/real/expdesign_E_8_4.cbf.gz",
+    "source_url": "https://cblib.zib.de/download/all/expdesign_E_8_4.cbf.gz",
+    "sha256": "bed3200dc40079e1df55eb43ea750b6944ad10fa73aa4fb5f40354950073176c",
+    "integer": true
+  },
+  {
+    "id": "sched_50_50_orig",
+    "format": "cbf",
+    "path": "data/real/sched_50_50_orig.cbf.gz",
+    "source_url": "https://cblib.zib.de/download/all/sched_50_50_orig.cbf.gz",
+    "sha256": "852150ed6696116e8db12dd595d5ebfea6c00deb48a31c02cef12bdef149f7f3",
+    "integer": false
+  },
+  {
+    "id": "QPLIB_2456",
+    "path": "data/real/QPLIB_2456.mps",
+    "source_url": "https://qplib.zib.de/lp/QPLIB_2456.lp",
+    "source_sha256": "2eede820c7f5441fd436910d04e49389b1a1a23b7a3da739f2a03deeeb6b6616",
+    "source_format": "lp",
+    "format": "mps",
+    "dialect": "gurobi",
+    "derivation": "Public QPLIB LP read and exported as MPS by Gurobi 13.0.3",
+    "original_path": "data/real/QPLIB_2456.lp"
+  },
+  {
+    "id": "QPLIB_2519",
+    "path": "data/real/QPLIB_2519.mps",
+    "source_url": "https://qplib.zib.de/lp/QPLIB_2519.lp",
+    "source_sha256": "184a642bd35107fac3400470aa973abe657ff8babc321bacbba37e81c7ada405",
+    "source_format": "lp",
+    "format": "mps",
+    "dialect": "gurobi",
+    "derivation": "Public QPLIB LP read and exported as MPS by Gurobi 13.0.3",
+    "original_path": "data/real/QPLIB_2519.lp"
+  },
+  {
+    "id": "QPLIB_2676",
+    "path": "data/real/QPLIB_2676.mps",
+    "source_url": "https://qplib.zib.de/lp/QPLIB_2676.lp",
+    "source_sha256": "83f8b92e27a9be3ffbda9b5f3e17c9eaae3c9acb4d8b70fe12882a33adf2ba41",
+    "source_format": "lp",
+    "format": "mps",
+    "dialect": "gurobi",
+    "derivation": "Public QPLIB LP read and exported as MPS by Gurobi 13.0.3",
+    "original_path": "data/real/QPLIB_2676.lp"
+  },
+  {
+    "id": "QPLIB_3185",
+    "path": "data/real/QPLIB_3185.mps",
+    "source_url": "https://qplib.zib.de/lp/QPLIB_3185.lp",
+    "source_sha256": "bcc13f72e7e8197d9d314aa19bcb54cbb23eed5ef4091dc027ad9528371e1e59",
+    "source_format": "lp",
+    "format": "mps",
+    "dialect": "gurobi",
+    "derivation": "Public QPLIB LP read and exported as MPS by Gurobi 13.0.3",
+    "original_path": "data/real/QPLIB_3185.lp"
+  }
+]

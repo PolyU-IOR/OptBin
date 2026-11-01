@@ -1,0 +1,99 @@
+{
+  "scope": "Reviewed reference-reader differences, not OptBin/JuMP agreement passes",
+  "reference_packages": {
+    "JuMP": "1.31.2",
+    "MathOptInterface": "1.53.0"
+  },
+  "issues": [
+    {
+      "id": "fixture_qcqp_mosek",
+      "input_sha256": "3e41ed69f46218507e19ab847afedcfa7f52765eeea204697eae301477e6fa96",
+      "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "reference_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": false
+      },
+      "reason": "MOI Mosek quadratic_format applies a half factor to QCMATRIX constraints; the actual MOSEK 11.2.7 reader uses xQx for QCMATRIX",
+      "adjudication": {
+        "reader": "MOSEK SDK",
+        "version": "11.2.7",
+        "complete_canonical_model_matches_optbin": true
+      }
+    },
+    {
+      "id": "fixture_mosek_QCMATRIX",
+      "input_sha256": "55f1e31aebfd5f9c268c4101c0444f5cfe20cdffdca1c6fc71266740320285cb",
+      "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "reference_canonical_sha256": "96ed6d328b0aa6927e6ad3acf742ef160c98d47403194960036129bc3d0d4548",
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": false,
+        "constraints": false
+      },
+      "reason": "MOI reads quadratic objectives from QSECTION only when the matrix name is literal OBJ; the valid source objective is named obj; MOI Mosek quadratic_format applies a half factor to QCMATRIX constraints; the actual MOSEK 11.2.7 reader uses xQx for QCMATRIX",
+      "adjudication": {
+        "reader": "MOSEK SDK",
+        "version": "11.2.7",
+        "complete_canonical_model_matches_optbin": true
+      }
+    },
+    {
+      "id": "fixture_mosek_QCMATRIX_OBJ",
+      "input_sha256": "a086aa2a83e432c143104bed98f0de9dee5aa1f305e14049458b7624243a6e36",
+      "native_canonical_sha256": "4f68e8563274facc81500eea9bebc31da4bf02facc9bbc1e437943ea8c9c4179",
+      "reference_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": false
+      },
+      "reason": "MOI Mosek quadratic_format applies a half factor to QCMATRIX constraints; the actual MOSEK 11.2.7 reader uses xQx for QCMATRIX",
+      "adjudication": {
+        "reader": "MOSEK SDK",
+        "version": "11.2.7",
+        "complete_canonical_model_matches_optbin": true
+      }
+    },
+    {
+      "id": "fixture_mosek_QSECTION",
+      "input_sha256": "2375f125ebf93257e9964eb7f1555baa324d145190117ab7aac21966cec81cc7",
+      "native_canonical_sha256": "4aaf3aef4b7cf01a2b81d4324a6979459fd09b6a4eb70e53454929b056b91378",
+      "reference_canonical_sha256": "96ed6d328b0aa6927e6ad3acf742ef160c98d47403194960036129bc3d0d4548",
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": false,
+        "constraints": true
+      },
+      "reason": "MOI reads quadratic objectives from QSECTION only when the matrix name is literal OBJ; the valid source objective is named obj",
+      "adjudication": {
+        "reader": "MOSEK SDK",
+        "version": "11.2.7",
+        "complete_canonical_model_matches_optbin": true
+      }
+    },
+    {
+      "id": "fixture_negative_upper_default",
+      "input_sha256": "433a2d79899d7b9eff3b3b0a97b28a637eace0c4845f458ff1198a2f47f27a12",
+      "native_canonical_sha256": "f0e02bc8ebb1e17e2045c7d46d2ae7a502099a4de06a2eff7e3fa87ac36e401c",
+      "reference_canonical_sha256": "001e9625af2f9d346cc521b1ad4217c4ba4ddb0f7dd4e5e7bcd140d8d1e57964",
+      "checks": {
+        "variables": true,
+        "sense": true,
+        "objective": true,
+        "constraints": false
+      },
+      "reason": "With a negative UP and no explicit lower bound, OptBin follows Gurobi (-Inf, upper). MOI retains an internal lower bound of zero, then bounds_to_set drops both bounds when lower > upper. An explicit MI lower-bound record avoids the ambiguity.",
+      "adjudication": {
+        "reader": "Gurobi SDK",
+        "version": "13.0.3",
+        "complete_numerical_model_matches_optbin": true
+      }
+    }
+  ]
+}
